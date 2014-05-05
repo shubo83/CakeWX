@@ -1,10 +1,8 @@
 # CakeWX
 
-**CakeWX** 是一个由PHP写的的免费的开源微信公众号管理平,遵循 [MIT License](http://github.com/niancode/CakeWX/master/LICENSE.txt).
+**CakeWX** 是一个由PHP写的的免费的开源微信公众号管理平,遵循 [MIT License](https://github.com/niancode/CakeWX/blob/master/LICENSE).
 
 他是基于 [CakePHP](http://www.cakephp.org) MVC 框架.
-
-[![Build Status](https://secure.travis-ci.org/croogo/croogo.png)](http://travis-ci.org/croogo/croogo)
 
 ## Requirements
   * Apache with `mod_rewrite`
@@ -27,7 +25,7 @@
     * `app/Config/Schema/sql/cakewx_data.sql`
   * Rename:
     * `app/Config/database.php.install` to `database.php`, and edit the details.
-    * `app/Config/croogo.php.install` to `croogo.php`, and edit the details.
+    * `app/Config/cakewx.php.install` to `cakewx.php`, and edit the details.
     * `app/Config/settings.json.install` to `settings.json`
   * You can access your admin panel at http://your-site.com/admin. The installer should
     display a page for you to create the administrative user.
@@ -47,9 +45,9 @@ It is recommended that you install Croogo using the web based installer for secu
 	generate a better result.  Edit the `COMPILE` value in the `Makefile`
 	accordingly and run:
 
-	`( cd Plugin/Croogo ; make )`
+	`( cd Plugin/CakeWX ; make )`
 
 ## Links
 
-  * **Official website**: [http://croogo.org](http://cakewx.com)
-  * **Downloads**: [http://downloads.croogo.org](http://downloads.cakewx.com)
+  * **Official website**: [http://cakewx.com](http://cakewx.com)
+  * **Downloads**: [http://downloads.cakewx.org](http://downloads.cakewx.com)
