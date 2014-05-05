@@ -49,5 +49,5 @@ It is recommended that you install Croogo using the web based installer for secu
 
 ## Links
 
-  * **Official website**: [http://cakewx.com](http://cakewx.com)
-  * **Downloads**: [http://downloads.cakewx.com](http://downloads.cakewx.com)
+  * **官方网站**: [http://cakewx.com](http://cakewx.com)
+  * **下载**: [http://downloads.cakewx.com](http://downloads.cakewx.com)
