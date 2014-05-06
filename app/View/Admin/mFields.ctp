@@ -9,80 +9,67 @@
 		"Action/mFields",
 	), array('block' => "script_extra", 'inline' => false));
 ?>
-
-<div class="col-sm-7" style="position: relative;">
-    <div class="tabbable">
-        <ul class="nav nav-tabs" id="myTab">
-            <li class="active">
-                <a data-toggle="tab" href="#home">
-                    <i class="green icon-home bigger-110"></i>
-                    DIY菜单
-                </a>
-            </li>
-        </ul>
-        <span class="btn btn-primary" type="button" id="savejson" style="position: absolute;top:0;right: 12px;padding:1px 10px;"><i class="icon-ok"></i>保存</span>
-        <div class="tab-content">
-            <div id="home" class="tab-pane in active">
-                <div class="dd dd-list" id="nestable"><ol></ol></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-sm-5" style="margin-top:30px; border:1px solid #e3e3e3; background-color:#f5f5f5;">
-	<?php
-	$this->Form->inputDefaults(array('label' => true, 'div' => true));
-	echo "<h2>添加菜单：</h2>";
-	echo $this->Form->create('WxDataMus', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal"));
-	echo $this->Main->formhr_input('FName', array(
-			'div' => "form-group",
-			'label' => array('text' => "菜单名称：", 'class' => "col-sm-3 control-label no-padding-right"),
-			'type' => "text",
-			'placeholder' => "",
-			'class' => "col-xs-10 col-sm-5",
-			'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-			'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div></div>",
-			'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-		));
-	echo $this->Main->formhr_input('newMenu', array(
-		'div' => "form-group",
-		'options' => array('1' => '是', '0' => '否'),
-		'label' => array('text' => "主菜单：", 'class' => "col-sm-3 control-label no-padding-right"),
-		'type' => "select",
-		'placeholder' => "",
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-    echo $this->Main->formhr_input('newsubMenu', array(
-    'div' => "form-group",
-    'options' => array('0' => '请选择'),
-    'label' => array('text' => "上级菜单：", 'class' => "col-sm-3 control-label no-padding-right"),
-    'type' => "select",
-    'disabled' => 'disabled',
-    'placeholder' => "",
-    'class' => "col-xs-10 col-sm-5",
-    'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-    'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-    'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-    ));
-	echo $this->Main->formhr_input('FKeysOrLink', array(
-			'div' => "form-group",
-			'label' => array('text' => "链接地址：", 'class' => "col-sm-3 control-label no-padding-right"),
-			'type' => "text",
-			'placeholder' => "",
-			'class' => "col-xs-10 col-sm-10",
-			'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-			'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-			'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-		));
-	?>
-	<div class="clearfix form-actions">
-		<div class="col-md-offset-3 col-md-9">
-            <button class="btn btn-primary" id="addnewitem" style="margin-left:20px;" type="button">
-                新增
-            </button>
-        </div>
+<div class="row">
+	<div class="col-sm-12" style="position: relative;">
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">
+				<i class="icon-remove"></i>
+			</button>
+			<strong>
+				编辑：
+			</strong>
+			可创建最多 3 个一级菜单，每个一级菜单下可创建最多 5 个二级菜单。编辑中的菜单不会马上被用户看到，请放心调试。
+			<br>
+		</div>
+	    <div class="tabbable">
+	       	<ul class="nav nav-tabs" id="myTab">
+	            <li class="active">
+	                <a data-toggle="tab" href="#home">
+	                    <i class="green icon-home bigger-110"></i>
+	                    DIY菜单
+	                </a>
+	            </li>
+				<li style="margin-left:950px">
+					<button class="btn btn-xs btn-warning">
+						<i class="icon-fire bigger-110"></i>
+						<span id="addnewitem" class="bigger-110 no-text-shadow">添加菜单</span>
+					</button>
+				</li>
+	        </ul>
+	        <div class="tab-content">
+	            <div id="home" class="tab-pane in active">
+	                <div style="max-width:none" class="dd dd-list" id="nestable"><ol></ol></div>
+	            </div>
+	        </div>
+	    </div>
 	</div>
-	<?php echo $this->Form->end(); ?>
 </div>
+
+<div class="alert alert-info" style="margin-top:20px">
+	<button type="button" class="close" data-dismiss="alert">
+		<i class="icon-remove"></i>
+	</button>
+	<strong>
+		发布：
+	</strong>
+	编辑中的菜单不能直接在用户手机上生效，你需要进行发布，发布后24小时内所有的用户都将更新到新的菜单。
+	<br>
+</div>
+<?php 
+$this->Form->inputDefaults(array('label' => true, 'div' => true));
+echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal")); 
+?>
+<div class="clearfix form-actions">
+	<div class="col-md-offset-3 col-md-9">
+		<button class="btn btn-info" type="submit">
+			<i class="icon-ok bigger-110"></i>
+			发布
+		</button>
+		&nbsp; &nbsp; &nbsp;
+		<button type="button" class="btn" id="previewbox">
+			<i class="icon-undo bigger-110"></i>
+			预览菜单
+		</button>
+	</div>
+</div>
+<?php echo $this->Form->end(); ?>

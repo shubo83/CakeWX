@@ -115,6 +115,7 @@ $(function() {
     //console.log($('.dd').nestable('serialize'));
 
 });
+
 $(document).on('click', '#addnewitem', function() {
     var type, newtitle, newurl,treejason;
     type = $("#WxDataMusNewMenu").val();
@@ -138,6 +139,7 @@ $(document).on('click', '#addnewitem', function() {
         return false;
     });
 });
+
 $(document).on('click', '#savejson', function() {
     var treejason = $('.dd').nestable('serialize');
     var pdata = $.toJSON(treejason);
