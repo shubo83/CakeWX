@@ -766,36 +766,53 @@ class AdminController extends AppController {
 			case 'api':
 				switch ($query['action']) {
 					case 'save':
-							if ($this->request->is('post')) {
-								$post = $this->request->data['post'];
-								$post = json_decode($post);
-								$query = $this->WxDataMus->saveData($post);
-								if ($query) {
-									$msg['state'] = 1;
-									$msg['msg'] = "操作成功";
-									
-								} else {
-									$msg['state'] = 0;
-									$msg['msg'] = "操作失败";
-								}
-								echo json_encode($msg);
+						if ($this->request->is('post')) {
+							$post = $this->request->data['post'];
+							$postJson['WxDataMus'] = json_decode($post, TRUE);
+							$query = $this->WxDataMus->saveData($postJson, $wxId);
+							if ($query) {
+								$msg['state'] = 1;
+								$msg['msg'] = "操作成功";
+								$msg['data'] = $query;
+							} else {
+								$msg['state'] = 0;
+								$msg['msg'] = "操作失败";
 							}
+							echo json_encode($msg);exit;
+						}
 						break;
 					case 'del':
-							if ($this->request->is('post')) {
-								$post['id'] = $this->request->data['post'];
-								$query = $this->WxDataMus->delete($post['id']);
-								if ($query) {
-									$msg['state'] = 1;
-									$msg['msg'] = "操作成功";
-									
-								} else {
-									$msg['state'] = 0;
-									$msg['msg'] = "操作失败";
-								}
-								echo json_encode($msg);
+						if ($this->request->is('post')) {
+							$post['id'] = $this->request->data['post'];
+							$query = $this->WxDataMus->delete($post['id']);
+							if ($query) {
+								$msg['state'] = 1;
+								$msg['msg'] = "操作成功";
+							} else {
+								$msg['state'] = 0;
+								$msg['msg'] = "操作失败";
 							}
+							echo json_encode($msg);exit;
+						}
 						break;
+					case 'svMenus':
+						if ($this->request->is('post')) {
+							$post = $this->request->data['post'];
+							$post = json_decode($post, TRUE);
+							$query = $this->WxDataMus->svMenus($post);
+							if ($query) {
+								$msg['state'] = 1;
+								$msg['msg'] = "操作成功";
+							} else {
+								$msg['state'] = 0;
+								$msg['msg'] = "操作失败";
+							}
+							echo json_encode($msg);exit;
+						}
+						break;
+					default:
+						$msg = $this->WxDataMus->getDataList($wxId);
+						echo json_encode($msg);exit;
 				}
 				break;
 			default:

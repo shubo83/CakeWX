@@ -29,10 +29,16 @@
 	                    DIY菜单
 	                </a>
 	            </li>
-				<li style="margin-left:950px">
-					<button class="btn btn-xs btn-warning">
+				<li style="margin-left:200px">
+					<button id="saveitem" type="button" class="btn btn-xs btn-info">
 						<i class="icon-fire bigger-110"></i>
-						<span id="addnewitem" class="bigger-110 no-text-shadow">添加菜单</span>
+						保存
+					</button>
+				</li>
+				<li style="margin-left:450px">
+					<button id="addnewitem" type="button" class="btn btn-xs btn-warning">
+						<i class="icon-fire bigger-110"></i>
+						添加菜单
 					</button>
 				</li>
 	        </ul>
