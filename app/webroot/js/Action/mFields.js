@@ -20,8 +20,8 @@ $(function() {
 	    altitle = $(this).parent().parent().find("span").text();
 	    alurl = $(this).parent().parent().parent().attr('data-url');
 	    temphtml = $('<div id="tempview" />');
-	    temphtml.html('<div class="form-horizontal"><div class="form-group"><label class="col-sm-3 control-label">菜单名称：</label><div class="col-xs-12 col-sm-9"><div class="clearfix"><input class="col-xs-10 col-sm-5" type="text" id="temptitle" value=""></div></div></div><div class="form-group"><label class="col-sm-3 control-label">关键字或链接：</label><div class="col-xs-12 col-sm-9"><div class="clearfix"><input class="col-xs-10 col-sm-10" type="text" value="" id="tempurl"></div></div></div></div>');
-	    temphtml.find("#temptitle").attr("value",altitle);
+	    temphtml.html('<div class="form-horizontal"><div class="form-group"><label class="col-sm-3 control-label">菜单名称：</label><div class="col-xs-12 col-sm-9"><div class="clearfix"><input class="col-xs-10 col-sm-10" type="text" id="temptitle" value=""></div></div></div><div class="form-group"><label class="col-sm-3 control-label">关键字或链接：</label><div class="col-xs-12 col-sm-9"><div class="clearfix"><input class="col-xs-10 col-sm-10" type="text" value="" id="tempurl"></div></div></div></div>');
+	    temphtml.find("#temptitle").attr("value",'');
 	    temphtml.find("#tempurl").attr("value",alurl);
 		saveMenuData(temphtml.html());	// 保存菜单数据
 	});
@@ -60,6 +60,7 @@ function saveAllData() {
 function saveMenuData(temphtml, id) {
 	var title = id ? '编辑菜单' : '添加菜单';
 	var edt = id ? 'edit' : 'add';
+    clearForm(".modal-body");
 	bootbox.dialog({
         message: temphtml,
         title: title,
@@ -191,19 +192,9 @@ function domFresh(id) {
         event.preventDefault();
         return false;
     });
-    $(document).change(function() {
-        var type = $("#WxDataMusNewMenu").val();
-        type == 0 ? $("#WxDataMusNewsubMenu").removeAttr('disabled') : $("#WxDataMusNewsubMenu").attr('disabled', 'disabled');
-        if(type == 0){
-            var selectop = '';
-            $(".firmenu").each(function() {
-                $("#WxDataMusNewsubMenu").append($('<option value="'+$(this).attr('id')+'">'+$(this).text()+'</option>'));
-            });
-        }
-    });
 }
 // ==============================Private Function
-function _doMenu(type, name, url, id) {
+function _doMenu(type, name, url, id, tempobj) {
 	if (type == 'add') {
 		newitem = createNode(name, "li", {'class':'dd-item', 'data-id':id, 'data-url':url});
 	    $("#nestable > ol").append(newitem);
@@ -213,9 +204,9 @@ function _doMenu(type, name, url, id) {
 	        return false;
 	    });
 	} else {
-		var muli = $("#nestable > ol").find("li[data-id='" + id + "']");
+		var muli = $("li[data-id='" + id + "']");
 		muli.attr('data-url', url);
-		muli.find('.dd-handle span').text(name);
+		muli.find('.dd-handle span').first().text(name);
 	}
 }
 function createNode(name, nodetag, attr,itemid) {

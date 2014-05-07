@@ -18,11 +18,19 @@
 			<strong>
 				编辑：
 			</strong>
-			可创建最多 3 个一级菜单，每个一级菜单下可创建最多 5 个二级菜单。编辑中的菜单不会马上被用户看到，请放心调试。
+            最多可创建 3 个一级菜单，每个一级菜单下可创建最多 5 个二级菜单, 子菜单可通过拖拽实现。编辑中的菜单不会马上被用户看到，请放心调试。
 			<br>
 		</div>
 	    <div class="tabbable">
-	       	<ul class="nav nav-tabs" id="myTab">
+            <button id="addnewitem" type="button" class="btn btn-xs btn-warning" style="float:right;margin-left:20px;">
+                <i class="icon-fire bigger-110"></i>
+                添加菜单
+            </button>
+            <button id="saveitem" type="button" class="btn btn-xs btn-info" style="float:right;">
+                <i class="icon-fire bigger-110"></i>
+                保存
+            </button>
+	       	<ul class="nav nav-tabs" id="myTab" style="width:50%;">
 	            <li class="active">
 	                <a data-toggle="tab" href="#home">
 	                    <i class="green icon-home bigger-110"></i>
@@ -30,16 +38,10 @@
 	                </a>
 	            </li>
 				<li style="margin-left:200px">
-					<button id="saveitem" type="button" class="btn btn-xs btn-info">
-						<i class="icon-fire bigger-110"></i>
-						保存
-					</button>
+
 				</li>
 				<li style="margin-left:450px">
-					<button id="addnewitem" type="button" class="btn btn-xs btn-warning">
-						<i class="icon-fire bigger-110"></i>
-						添加菜单
-					</button>
+
 				</li>
 	        </ul>
 	        <div class="tab-content">
