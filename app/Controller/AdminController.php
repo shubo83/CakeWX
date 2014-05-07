@@ -97,7 +97,7 @@ class AdminController extends AppController {
 		$this->paginate['limit'] = 5;
 		$this->Paginator->settings = $this->paginate;
 		$data['datalist'] = $this->Paginator->paginate('WxWebchat', array('FPerson' => $this->uid));
-		$data['leavecount'] = $this->toAccount - intval($result['count']);
+		$data['leavecount'] = $this->toAccount - intval(count($data['datalist']));
 		$this->vmenu = $this->WxWebchat->getmenus('hmenu');
 		$this->vurl = Router::url(array('controller' => "admin", 'action' => "basic"));
 		$this->set('data', $data);

@@ -36,6 +36,7 @@ class AppController extends Controller {
 	public $components = array('Session', 'Auth');
 	public $helpers = array('Array', 'Main', 'Html');
 	public $user = array();
+	public $layout = "admin";
 	public $uid = '';
 	public $username = '';
 	public $snsurl = '';
@@ -61,7 +62,7 @@ class AppController extends Controller {
 		    'Form' => array('userModel' => 'TPerson', 'fields' => array('username' => "FMemberId", 'password' => "FPassWord"), 'scope' => array('TPerson.FIsAuth' => true)),
 		);
 		$this->Auth->authError = "用户未被授权，禁止访问。";
-		$this->Auth->sessionKey = FALSE;
+		//$this->Auth->sessionKey = FALSE;
 		
 		// login case
 		$this->user = AuthComponent::user();
@@ -179,5 +180,6 @@ class AppController extends Controller {
 		$this->set('username', $this->username);
 		$this->set('user', $this->user);
 		$this->set('name', $this->user['FullName']);
+		$this->set('WC_BASE', "");
 	}
 }

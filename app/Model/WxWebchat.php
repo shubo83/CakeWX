@@ -290,7 +290,7 @@ class WxWebchat extends AppModel {
 				),
 				"素材库" => array(
 					'url' => "", 
-					'icon' => "icon-hdd",
+					'icon' => "icon-picture",
 					'child' => array(
 						'文本' => array(
 							'url' => "{$baseURL}mTxt", 
@@ -330,7 +330,7 @@ class WxWebchat extends AppModel {
 				),
 				"自定义菜单" => array(
 					'url' => "", 
-					'icon' => "icon-hdd",
+					'icon' => "icon-list",
 					'child' => array(
 						'菜单设置' => array(
 							'url' => "{$baseURL}mFields", 

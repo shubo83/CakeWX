@@ -9,7 +9,8 @@
 	// load script
 	$this->Html->script(array(
 		"Editor/kindeditor",
-		"Action/webchat"
+		"/assets/js/bootbox.min",
+		"Action/twSelect"
 	), array('block' => "script_extra", 'inline' => false));
 ?>
 <style type="text/css">

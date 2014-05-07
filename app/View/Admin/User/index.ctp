@@ -8,10 +8,6 @@
 	
 	// load script
 	$this->Html->script(array(
-		"/assets/js/bootbox.min",
-		"Editor/kindeditor",
-		"Action/webchat",
-		"Action/twPreview"
 	), array('block' => "script_extra", 'inline' => false));
 ?>
 <style type="text/css">

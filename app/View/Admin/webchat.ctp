@@ -53,8 +53,8 @@
 									免费版
 								</td>
 								<td class="hidden-480">
-									<p>创建时间:<?= $vals['WxWebchat']['FCreatedate'] ?></p>
-									<p>到期时间:<?= $vals['WxWebchat']['FCreatedate'] ?></p>
+									<p>创建时间:<?= date('Y-m-d', strtotime($vals['WxWebchat']['FCreatedate'])) ?></p>
+									<p>到期时间:<?= date('Y-m-d', strtotime('2200-4-15')) ?></p>
 								</td>
 								<td>
 									<p>请求数剩余：不限制</p>

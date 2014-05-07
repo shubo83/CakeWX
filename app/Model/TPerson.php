@@ -549,51 +549,6 @@ class TPerson extends AppModel {
 	
 	// ============ webchat
 	
-	
-	/**
-	 * 新增和保存后的事件
-	 *
-	 * @return void
-	 * @author apple
-	 **/
-	function afterSave()
-	{
-		// ClassRegistry::init('TUpdateInfo')->update_cs_cache($this->useTable, $this->id);	// 写更新缓存
-	}	
-	
-	/**
-	 * 保存之前的判断
-	 *
-	 * @return void
-	 * @author apple
-	 **/
-	function beforeSave()
-	{
-		
-	}
-	
-	/**
-	 * 删除之前的判断
-	 *
-	 * @return void
-	 * @author apple
-	 **/
-	function beforeDelete()
-	{
-		if ($this->uid == $this->id) return FALSE;			// safe caluse
-	}
-	
-	/**
-	 * 删除后的事件
-	 *
-	 * @return void
-	 * @author apple
-	 **/
-	function afterDelete()
-	{
-		ClassRegistry::init('TUpdateInfo')->update_cs_cache($this->useTable, $this->id);
-	}
-	
 	/**
 	 * undocumented function
 	 *

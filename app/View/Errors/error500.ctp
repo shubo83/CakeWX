@@ -1,28 +1,59 @@
 <?php
-/**
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       Cake.View.Errors
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
+	$this->extend('/Common/Admin/user');
 ?>
-<h2><?php echo $name; ?></h2>
-<p class="error">
-	<strong><?php echo __d('cake', 'Error'); ?>: </strong>
-	<?php echo __d('cake', 'An Internal Error Has Occurred.'); ?>
-</p>
-<?php
-if (Configure::read('debug') > 0 ):
-	echo $this->element('exception_stack_trace');
-endif;
-?>
+<div class="col-xs-12">
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="error-container">
+		<div class="well">
+			<h1 class="grey lighter smaller">
+				<span class="blue bigger-125">
+					<i class="icon-random"></i>
+					500
+				</span>
+				歇菜了，攻城狮正在修复
+			</h1>
+
+			<hr>
+			<h3 class="lighter smaller">
+				But we are working
+				<i class="icon-wrench icon-animated-wrench bigger-125"></i>
+				on it!
+			</h3>
+
+			<div class="space"></div>
+
+			<div>
+				<h4 class="lighter smaller">Meanwhile, try one of the following:</h4>
+
+				<ul class="list-unstyled spaced inline bigger-110 margin-15">
+					<li>
+						<i class="icon-hand-right blue"></i>
+						Read the faq
+					</li>
+
+					<li>
+						<i class="icon-hand-right blue"></i>
+						Give us more info on how this specific error occurred!
+					</li>
+				</ul>
+			</div>
+
+			<hr>
+			<div class="space"></div>
+
+			<div class="center">
+				<a href="<?php echo Router::url('/'); ?>" class="btn btn-grey">
+					<i class="icon-arrow-left"></i>
+					返回
+				</a>
+
+				<a href="<?php echo Router::url('/admin'); ?>" class="btn btn-primary">
+					<i class="icon-dashboard"></i>
+					管理中心
+				</a>
+			</div>
+		<iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe></div>
+	</div>
+
+	<!-- PAGE CONTENT ENDS -->
+</div>
