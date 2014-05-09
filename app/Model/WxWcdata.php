@@ -75,7 +75,7 @@ class WxWcdata extends AppModel {
 	 * @author apple
 	 **/
 	function getDataList($webchat, $id = 'NULL')
-	{	
+	{
 		$data = $this->find('first', array('conditions' => array('FWebchat' => $webchat), 'recursive' => 0));
 		// if ($id != 'NULL')
 		// 	{

@@ -65,8 +65,9 @@ echo $this->Main->formhr_input('FMemo', array(
 echo $this->Main->formhr_input('FContent', array(
 		'div' => "form-group", 
 		'label' => array('text' => "图文内容：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "textarea", 
-		'placeholder' => "", 
+		'type' => "textarea",
+        'value' => "&nbsp;",
+		'placeholder' => "",
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div></div>",
