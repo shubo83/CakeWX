@@ -11,7 +11,6 @@
 	$this->Html->script(array(
 		"/assets/js/bootbox.min",
 		"Editor/kindeditor",
-		"Action/webchat",
 		"Action/twPreview",
 		"Action/mPicAdd"
 	), array('block' => "script_extra", 'inline' => false));
@@ -75,7 +74,7 @@ echo $this->Main->formhr_input('FContent', array(
 	));
 echo $this->Main->formhr_input('FLink', array(
 		'div' => "form-group", 
-		'label' => array('text' => "原文链接：", 'class' => "col-sm-3 control-label no-padding-right"), 
+		'label' => array('text' => "图文链接：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "text", 
 		'placeholder' => "", 
 		'class' => "col-xs-10 col-sm-5",

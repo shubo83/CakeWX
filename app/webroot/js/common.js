@@ -46,5 +46,5 @@ function fixPNG(myImage)
 }
 
 $(function() {
-	$(".page_tips").animate({ opacity: 'hide' }, 4000);
+	$(".page_tips").animate({ opacity: 'hide' }, 8000);
 });

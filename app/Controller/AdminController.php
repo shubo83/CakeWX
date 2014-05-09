@@ -923,7 +923,7 @@ class AdminController extends AppController {
 		}
 		if ($this->request->is('post')) {
 			$this->WxWebchat->set($this->request->data);
-			if ($this->WxWebchat->validates()) {
+			if ($this->WxWebchat->validates(array('fieldList' => array('FName', 'FWxopenId', 'FWxId', 'FIcon')))) {
 				$query = $this->WxWebchat->saveWebchat($this->request->data, $this->uid);
 				if ($query) {
 					$this->Session->setFlash('微信公众账号添加成功。');
@@ -953,7 +953,7 @@ class AdminController extends AppController {
 		// echo '<pre>';print_r($this->request);exit;
 		if ($this->request->is('post') || $this->request->is('put')) {
 			$this->WxWebchat->set($this->request->data);
-			if ($this->WxWebchat->validates()) {
+			if ($this->WxWebchat->validates(array('fieldList' => array('FName', 'FWxopenId', 'FWxId', 'FIcon')))) {
 				$this->WxWebchat->id = $id;
 				$query = $this->WxWebchat->saveWebchat($this->request->data, $this->uid);
 				if ($query) {
