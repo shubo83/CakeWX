@@ -1,3 +1,27 @@
+(function($) {
+    if (!$.outerHTML) {
+        $.extend({
+            outerHTML: function(ele) {
+                var $return = undefined;
+                if (ele.length === 1) {
+                    $return = ele[0].outerHTML;
+                }
+                else if (ele.length > 1) {
+                    $return = {};
+                    ele.each(function(i) {
+                        $return[i] = $(this)[0].outerHTML;
+                    })
+                };
+                return $return;
+            }
+        });
+        $.fn.extend({
+            outerHTML: function() {
+                return $.outerHTML($(this));
+            }
+        });
+    }
+})(jQuery);
 $(document).ready(function() {
     $("#WxDataTwFPreTwj").hide();
     var type = $(".twSelect").val();
@@ -32,6 +56,8 @@ $(".twSelect").on("change", function(){
     if(type == 0) {
         $(".Kreplaybox textarea, .Kreplaybox .help-inline").show();
         $(".Kreplaybox").children().not("textarea").hide();
+        $(".u-chooses").empty();
+        $(".Kreplaybox .help-inline, .Kreplaybox .maroon").show();
     } else {
 		$.ajax({
 			url: ADMIN_WC_URL + "mPic?_a=twj&_m=simple",
@@ -47,7 +73,7 @@ $(".twSelect").on("change", function(){
 							className: "btn-primary",
                 			callback: function() {
 								$(".selected .com_mask, .selected .icon_item_selected").hide();
-			                    var selehtm = '';
+			                    var selehtm = '';console.log(Atempids);
 			                    $.each(Atempids, function(key,val) {
 									var t_id = $('#'+val).attr('id');
 									$('#'+val).append("<input type=\"hidden\" name=\"data[WxDataKds][FTwj][]\" value=\"" + t_id +"\" />");
@@ -55,8 +81,8 @@ $(".twSelect").on("change", function(){
 								});
 			                   	$(".u-chooses").empty();
 			                   	$(".u-chooses").prepend(selehtm);
-		                        $("#addTw").parent().show();
-		                        $(".Kreplaybox textarea").hide();
+		                        $(".u-chooses").parent().show();
+		                        $(".Kreplaybox textarea, .Kreplaybox .maroon").hide();
                   			}
 						},
 					}

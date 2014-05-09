@@ -106,5 +106,8 @@ var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 		<div id='ajcont' style="display:none">
 			<div id="aj_box"></div>
 		</div>
+        <div class="actips">
+            <div class="tips">操作成功</div>
+        </div>
 	</body>
 </html>
