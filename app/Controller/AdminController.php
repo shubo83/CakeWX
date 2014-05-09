@@ -833,7 +833,7 @@ class AdminController extends AppController {
 				$this->TPerson->id = $this->uid;
 				$query = $this->TPerson->save($this->request->data, TRUE, array('FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity'));
 				if ($query) {
-					$this->Session->setFlash('保存成功。');
+					$this->flashSuccess("保存成功");
 					return $this->redirect($this->rdBaseURL.'basic');
 				}
 			}

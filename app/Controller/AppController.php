@@ -159,6 +159,28 @@ class AppController extends Controller {
 			$this->redirect(array('controller' => "admin", 'action' => "index"));
 		}
 	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function flashSuccess($msg)
+	{
+		$this->Session->setFlash($msg);
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function flashError($msg)
+	{
+		$this->Session->setFlash($msg, 'default', array(), 'error');
+	}
 
 	/**
 	 * undocumented function

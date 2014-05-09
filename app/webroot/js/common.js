@@ -45,3 +45,6 @@ function fixPNG(myImage)
 	} 
 }
 
+$(function() {
+	$(".page_tips").animate({ opacity: 'hide' }, 4000);
+});

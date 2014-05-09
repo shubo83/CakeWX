@@ -84,7 +84,8 @@ var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 </head>
 	<body>	
 		<?php
-			echo $this->Session->flash('flash', array('element' => 'flashFailure'));
+			echo $this->Session->flash('flash', array('element' => 'flash'));
+			echo $this->Session->flash('error', array('element' => 'flash', 'params' => array('tipsType' => "error")));
 			echo $this->fetch('content');
 			echo '<!--[if !IE]> --><script type="text/javascript">
 				window.jQuery || document.write("<script src=\''.$this->Html->url('/assets/js/jquery-2.0.3.min.js').'\'>"+"<"+"/script>");
@@ -106,8 +107,5 @@ var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 		<div id='ajcont' style="display:none">
 			<div id="aj_box"></div>
 		</div>
-        <div class="actips">
-            <div class="tips">操作成功</div>
-        </div>
 	</body>
 </html>
