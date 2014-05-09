@@ -3,7 +3,8 @@
 
 	// CSS block
 	$this->Html->css(array(
-		"Mobile/client-page1d90ea.css"
+		"Mobile/client-page1d90ea.css",
+        "Mobile/pc-page1d90ea.css"
 	), null, array('block' => "css_basic", 'inline' => false));
 	
 	// Script block
@@ -39,7 +40,7 @@ var ADMIN_URL = '<?= Router::url("/admin/", TRUE) ?>';
 var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 </script>
 </head>
-	<body>	
+	<body id="activity-detail">
 		<?php
 			echo $this->fetch('content');
 			echo $this->fetch('script_basic');

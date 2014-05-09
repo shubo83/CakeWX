@@ -37,11 +37,11 @@ class MobController extends AppController {
 	{
 		$this->loadModel("WxDataTw");
 		$result = $this->WxDataTw->getDataList(NULL, $id);
-		$data['title'] = $result['FName'];
-		$data['author'] = $result['FAuthor'];
-		$data['content'] = $result['FContent'];
-		$data['memeo'] = $result['FMemo'];
-		$data['dateline'] = $result['FCreatedate'];
+		$data['title'] = $result['WxDataTw']['FTitle'];
+		$data['author'] = $result['WxDataTw']['FAuthor'];
+		$data['content'] = $result['WxDataTw']['FContent'];
+		$data['memeo'] = $result['WxDataTw']['FMemo'];
+		$data['dateline'] = $result['WxDataTw']['FCreatedate'];
 		$this->set('post', $data);
 		$this->render('/Mobile/index');
 	}
