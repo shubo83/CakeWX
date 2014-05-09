@@ -66,6 +66,7 @@ echo $this->Main->formhr_input('FContent', array(
 		'div' => "form-group", 
 		'label' => array('text' => "图文内容：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "textarea", 
+		'value' => "&nbsp;",
 		'placeholder' => "", 
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
