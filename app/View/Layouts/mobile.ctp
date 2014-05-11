@@ -3,10 +3,12 @@
 
 	// CSS block
 	$this->Html->css(array(
-		"Mobile/client-page1d90ea.css",
-        "Mobile/pc-page1d90ea.css"
+		"Mobile/client-page1d90ea.css"
 	), null, array('block' => "css_basic", 'inline' => false));
-	
+    $this->Html->css(array(
+        "Mobile/pc-page1d90ea.css"
+    ), null, array('block' => "css_ie9", 'inline' => false));
+
 	// Script block
 	$this->Html->script(array(
 	), array('block' => "script_basic", 'inline' => false));
@@ -30,6 +32,8 @@
 	echo $this->Html->meta(array('name' => "apple-mobile-web-app-status-bar-style", 'content' => "black"));
 	echo $this->Html->meta(array('name' => "format-detection", 'content' => "telephone=no"));
 	echo '<!-- basic styles -->'.$this->fetch('css_basic');
+    echo '<!--[if IE 9]>'.$this->fetch('css_ie9').'<![endif]-->';
+    echo '<link media="screen and (min-width:1000px)" rel="stylesheet" type="text/css" href="'.Router::url('/css/Mobile/pc-page1d90ea.css').'"/>';
 	echo $this->fetch('css_common');
 	echo $this->fetch('css_extra');
 ?>
