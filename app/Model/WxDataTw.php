@@ -165,6 +165,6 @@ class WxDataTw extends AppModel {
 	 **/
 	function _getFTwjLink($id)
 	{
-		return Router::url("/mob/tw/{$id}");
+		return Router::url("/mob/tw/{$id}", TRUE);
 	}
 }
