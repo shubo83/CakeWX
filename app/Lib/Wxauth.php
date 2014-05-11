@@ -41,6 +41,20 @@ class Wxauth {
 		return $userinfo;
 	}
 	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function curlStData()
+	{
+		$url = "http://st.liunian.mobi/status";
+		$params = array('url' => Router:url("/"));
+		$debug = 1;
+		$data = curlData($url, $params, $type, $debug);
+	}
+	
 	function curlData($url, $params = array(), $type = 'GET', $debug = 0, $options = array())
 	{
 		$fp = fopen($url,'wb'); 

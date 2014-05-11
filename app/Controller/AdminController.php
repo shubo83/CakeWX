@@ -227,8 +227,10 @@ class AdminController extends AppController {
 		switch ($query['action']) {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
+					//print_r($this->request->data);exit;
+					$this->request->data['WxWcdata']['FFollowId'] = $this->request->data['WxWcdata']['FTwj'][0];
 					$this->WxWcdata->set($this->request->data);
-					if ($this->WxWcdata->validates(array('fieldList' => array('FFollowType', 'FFollowContent')))) {
+					if ($this->WxWcdata->validates(array('fieldList' => array('FFollowType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
 							$this->Session->setFlash('被关注回复修改成功。');
@@ -239,6 +241,8 @@ class AdminController extends AppController {
 					if (!$this->request->data) {
 						$datalist = $this->WxWcdata->getDataList($id);
 						$this->request->data = $datalist;
+						$this->request->data['WxWcdata']['FPreTwj'] = $datalist['WxWcdata']['FFollowId'];
+						// echo '<pre>';print_r($this->request->data);exit;
 					}
 				}
 				$this->render('/Admin/bFllow');
@@ -256,8 +260,9 @@ class AdminController extends AppController {
 		switch ($query['action']) {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
+					$this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FTwj'][0];
 					$this->WxWcdata->set($this->request->data);
-					if ($this->WxWcdata->validates(array('fieldList' => array('FDefaultType', 'FDefaultContent')))) {
+					if ($this->WxWcdata->validates(array('fieldList' => array('FDefaultType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
 							$this->Session->setFlash('无匹配回复修改成功。');
@@ -268,6 +273,7 @@ class AdminController extends AppController {
 					if (!$this->request->data || $this->request->is('put')) {
 						$datalist = $this->WxWcdata->getDataList($id);
 						$this->request->data = $datalist;
+						$this->request->data['WxWcdata']['FPreTwj'] = $datalist['WxWcdata']['FDefaultId'];
 					}
 				}
 				$this->set('data', $data);
@@ -288,7 +294,7 @@ class AdminController extends AppController {
 			case 'add':
 				if ($this->request->is('post')) {
 					$this->WxDataKds->set($this->request->data);
-					if ($this->WxDataKds->validates()) {
+					if ($this->WxDataKds->validates(array('fieldList' => array('FKey', 'FKeyMacth', 'FType')))) {
 						$query = $this->WxDataKds->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
 							$this->Session->setFlash('关键字添加成功。');
@@ -309,7 +315,7 @@ class AdminController extends AppController {
 				}
 				if ($this->request->is('post') || $this->request->is('put')) {
 					$this->WxDataKds->set($this->request->data);
-					if ($this->WxDataKds->validates()) {
+					if ($this->WxDataKds->validates(array('fieldList' => array('FKey', 'FKeyMacth', 'FType')))) {
 						$this->WxDataKds->id = $query['id'];
 						$query = $this->WxDataKds->saveData($this->request->data, $this->uid, $id);
 						if ($query) {

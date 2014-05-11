@@ -63,7 +63,7 @@ echo $this->Main->formhr_input('FWbContent', array(
 		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span><div class='u-chooses'></div></span></div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
-echo $this->Main->formhr_hidden('FPreTwj');				// 隐藏域
+echo $this->Main->formhr_hidden('FPreTwj', array('id' => "FPreTwj"));				// 隐藏域
 ?>
 <div class="clearfix form-actions">
 	<div class="col-md-offset-3 col-md-9">
@@ -78,4 +78,5 @@ echo $this->Main->formhr_hidden('FPreTwj');				// 隐藏域
 		</button>
 	</div>
 </div>
+<?php echo $this->Form->hidden('t_form', array('id' => "t_form", 'value' => "WxDataKds")); ?>
 <?php echo $this->Form->end(); ?>

@@ -72,7 +72,7 @@ class WxDataKds extends AppModel {
 		$this->set('FWebchat', $id);
 		$this->data['WxDataKds']['FTwj'] = serialize($this->data['WxDataKds']['FTwj']);
 		// print_r($this->data);exit;
-		$query = $this->save($this->data);
+		$query = $this->save($this->data, FALSE);
 		if ($query) return $this->id;
 	}
 	

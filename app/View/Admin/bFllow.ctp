@@ -30,14 +30,16 @@ echo $this->Main->formhr_input('FFollowType', array(
 	));
 echo $this->Main->formhr_input('FFollowContent', array(
 		'div' => "form-group", 
+		'disabl' => false,
 		'label' => array('text' => "被关注回复内容：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "textarea",
 		'placeholder' => "",
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix Kreplaybox'>",
-        'after' => "<span class='help-inline col-xs-12 col-sm-7'><div class='u-chooses'></div><span class='middle maroon'>*</span></span></div></div>",
+        'after' => "<span class='help-inline col-xs-12 col-sm-7'><div class='u-chooses'></div><span class='middle maroon'></span></span></div></div>",
         'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
+	echo $this->Main->formhr_hidden('FPreTwj', array('id' => "FPreTwj"));
 ?>
 <div class="clearfix form-actions">
 	<div class="col-md-offset-3 col-md-9">
@@ -52,4 +54,5 @@ echo $this->Main->formhr_input('FFollowContent', array(
 		</button>
 	</div>
 </div>
+<?php echo $this->Form->hidden('t_form', array('id' => "t_form", 'value' => "WxWcdata")); ?>
 <?php echo $this->Form->end(); ?>

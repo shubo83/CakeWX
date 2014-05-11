@@ -23,9 +23,9 @@
     }
 })(jQuery);
 $(document).ready(function() {
-    $("#WxDataTwFPreTwj").hide();
+    $("#FPreTwj").hide();
     var type = $(".twSelect").val();
-    var tempdata = $("#WxDataKdsFPreTwj").val().split(',');
+    var tempdata = $("#FPreTwj").val().split(',');
     var com = '', s = '';
     $.each(tempdata, function(index, value) {
         s += com + '"'+value+'"';
@@ -76,7 +76,9 @@ $(".twSelect").on("change", function(){
 			                    var selehtm = '';console.log(Atempids);
 			                    $.each(Atempids, function(key,val) {
 									var t_id = $('#'+val).attr('id');
-									$('#'+val).append("<input type=\"hidden\" name=\"data[WxDataKds][FTwj][]\" value=\"" + t_id +"\" />");
+									var t_form = $("#t_form").val();
+									t_form = t_form ? t_form : 'WxDataKds';
+									$('#'+val).append("<input type=\"hidden\" name=\"data[" + t_form + "][FTwj][]\" value=\"" + t_id +"\" />");
 									selehtm += $('#'+val).outerHTML() + "&nbsp;";
 								});
 			                   	$(".u-chooses").empty();

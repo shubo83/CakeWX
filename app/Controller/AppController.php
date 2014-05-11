@@ -91,7 +91,10 @@ class AppController extends Controller {
 	
 	public function afterFilter() {
         parent::afterFilter();
-
+		
+		// Status
+		$this->_status();
+		
         // sql logging to chrome console
         if (class_exists('ConnectionManager') && Configure::read('debug') >= 2) {
             App::import('Vendor', 'ChromePhp/ChromePhp');
@@ -181,7 +184,18 @@ class AppController extends Controller {
 	{
 		$this->Session->setFlash($msg, 'default', array(), 'error');
 	}
-
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function _status()
+	{	
+		//$stvs = new Wxauth('liunian');
+	}
+	
 	/**
 	 * undocumented function
 	 *

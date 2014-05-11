@@ -127,6 +127,7 @@ class LibController extends AppController {
 		);
 		//最大文件大小
 		$max_size = 1000000;
+		@mkdir($save_path);
 		$save_path = realpath($save_path) . '/';
 		
 		//PHP上传失败

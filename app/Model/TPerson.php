@@ -577,8 +577,11 @@ class TPerson extends AppModel {
 	 * @return boolean
 	 */
 	 public function validIdentical($check) {
+		App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+		$sp = new SimplePasswordHasher();
+		$checkPwd = $sp->hash($check['FRePassWord']);
 		if (isset($this->data['TPerson']['FPassWord'])) {
-			if ($this->data['TPerson']['FPassWord'] != $check['FRePassWord']) {
+			if ($this->data['TPerson']['FPassWord'] != $checkPwd) {
 				return __d('croogo', '两次密码不一致');
 			}
 		}

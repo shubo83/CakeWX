@@ -44,14 +44,14 @@ class WxReply extends AppModel {
 			switch ($this->msType) {
 				case 'event':
 					if ($this->event == 'subscribe') {
-						$contentStr = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $keyword, $toUsername);
+						$contentStr = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $keyword, $this->toUsername);
 						$wxData['data'] = $contentStr;
 						$resultStr = $this->_getTPL("text", $wxData);
 					}
 					break;
 				default:
 					$vars['keyword'] = $this->keyword;
-					$wxData = ClassRegistry::init('WxWcdata')->getMsg("keyword", $this->webchat, $vars);
+					$wxData = ClassRegistry::init('WxWebchat')->getMsg("text", $vars, $this->toUsername);
 					$resultStr = $this->_getTPL($wxData['type'], $wxData);
 			}
 		} else {

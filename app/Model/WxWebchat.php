@@ -170,10 +170,6 @@ class WxWebchat extends AppModel {
 			$content = $content ? $content : 'WX, I Love You!';			// Default Msg
 			return $content;
 		}
-		else
-		{
-			return '亲，您的账号还没有配置成功。［在微信］';
-		}
 	}
 	
 	/**

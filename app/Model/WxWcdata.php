@@ -63,6 +63,7 @@ class WxWcdata extends AppModel {
 		$this->set('Id', $this->id ? $this->id : String::uuid());
 		$this->set('FUpdatedate', date('Y-m-d H:i:s'));
 		$this->set('FWebchat', $id);
+		$this->set($data);
 		// echo '<pre>';print_r($this->data);exit;
 		$query = $this->save($this->data, FALSE);
 		if ($query) return $this->id;
@@ -103,7 +104,6 @@ class WxWcdata extends AppModel {
 	 **/
 	function getMsg($type = null, $webchat, $var = null)
 	{
-		$webchat = md5($webchat);			// Encode
 		$data = $this->getDataList($webchat);
 		switch ($type)
 		{
