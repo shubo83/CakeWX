@@ -121,9 +121,6 @@ class WxWcdata extends AppModel {
 				break;
 			case 'keyword':			// 关键字
 				$msg = ClassRegistry::init('WxDataKds')->getMsg($webchat, $var['keyword']);
-				if (!$msg) {
-					$msg = $this->getMsg('null', $webchat);
-				}
 				break;
 			default:
 				if ($data['WxWcdata']['FFollowType'] == 1 && $data['WxWcdata']['FDefaultId']) {

@@ -166,9 +166,9 @@ class WxDataKds extends AppModel {
 			$data = $this->find('first', array('conditions' => array("LOCATE(`Fkey`, '{$keywords}') >" => "0", 'FWebchat' => $webchat, 'FKeyMacth' => "1"), 'recursive' => 0));
 		}
 		$type = isset($data['WxDataKds']['FType']) ? intval($data['WxDataKds']['FType']) : FALSE;
-		$content['type'] = "text";
 		switch ($type) {
 			case '0':
+				$content['type'] = "text";
 				$content['data'] = isset($data['WxDataKds']['FWbContent']) ? $data['WxDataKds']['FWbContent'].$suffix : ClassRegistry::init('WxWcdata')->getMsg('null', $webchat);
 				break;
 			case '1':
@@ -178,6 +178,8 @@ class WxDataKds extends AppModel {
 				$content['data']['items'] = $WX_twData['items'];
 				$content['type'] = "news";
 				break;
+			default:
+				$content = ClassRegistry::init('WxWcdata')->getMsg('null', $webchat);
 		}
 		return $content;
 	}
