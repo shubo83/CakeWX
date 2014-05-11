@@ -35,11 +35,6 @@ class WxDataTw extends AppModel {
 			'rule' => "notEmpty",
 			'message' => "必须填写",
 			'required' => true
-	    ),
-		'FContent' => array(
-			'rule' => "notEmpty",
-			'message' => "必须填写",
-			'required' => true
 	    )
 	);
 	

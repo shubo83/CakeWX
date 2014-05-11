@@ -61,14 +61,6 @@ KindEditor.ready(function(K) {
 			url = BASE_URL + url;
 		}
 	});
-	
-	K.create('#WxDataTwFMemo', {
-		width: '700px',
-		height: '300px',
-		items: [
-		        'emoticons'
-		]
-	});
 });
 
 // 图文预览
