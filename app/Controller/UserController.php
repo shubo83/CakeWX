@@ -51,12 +51,23 @@ class UserController extends AppController {
 	 **/
 	function register() {
 		$errors = "";
-		if ($this->request->isPost()) {
-			if ($this->Auth->login()) {
-				$this->redirect($this->Auth->redirect());
-			} else {
-				$this->Session->setFlash(__('用户名和密码错误。'), 'default', array('class' => 'error'));
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->TPerson->set($this->request->data);
+			$this->TPerson->validator()->add('FMemberId', 'unique', array(
+			    'rule' => 'isUnique',
+			    'required' => 'create',
+				'message' => "此账号已经存在了，请更换一个新的。"
+			));
+			if ($this->TPerson->validates(array('fieldList' => array('FMemberId', 'FPassWord', 'FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity')))) {
+				$this->TPerson->id = $this->uid;
+				$query = $this->TPerson->addUser($this->request->data);
+				if ($query) {
+					$this->flashSuccess("注册成功，请登录。");
+					return $this->redirect(array('action' => "login"));
+				}
 			}
+		} else {
+			//$this->request->data = $user;
 		}
 	
 		$this->set('errors', $errors);

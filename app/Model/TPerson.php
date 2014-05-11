@@ -47,9 +47,11 @@ class TPerson extends AppModel {
 	 */
 	public $validate = array(
 		'FMemberId' => array(
-			'rule' => "notEmpty",
-			'message' => "必须填写",
-			'required' => true
+			'notEmpty' => array(
+				'rule' => "notEmpty",
+				'message' => "必须填写",
+				'required' => true
+			)
 	    ),
 		'FPassWord' => array(
 			'notEmpty' => array(
@@ -548,6 +550,27 @@ class TPerson extends AppModel {
 	}
 	
 	// ============ webchat
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function addUser($user) {
+		App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
+		$sp = new SimplePasswordHasher();
+		$this->set($user);
+		$this->set('Id', String::uuid());
+		$this->set('FPassWord', $sp->hash($user['TPerson']['FPassWord']));
+		$this->set('FCreatedate', date('Y-m-d H:i:s'));
+		$this->set('FIsActive', 1);
+		$this->set('FIsAuth', 1);
+		// $this->create();
+		// echo '<pre>';print_r($this->data);exit;
+		$query = $this->save($this->data, FALSE);
+		if ($query) return $user;
+	}
 	
 	/**
 	 * undocumented function
