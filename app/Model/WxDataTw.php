@@ -130,7 +130,7 @@ class WxDataTw extends AppModel {
 	 **/
 	function getMsg($twId, $type = 'arr')
 	{
-		$twId = reset($twId);
+		$twId = is_array($twId) ? reset($twId) : $twId;
 		$data = $this->find('first', array('conditions' => array('Id' => $twId), 'recursive' => 0));
 		$WX_twj = isset($data['WxDataTw']['FTwj']) ? unserialize($data['WxDataTw']['FTwj']) : FALSE;
 		$WX_type = isset($data['WxDataTw']['FType']) ? $data['WxDataTw']['FType'] : 0;
