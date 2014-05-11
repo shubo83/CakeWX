@@ -108,8 +108,14 @@ class WxWcdata extends AppModel {
 		switch ($type)
 		{
 			case 'subscribe':			// 订阅
-				$msg = isset($data['WxWcdata']['FFollowContent']) ? $data['WxWcdata']['FFollowContent'] : FALSE;
-				$msg = !$msg ? $this->getMsg(null, $webchat) : $msg;
+				if ($data['WxWcdata']['FFollowType'] == 1 && $data['WxWcdata']['FFollowId']) {
+					$WX_twj = $data['WxWcdata']['FFollowId'];
+					$msg = ClassRegistry::init('WxDataTw')->getMsg($WX_twj, 'news');
+				} else {
+					$msg = isset($data['WxWcdata']['FFollowContent']) ? $data['WxWcdata']['FFollowContent'] : FALSE;
+					$msg = !$msg ? $this->getMsg(null, $webchat) : $msg;
+				}
+			
  				break;
 			case 'signtext':			// 个性签名
 				$msg = isset($data['WxWcdata']['FSignText']) ? $data['WxWcdata']['FSignText'] : '';
@@ -118,7 +124,12 @@ class WxWcdata extends AppModel {
 				$msg = ClassRegistry::init('WxDataKds')->getMsg($webchat, $var['keyword']);
 				break;
 			default:
-				$msg = isset($data['WxWcdata']['FDefaultContent']) ? $data['WxWcdata']['FDefaultContent'] : FALSE;
+				if ($data['WxWcdata']['FFollowType'] == 1 && $data['WxWcdata']['FDefaultId']) {
+					$WX_twj = $data['WxWcdata']['FDefaultId'];
+					$msg = ClassRegistry::init('WxDataTw')->getMsg($WX_twj, 'news');
+				} else {
+					$msg = isset($data['WxWcdata']['FDefaultContent']) ? $data['WxWcdata']['FDefaultContent'] : FALSE;
+				}
 				break;
 		}
 		return $msg;

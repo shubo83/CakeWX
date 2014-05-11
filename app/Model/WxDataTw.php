@@ -128,7 +128,7 @@ class WxDataTw extends AppModel {
 	 * @return void
 	 * @author apple
 	 **/
-	function getMsg($twId)
+	function getMsg($twId, $type = 'arr')
 	{
 		$twId = reset($twId);
 		$data = $this->find('first', array('conditions' => array('Id' => $twId), 'recursive' => 0));
@@ -153,6 +153,14 @@ class WxDataTw extends AppModel {
 								);
 			}
 			$returnArr['count'] += intval(count($twjData));
+		}
+		
+		// Msg Output
+		if ($type != 'arr') {
+			$content['data']['ArticleCount'] = $returnArr['count'];
+			$content['data']['items'] = $returnArr['items'];
+			$content['type'] = "news";
+			$returnArr = $content;
 		}
 		return $returnArr;
 	}
