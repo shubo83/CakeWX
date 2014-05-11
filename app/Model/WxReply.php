@@ -44,9 +44,9 @@ class WxReply extends AppModel {
 			switch ($this->msType) {
 				case 'event':
 					if ($this->event == 'subscribe') {
-						$contentStr = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $keyword, $this->toUsername);
-						$wxData['data'] = $contentStr;
-						$resultStr = $this->_getTPL("text", $wxData);
+						$vars['keyword'] = $this->keyword;
+						$contentStr = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $vars, $this->toUsername);
+						$resultStr = $this->_getTPL($wxData['type'], $wxData);
 					}
 					break;
 				default:

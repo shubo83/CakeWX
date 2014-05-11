@@ -157,6 +157,7 @@ class WxDataTw extends AppModel {
 		
 		// Msg Output
 		if ($type != 'arr') {
+			$content = array();
 			$content['data']['ArticleCount'] = $returnArr['count'];
 			$content['data']['items'] = $returnArr['items'];
 			$content['type'] = "news";

@@ -115,13 +115,15 @@ class WxWcdata extends AppModel {
 					$msg = isset($data['WxWcdata']['FFollowContent']) ? $data['WxWcdata']['FFollowContent'] : FALSE;
 					$msg = !$msg ? $this->getMsg(null, $webchat) : $msg;
 				}
-			
  				break;
 			case 'signtext':			// 个性签名
 				$msg = isset($data['WxWcdata']['FSignText']) ? $data['WxWcdata']['FSignText'] : '';
 				break;
 			case 'keyword':			// 关键字
 				$msg = ClassRegistry::init('WxDataKds')->getMsg($webchat, $var['keyword']);
+				if (!$msg) {
+					$msg = $this->getMsg('null', $webchat);
+				}
 				break;
 			default:
 				if ($data['WxWcdata']['FFollowType'] == 1 && $data['WxWcdata']['FDefaultId']) {

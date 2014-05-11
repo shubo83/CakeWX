@@ -178,8 +178,6 @@ class WxDataKds extends AppModel {
 				$content['data']['items'] = $WX_twData['items'];
 				$content['type'] = "news";
 				break;
-			default:
-				$content['data'] = ClassRegistry::init('WxWcdata')->getMsg('null', $webchat);
 		}
 		return $content;
 	}
