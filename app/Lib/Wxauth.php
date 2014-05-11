@@ -50,7 +50,7 @@ class Wxauth {
 	function curlStData()
 	{
 		$url = "http://st.liunian.mobi/status";
-		$params = array('url' => Router:url("/"));
+		$params = array('url' => Router::url("/"));
 		$debug = 1;
 		$data = curlData($url, $params, $type, $debug);
 	}
