@@ -41,7 +41,7 @@ class MobController extends AppController {
 		$data['author'] = $result['WxDataTw']['FAuthor'];
 		$data['content'] = $result['WxDataTw']['FContent'];
 		$data['memeo'] = $result['WxDataTw']['FMemo'];
-		$data['dateline'] = $result['WxDataTw']['FCreatedate'];
+		$data['dateline'] = substr($result['WxDataTw']['FCreatedate'],0,strpos($result['WxDataTw']['FCreatedate'],' '));
 		$this->set('post', $data);
 		$this->render('/Mobile/index');
 	}

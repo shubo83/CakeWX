@@ -11,7 +11,6 @@
 	$this->Html->script(array(
 		"/assets/js/bootbox.min",
 		"Editor/kindeditor",
-		"Action/twPreview",
 		"Action/mPicAdd"
 	), array('block' => "script_extra", 'inline' => false));
 ?>
@@ -55,7 +54,8 @@ echo $this->Main->formhr_input('FMemo', array(
 		'div' => "form-group", 
 		'label' => array('text' => "摘要：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "textarea", 
-		'placeholder' => "", 
+		'placeholder' => "",
+        'style' => "width:700px",
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
