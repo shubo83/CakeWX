@@ -65,7 +65,7 @@ class WxapiController extends AppController {
 	 */
 	public function index($id) {
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-		$wx = new Wxauth($this->wxToken);		
+		$wx = new Wxauth();		
 		if (!empty($postStr)) {
 			$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
 			$returnStr = $this->WxReply->getReply($postObj);  

@@ -610,5 +610,21 @@ class TPerson extends AppModel {
 		}
 		return true;
 	}
+	
+	/**
+	 * validIdentical
+	 *
+	 * @param string $check
+	 * @return boolean
+	 */
+	 public function validIdentical_noEn($check) {
+		$checkPwd = $check['FRePassWord'];
+		if (isset($this->data['TPerson']['FPassWord'])) {
+			if ($this->data['TPerson']['FPassWord'] != $checkPwd) {
+				return __d('croogo', '两次密码不一致');
+			}
+		}
+		return true;
+	}
 
 }

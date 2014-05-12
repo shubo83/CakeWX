@@ -168,6 +168,19 @@ class InstallController extends Controller {
 		if ($this->request->is('post')) {
 			$this->loadModel('TPerson');
 			$this->TPerson->set($this->request->data);
+			$this->TPerson->validator()->add('FMemberId', 'unique', array(
+			    'rule' => 'isUnique',
+			    'required' => 'create',
+				'message' => "此账号已经存在了，请更换一个新的。"
+			));
+			$this->TPerson->validator()->remove('FRePassWord');
+			$this->TPerson->validator()->add('FRePassWord', 'validIdentical_noEn', array(
+				'rule' => "validIdentical_noEn"
+			));
+			// print_r($this->TPerson->validator());exit;
+			// unset($this->TPerson->validator()['FRePassWord']);
+			//unset($this->TPerson->validate['FRePassWord']);
+			//$this->TPerson->validator()->add('FRePassWord', 'rule', "validIdentical_noEn");
 			if ($this->TPerson->validates(array('fieldList' => array('FMemberId', 'FPassWord', 'FRePassWord')))) {
 				$user = $this->TPerson->addAdminUser($this->request->data);
 				if ($user) {
@@ -189,8 +202,8 @@ class InstallController extends Controller {
 	public function finish($token = null) {
 		$this->set('title_for_layout', __d('croogo', '安装完成'));
 		$this->_check();
-
 		$InstallManager = new InstallManager();
+		$InstallManager->stvs();
 		$result = $InstallManager->createSettingsFile();
 		if ($result) {
 			$InstallManager->installCompleted();

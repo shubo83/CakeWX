@@ -8,7 +8,7 @@ class Wxauth {
 	 * @return void
 	 * @author apple
 	 **/
-	function __construct($token, $appid = null, $appsecret = null)
+	function __construct($token = 'liunian', $appid = null, $appsecret = null)
 	{
 		$this->wechatObj = new wechatCallbackapiTest();
 		$this->wechatObj->setGloabl(array(
@@ -47,12 +47,9 @@ class Wxauth {
 	 * @return void
 	 * @author apple
 	 **/
-	function curlStData()
+	function curlStData($url, $params = array(), $type = 'GET', $debug = 0, $options = array())
 	{
-		$url = "http://st.liunian.mobi/status";
-		$params = array('url' => Router::url("/"));
-		$debug = 1;
-		$data = curlData($url, $params, $type, $debug);
+		return curlData($url, $params, $type, $debug, $options);
 	}
 	
 	function curlData($url, $params = array(), $type = 'GET', $debug = 0, $options = array())

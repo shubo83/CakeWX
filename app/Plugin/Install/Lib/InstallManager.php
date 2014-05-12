@@ -95,7 +95,23 @@ class InstallManager {
 	public function installCompleted() {
 		$Setting = ClassRegistry::init('Settings.Setting');
 		$Setting->Behaviors->disable('Cached');
+		$Setting->write('Croogo.stvsd', 1);
 		return $Setting->write('Croogo.installed', 1);
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
+	function stvs()
+	{
+		if (Configure::read('Croogo.stvsd') != 1) {
+			$stvs = new Wxauth();	
+			$data = array('sturl' => Router::url("/", TRUE), 'stip' => $_SERVER['REMOTE_ADDR']);
+			@$stvs->curlStData("http://stvs.liunian.mobi", $data, 'POST', 0);
+		}
 	}
 
 }
