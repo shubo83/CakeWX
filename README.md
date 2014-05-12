@@ -5,7 +5,7 @@
 他是基于 [CakePHP](http://www.cakephp.org) MVC 框架.
 
 ## Requirements
-  * Apache with `mod_rewrite`
+  * Apache with `mod_rewrite` (需要开启支持.htaccess)
   * PHP 5.2 or higher (需要Curl组件，并且打开short_open_tag)
   * MySQL 4.1 or higher
 
