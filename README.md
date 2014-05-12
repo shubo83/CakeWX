@@ -6,7 +6,7 @@
 
 ## Requirements
   * Apache with `mod_rewrite`
-  * PHP 5.2 or higher
+  * PHP 5.2 or higher (需要Curl组件，并且打开short_open_tag)
   * MySQL 4.1 or higher
 
 ## Links
