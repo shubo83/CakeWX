@@ -12,4 +12,3 @@
 ## Links
 
   * **官方网站**: [http://cakewx.com](http://cakewx.com)
-  * **下载**: [http://downloads.cakewx.com](http://downloads.cakewx.com)
