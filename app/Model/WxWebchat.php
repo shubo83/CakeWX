@@ -191,6 +191,10 @@ class WxWebchat extends AppModel {
 							'url' => Router::url(array('controller' => "admin", 'action' => "basic")), 
 							'icon' => "icon-double-angle-right",
 						),
+						'网站信息' => array(
+							'url' => Router::url(array('controller' => "admin", 'action' => "wBasic")), 
+							'icon' => "icon-double-angle-right"
+						),
 						'公众账号管理' => array(
 							'url' => Router::url(array('controller' => "admin", 'action' => "index")), 
 							'icon' => "icon-double-angle-right",

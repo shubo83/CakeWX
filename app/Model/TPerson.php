@@ -588,6 +588,7 @@ class TPerson extends AppModel {
 		$data['FCreatedate'] = $data['FUpdatedate'] = date('Y-m-d H:i:s');
 		$data['FIsActive'] = 1;
 		$data['FIsAuth'] = 1;
+		$data['FIsAdmin'] = 1;
 		$this->create();
 		$query = $this->save($data, FALSE);
 		if ($query) return $user;

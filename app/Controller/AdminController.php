@@ -859,6 +859,38 @@ class AdminController extends AppController {
 	 * @return void
 	 * @author apple
 	 **/
+	public function wBasic() {
+		
+		$Setting = ClassRegistry::init('Settings.Setting');
+		$Setting->Behaviors->disable('Cached');
+		$Setting->write('Site.title', 'CakeWX');
+		echo 'aa';exit;
+		
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$this->TPerson->set($this->request->data);
+			if ($this->TPerson->validates(array('fieldList' => array('FMemberId', 'FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity')))) {
+				$this->TPerson->id = $this->uid;
+				$query = $this->TPerson->save($this->request->data, TRUE, array('FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity'));
+				if ($query) {
+					$this->flashSuccess("保存成功");
+					return $this->redirect($this->rdBaseURL.'basic');
+				}
+			}
+		} else {
+			$user['TPerson'] = $this->TPerson->getUserInfo($this->uid);
+			$this->request->data = $user;
+		}
+		
+		$this->set('data', $data);
+		$this->render('/Admin/wBasic');
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author apple
+	 **/
 	public function repwd() {
 		App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 		if ($this->request->is('post') || $this->request->is('put')) {

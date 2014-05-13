@@ -8,7 +8,7 @@
 		"tagline": "A CakePHP powered Content Management System.",
 		"theme": "",
 		"timezone": 0,
-		"title": "Croogo"
+		"title": "CakeWX"
 	},
 	"Hook": {
 		"bootstraps": "Settings"
@@ -20,9 +20,9 @@
 		"level": 1
 	},
 	"Meta": {
-		"description": "Croogo - A CakePHP powered Content Management System",
-		"generator": "Croogo - Content Management System",
-		"keywords": "croogo, Croogo",
+		"description": "CakeWX - A CakePHP powered Content Management System",
+		"generator": "CakeWX - Content Management System",
+		"keywords": "CakeWX, CakeWX",
 		"robots": "index, follow"
 	},
 	"Reading": {

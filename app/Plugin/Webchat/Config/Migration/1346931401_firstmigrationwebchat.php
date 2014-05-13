@@ -136,6 +136,7 @@ class FirstMigrationWebchat extends CakeMigration {
 					'FUpdatedate' => array('type' => 'datetime'),
 					'FIsActive' => array('type' => 'boolean', 'length' => 1),
 					'FIsAuth' => array('type' => 'boolean', 'length' => 1),
+					'FIsAdmin' => array('type' => 'boolean', 'length' => 1, 'null' => false, 'default' => '0'),
 					'indexes' => array(
 						'PRIMARY' => array('column' => 'Id', 'unique' => 1),
 						'FMemberId' => array('column' => 'FMemberId', 'unique' => 1)

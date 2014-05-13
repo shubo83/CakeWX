@@ -190,7 +190,7 @@ class AppController extends Controller {
 	 **/
 	function _setGlobalViews() {	
 		$settings['site_sign'] = "CakeWX";
-		$settings['site_name'] = "CakeWX－免费的微信公众号管理平台";
+		$settings['site_name'] = "开源免费的微信公众平台开发框架 - Powered by CakeWX";
 		$settings['site_keywords'] = "CakeWX，微信公众平台，微信公众账号，订阅号，服务号，微信营销";
 		$settings['site_description'] = "CakeWX，开源免费的微信公众账号管理系统";
 		$this->set('settings', $settings);
