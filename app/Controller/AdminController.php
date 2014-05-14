@@ -860,24 +860,23 @@ class AdminController extends AppController {
 	 * @author apple
 	 **/
 	public function wBasic() {
-		
-		$Setting = ClassRegistry::init('Settings.Setting');
-		$Setting->Behaviors->disable('Cached');
-		$Setting->write('Site.title', 'CakeWX');
-		echo 'aa';exit;
-		
+		$this->_checkPrivileges();
 		if ($this->request->is('post') || $this->request->is('put')) {
-			$this->TPerson->set($this->request->data);
-			if ($this->TPerson->validates(array('fieldList' => array('FMemberId', 'FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity')))) {
-				$this->TPerson->id = $this->uid;
-				$query = $this->TPerson->save($this->request->data, TRUE, array('FullName', 'FPhone', 'FMobileNumber', 'FEMail', 'FCity'));
-				if ($query) {
-					$this->flashSuccess("保存成功");
-					return $this->redirect($this->rdBaseURL.'basic');
+			$Setting = ClassRegistry::init('Settings.Setting');
+			$Setting->Behaviors->disable('Cached');
+			foreach ($this->request->data as $key => $value) {
+				foreach ($value as $k => $v) {
+					$Setting->write("{$key}.{$k}", $v);
 				}
 			}
+			$this->flashSuccess("保存成功");
 		} else {
-			$user['TPerson'] = $this->TPerson->getUserInfo($this->uid);
+			$sets = array('Site' => array("title", "name", "keywords", "description"));
+			foreach ($sets as $key => $value) {
+				foreach ($value as $v) {
+					$user[$key][$v] = Configure::read("{$key}.{$v}");
+				}
+			}
 			$this->request->data = $user;
 		}
 		
@@ -1036,4 +1035,20 @@ class AdminController extends AppController {
 	{
 	}
 	
+//======================Private
+	
+	/**
+	 * 权限检查
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function _checkPrivileges()
+	{
+		$routers = $this->WxWebchat->getmenus('hmenu', '', 'router');
+		if (!in_array(Router::url(), $routers)) {
+			$this->flashError("用户未被授权，禁止访问。");
+			return $this->redirect(array('action' => "index"));
+		}
+	}
 }

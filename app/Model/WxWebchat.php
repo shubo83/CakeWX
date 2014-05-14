@@ -178,7 +178,7 @@ class WxWebchat extends AppModel {
 	 * @return void
 	 * @author apple
 	 **/
-	function getmenus($type = 'vmenu', $id = '')
+	function getmenus($type = 'vmenu', $id = '', $router = 0)
 	{
 		$baseURL = Router::url("/admin/wc/{$id}/");
 		$menu = array(
@@ -187,13 +187,14 @@ class WxWebchat extends AppModel {
 					'url' => "", 
 					'icon' => "icon-desktop", 
 					'child' => array(
+						'网站信息' => array(
+							'url' => Router::url(array('controller' => "admin", 'action' => "wBasic")), 
+							'icon' => "icon-double-angle-right",
+							'FIsAdmin' => 1
+						),
 						'基本信息' => array(
 							'url' => Router::url(array('controller' => "admin", 'action' => "basic")), 
 							'icon' => "icon-double-angle-right",
-						),
-						'网站信息' => array(
-							'url' => Router::url(array('controller' => "admin", 'action' => "wBasic")), 
-							'icon' => "icon-double-angle-right"
 						),
 						'公众账号管理' => array(
 							'url' => Router::url(array('controller' => "admin", 'action' => "index")), 
@@ -409,11 +410,7 @@ class WxWebchat extends AppModel {
 		
 		$view = new View();
 		$main = $view->loadHelper('Main');
-		// App::uses('MainHelper', 'View/Helper');
-		// 	App::uses('View', 'View');
-		// 	$this->View = new View($this->Controller);
-		// 	$main = new MainHelper($this->View);
-		$vmenu = $main->menuSearch($menu[$type], $type);
+		$vmenu = $main->menuSearch($menu[$type], $type, $router);
 		return $vmenu;
 	}
 }

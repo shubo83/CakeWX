@@ -86,6 +86,7 @@ var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 		<?php
 			echo $this->Session->flash('flash', array('element' => 'flash'));
 			echo $this->Session->flash('error', array('element' => 'flash', 'params' => array('tipsType' => "error")));
+			echo $this->Session->flash('auth', array('element' => 'flash', 'params' => array('tipsType' => "error")));
 			echo $this->fetch('content');
 			echo '<!--[if !IE]> --><script type="text/javascript">
 				window.jQuery || document.write("<script src=\''.$this->Html->url('/assets/js/jquery-2.0.3.min.js').'\'>"+"<"+"/script>");

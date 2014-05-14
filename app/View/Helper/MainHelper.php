@@ -35,7 +35,7 @@ class MainHelper extends AppHelper {
 	 * @return void
 	 * @author apple
 	 **/
-	function menuSearch($arr, $type = 'hmenu')
+	function menuSearch($arr, $type = 'hmenu', $router = 0)
 	{
 		if ($type == 'hmenu')
 		{
@@ -48,8 +48,7 @@ class MainHelper extends AppHelper {
 			$ac = $this->request->params['pass'][1];
 			$url = Router::url("/admin/wc/{$id}/{$ac}");
 		}
-		
-		$value = $this->Array->MY_arrSearch($arr, $url, 'url', TRUE, 'child');
+		$value = $this->Array->MY_arrSearch($arr, $url, 'url', TRUE, 'child', 'action', $router);
 		return $value;
 	}
 	

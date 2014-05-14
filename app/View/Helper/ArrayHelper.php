@@ -81,25 +81,44 @@ class ArrayHelper extends AppHelper {
 	 * @return void
 	 * @author apple
 	 **/
-	function MY_arrSearch($arr, $vls, $url = "", $each = FALSE, $child = "", $action = "action")
+	function MY_arrSearch($arr, $vls, $url = "", $each = FALSE, $child = "", $action = "action", $router = 0)
 	{
+		$this->isAdmin = $this->Array->isAdmin();
 		$newarr = array();
 		$arr1 = array_keys($arr);
 		$find = FALSE;
 		if (is_array($arr))
 		{
-			
 			// FIsActive
 			foreach ($arr as $key => &$value)
 			{
+				if (isset($value['FIsAdmin']) && !$this->isAdmin) unset($arr[$key]);
 				if (isset($value['FIsActive']) && !$value['FIsActive']) unset($arr[$key]);
 				if (isset($value[$child]))
 				{
 					foreach ($value[$child] as $k => &$v)
 					{
+						if (isset($v['FIsAdmin']) && !$this->isAdmin) unset($value[$child][$k]);
 						if (isset($v['FIsActive']) && !$v['FIsActive']) unset($value[$child][$k]);
 					}
 				}
+			}
+			
+			// Router Return
+			if ($router === 'router') {
+				foreach ($arr as $r_key => $r_value) {
+					if (isset($r_value[$child])) {
+						foreach ($r_value[$child] as $r_k => $r_v) {
+							if (isset($r_v[$action])) {
+								foreach ($r_v[$action] as $r_vv) {
+									$newarr[] = $r_vv['url'];
+								}
+							}
+							$newarr[] = $r_v['url'];
+						}
+					}
+				}
+				return $newarr;
 			}
 			
 			// Search and Return
@@ -163,6 +182,7 @@ class ArrayHelper extends AppHelper {
 				}
 			}
 		}
+		// echo '<pre>';print_r($arr);exit;
 		return array('search' => $newarr, 'menu' => $arr);
 	}
 

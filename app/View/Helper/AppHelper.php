@@ -33,4 +33,15 @@ App::uses('Helper', 'View');
 class AppHelper extends Helper {
 	public $helpers = array('Array', 'Html', 'Main', 'Form');
 	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function isAdmin()
+	{
+		$user = AuthComponent::user();
+		return $user['FIsAdmin'] ? TRUE : FALSE;
+	}
 }

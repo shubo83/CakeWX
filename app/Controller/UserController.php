@@ -34,7 +34,7 @@ class UserController extends AppController {
 				if ($this->Auth->login()) {
 					return $this->redirect($this->Auth->redirect());
 				} else {
-					$this->Session->setFlash(__('用户名和密码错误。'), 'default', array('class' => 'error'));
+					$this->flashError("用户名和密码错误。");
 				}
 			}
 		}

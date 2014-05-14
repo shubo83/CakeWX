@@ -42,6 +42,7 @@ class AppController extends Controller {
 	public $snsurl = '';
 	public $wxAPI = '';
 	public $wxToken = 'liunian';
+	public $site_cx = "Powered by CakeWX";
 	
 	/**
 	 * undocumented function
@@ -70,8 +71,8 @@ class AppController extends Controller {
 			$this->user = AuthComponent::user();
 			$this->uid = $this->user['Id'];
 			$this->username = $this->user['FMemberId'];
+			$this->isAdmin = $this->user['FIsAdmin'] ? TRUE : FALSE;
 		}	
-		
 		// Views
 		$this->_setGlobalViews();
 	}
@@ -189,10 +190,11 @@ class AppController extends Controller {
 	 * @author apple
 	 **/
 	function _setGlobalViews() {	
-		$settings['site_sign'] = "CakeWX";
-		$settings['site_name'] = "开源免费的微信公众平台开发框架 - Powered by CakeWX";
-		$settings['site_keywords'] = "CakeWX，微信公众平台，微信公众账号，订阅号，服务号，微信营销";
-		$settings['site_description'] = "CakeWX，开源免费的微信公众账号管理系统";
+		$conf = $this->_getSiteConf();
+		$settings['site_sign'] = $conf['Site']['name'];
+		$settings['site_name'] = "{$conf['Site']['title']} - {$this->site_cx}";
+		$settings['site_keywords'] = $conf['Site']['keywords'];
+		$settings['site_description'] = $conf['Site']['description'];
 		$this->set('settings', $settings);
 		$this->set('cakeSign', $settings['site_sign']);
 		$this->set('cakeTitle', $settings['site_name']);
@@ -203,5 +205,26 @@ class AppController extends Controller {
 		$this->set('user', $this->user);
 		$this->set('name', $this->user['FullName']);
 		$this->set('WC_BASE', "");
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function _getSiteConf()
+	{
+		$sets = array('Site' => array("title" => array('default' => "开源免费的微信公众平台开发框架"), "name" => array('default' => "CakeWX"), "keywords", "description"));
+		$conf = array();
+		foreach ($sets as $key => $value) {
+			foreach ($value as $k  => $v) {
+				$v_s = is_array($v) ? $k : $v;
+				$rconf = Configure::read("{$key}.{$v_s}");
+				$rdefault = isset($v['default']) ? $v['default'] : '';
+				$conf[$key][$v_s] = $rconf ? $rconf : $rdefault;
+			}
+		}
+		return $conf;
 	}
 }

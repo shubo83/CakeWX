@@ -30,7 +30,6 @@
 </style>
 <div class="user">
 	<?php 
-	echo $this->session->flash('auth');
 	$this->Form->inputDefaults(array('label' => true, 'div' => true));
 	echo $this->Form->create('TPerson', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal")); 
 	echo $this->Main->formhr_input('FMemberId', array(
