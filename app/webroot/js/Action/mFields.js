@@ -111,7 +111,7 @@ function freshMus() {
 		            temphtml = createNode(category.name, "li", {'class':'dd-item', 'data-url':category.url, 'data-id':category.id}, itemid);
 		            subhtm = $('<ol class="dd-list" />');
 		            $.each(category.children, function(index, subitem) {
-		                subitem = createNode( subitem.name, "li", {'class':'dd-item', 'data-url':category.url, 'data-id':subitem.id});
+		                subitem = createNode( subitem.name, "li", {'class':'dd-item', 'data-url':subitem.url, 'data-id':subitem.id});
 		                subhtm.append(subitem);
 		            });
 		            temphtml.append(subhtm);
