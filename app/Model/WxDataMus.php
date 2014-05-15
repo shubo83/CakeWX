@@ -174,7 +174,6 @@ class WxDataMus extends AppModel {
 		// echo '<pre>';print_r($newarr);exit;
 		return $json;
 		
-		
 	}
 	
 	/**

@@ -114,6 +114,7 @@ class WxWcdata extends AppModel {
 				} else {
 					$msg = isset($data['WxWcdata']['FFollowContent']) ? $data['WxWcdata']['FFollowContent'] : FALSE;
 					$msg = !$msg ? $this->getMsg(null, $webchat) : $msg;
+					$msg['type'] = "text";
 				}
  				break;
 			case 'signtext':			// 个性签名
@@ -128,6 +129,7 @@ class WxWcdata extends AppModel {
 					$msg = ClassRegistry::init('WxDataTw')->getMsg($WX_twj, 'news');
 				} else {
 					$msg = isset($data['WxWcdata']['FDefaultContent']) ? $data['WxWcdata']['FDefaultContent'] : FALSE;
+					$msg['type'] = "text";
 				}
 				break;
 		}
