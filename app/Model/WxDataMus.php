@@ -110,8 +110,9 @@ class WxDataMus extends AppModel {
 	 * @return void
 	 * @author apple
 	 **/
-	function getDataList($id, $cid = NULL, $ids = NULL)
+	function getDataList($id, $cid = NULL, $ids = NULL, $api = 0)
 	{
+		$api = $api ? 'desc' : 'asc';
 		if ($cid != NULL) {
 			$data = $this->find('first', array('conditions' => array('Id' => $cid, 'FWebchat' => $id), 'recursive' => 0));
 			if (is_array($data)) {
@@ -127,7 +128,7 @@ class WxDataMus extends AppModel {
 			foreach ($data['datalist'] as $key => &$vals) {
 				$ownerId = $vals['WxDataMus']['Id'];
 				$conditions = array('FWebchat' => $id, 'FOwnerMenu' => $ownerId);
-				$ownerData['datalist'] = $this->find('all', array('conditions' => $conditions, 'order' => "FCreatedate asc, FOrder asc", 'recursive' => 0));
+				$ownerData['datalist'] = $this->find('all', array('conditions' => $conditions, 'order' => "FCreatedate asc, FOrder {$api}", 'recursive' => 0));
 				$ownerData['count'] = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
 				$newData[$key] = array('name' => $vals['WxDataMus']['FName'], 'id' => $vals['WxDataMus']['Id'], 'url' => $vals['WxDataMus']['FKeysOrLink']);
 				if ($ownerData['count']) {
@@ -152,7 +153,7 @@ class WxDataMus extends AppModel {
 	function getMenuApi($webchat)
 	{
 		$newarr = array();
-		$data = $this->getDataList($webchat);
+		$data = $this->getDataList($webchat, null, null, 1);
 		foreach ($data as $key => $value) {
 			$type = $this->checkType($value['url']);
 			$newarr['button'][$key]['type'] = $type['type'];
@@ -170,7 +171,7 @@ class WxDataMus extends AppModel {
 		$view = new View();
 		$main = $view->loadHelper('Main');
 		$json = $main->ch_json_encode($newarr);
-		// echo '<pre>';print_r($newarr);exit;
+		echo '<pre>';print_r($newarr);exit;
 		return $json;
 		
 		
