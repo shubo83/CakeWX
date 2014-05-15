@@ -54,6 +54,7 @@ class WxReply extends AppModel {
 		$this->time = time();
 		$this->msType = trim($xmlData->MsgType);
 		$this->event = $xmlData->Event;
+		$this->eventKey = $xmlData->EventKey;
 		$this->webchat = ClassRegistry::init('WxWebchat')->getWxId($this->toUsername);
 	}
 	
@@ -80,7 +81,7 @@ class WxReply extends AppModel {
 					}
 					break;
 				default:
-					$vars['keyword'] = $this->keyword;
+					$vars['keyword'] = $this->eventKey;
 					$wxData = ClassRegistry::init('WxWebchat')->getMsg("text", $vars, $this->toUsername);
 					$resultStr = $this->_getTPL($wxData['type'], $wxData);
 			}
