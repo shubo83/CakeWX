@@ -78,6 +78,8 @@ echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 
 			<i class="icon-undo bigger-110"></i>
 			预览菜单
 		</button>
+		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
+		<font color="red">(提示：一切修改操作完成后，先点上面的保存按钮，然后再点击发布。)</font>
 	</div>
 </div>
 <?php echo $this->Form->end(); ?>
