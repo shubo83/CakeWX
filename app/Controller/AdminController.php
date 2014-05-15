@@ -828,8 +828,13 @@ class AdminController extends AppController {
 					$appid = $this->wcdata['WxWebchat']['FWxAppId'];
 					$appsecret = $this->wcdata['WxWebchat']['FWxAppSecret'];
 					$case = $this->WxReply->saveMenus($wxId, $appid, $appsecret);
-					$msg = $case ? "菜单已经更新成功，由于微信客户端缓存，需要24小时微信客户端才会展现出来。" : $case;
-					$this->flashSuccess($msg);
+					if ($case && $case['state'] == 1) {
+						$this->flashSuccess("菜单已经更新成功，由于微信客户端缓存，需要24小时微信客户端才会展现出来。");
+					} else if ($case && $case['state'] == 0) {
+						$this->flashError($case['msg']);
+					} else {
+						$this->flashError("菜单更新失败。");
+					}
 					$this->redirect($this->rdWcURL);
 				}
 				$this->render('/Admin/mFields');

@@ -72,9 +72,14 @@ class wechatCallbackapiTest
 		if ($aToken) {
 			$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$aToken}";
 			$data = curlData($url, $mdata, 'POST', $debug);
-			// print_r($aToken);
+			// print_r($data);
 			if ($data['errcode'] == 0) {
-				return TRUE;
+				$msg['state'] = 1;
+				return $msg;
+			} else {
+				$msg['state'] = 0;
+				$msg['msg'] = "错误：{$data['errcode']}，{$data['errmsg']}";
+				return $msg;
 			}
 		}
 	}

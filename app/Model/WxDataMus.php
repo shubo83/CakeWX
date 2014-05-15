@@ -161,16 +161,16 @@ class WxDataMus extends AppModel {
 			if (is_array($value['children'])) {
 				foreach ($value['children'] as $k => $v) {
 					$type = $this->checkType($value['url']);
-					$newarr['button'][$key]['sub_button']['type'] = $type['type'];
-					$newarr['button'][$key]['sub_button']['name'] = $v['name'];
-					$newarr['button'][$key]['sub_button'][$type['key']] = $v['url'];
+					$newarr['button'][$key]['sub_button'][$k]['type'] = $type['type'];
+					$newarr['button'][$key]['sub_button'][$k]['name'] = $v['name'];
+					$newarr['button'][$key]['sub_button'][$k][$type['key']] = $v['url'];
 				}
 			}
 		}
 		$view = new View();
 		$main = $view->loadHelper('Main');
 		$json = $main->ch_json_encode($newarr);
-		// echo '<pre>';print_r($json);exit;
+		// echo '<pre>';print_r($newarr);exit;
 		return $json;
 		
 		

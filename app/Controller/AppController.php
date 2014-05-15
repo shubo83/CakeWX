@@ -215,7 +215,7 @@ class AppController extends Controller {
 	 **/
 	function _getSiteConf()
 	{
-		$sets = array('Site' => array("title" => array('default' => "开源免费的微信公众平台开发框架"), "name" => array('default' => "CakeWX"), "keywords", "description"));
+		$sets = array('Site' => array("title" => array('default' => "开源免费的微信公众平台开发框架"), "name" => array('default' => "CakeWX"), "keywords" => array(), "description" => array()));
 		$conf = array();
 		foreach ($sets as $key => $value) {
 			foreach ($value as $k  => $v) {

@@ -62,8 +62,8 @@
 	echo $this->Html->meta('icon');
 	echo $this->Html->meta('keywords', $cakeKeywords);
 	echo $this->Html->meta('description', $cakeDescription);
-	echo $this->Html->meta(array('name' => "author", 'content' => "liunian"));
-	echo $this->Html->meta(array('name' => "generator", 'content' => "liunian.wln"));
+	echo $this->Html->meta(array('name' => "author", 'content' => "liunian.CakeWX"));
+	echo $this->Html->meta(array('name' => "generator", 'content' => "www.cakewx.com"));
 	echo $this->Html->meta('viewport', "width=device-width, initial-scale=1.0");
 	echo '<!-- basic styles -->'.$this->fetch('css_basic');
 	echo '<!--[if IE 7]>'.$this->fetch('css_ie7').'<![endif]-->';
