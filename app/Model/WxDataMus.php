@@ -171,7 +171,7 @@ class WxDataMus extends AppModel {
 		$view = new View();
 		$main = $view->loadHelper('Main');
 		$json = $main->ch_json_encode($newarr);
-		echo '<pre>';print_r($newarr);exit;
+		// echo '<pre>';print_r($newarr);exit;
 		return $json;
 		
 		
