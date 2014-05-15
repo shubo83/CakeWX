@@ -185,5 +185,8 @@ class ArrayHelper extends AppHelper {
 		// echo '<pre>';print_r($arr);exit;
 		return array('search' => $newarr, 'menu' => $arr);
 	}
+	
+	
+	
 
 }

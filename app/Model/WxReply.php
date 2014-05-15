@@ -13,7 +13,33 @@ class WxReply extends AppModel {
 	 **/
 	public $msType = 'text';
 	public $useTable = FALSE;
-
+	
+	/**
+	 * 微信valid
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function wx_valid()
+	{
+		$wx = new Wxauth();	
+		return $wx->wx_valid();
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function saveMenus($webchat, $appid, $appsecret)
+	{	
+		$wxmus = ClassRegistry::init('WxDataMus');
+		$data = $wxmus->getMenuApi($webchat);
+		$wx = new Wxauth('liunian', $appid, $appsecret);	
+		return $wx->saveMenus($data, 0);		// debug..
+	}
+	
 	/**
 	 * 初始化
 	 *
@@ -46,6 +72,10 @@ class WxReply extends AppModel {
 					if ($this->event == 'subscribe') {
 						$vars['keyword'] = $this->keyword;
 						$wxData = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $vars, $this->toUsername);
+						$resultStr = $this->_getTPL($wxData['type'], $wxData);
+					} else {
+						$vars['keyword'] = $this->event;
+						$wxData = ClassRegistry::init('WxWebchat')->getMsg("text", $vars, $this->toUsername);
 						$resultStr = $this->_getTPL($wxData['type'], $wxData);
 					}
 					break;

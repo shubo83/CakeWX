@@ -59,12 +59,31 @@ class wechatCallbackapiTest
 			return $data;
 		}
 	}
+	
+	/**
+	 * 菜单功能
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	public function saveMenus($mdata, $debug = 0) {
+		$acode = $this->getAccessCode();
+		$aToken = $acode['access_token'];
+		if ($aToken) {
+			$url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token={$aToken}";
+			$data = curlData($url, $mdata, 'POST', $debug);
+			// print_r($aToken);
+			if ($data['errcode'] == 0) {
+				return TRUE;
+			}
+		}
+	}
 
-	public function getAccessCode($code)
+	public function getAccessCode()
 	{
 		$appid = $this->appid;
 		$secret = $this->appsecret;
-		$url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$secret}&code={$code}&grant_type=authorization_code";
+		$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$secret}";
 		$data = curlData($url);
 		return $data;
 	}

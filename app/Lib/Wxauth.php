@@ -33,6 +33,17 @@ class Wxauth {
 	 * undocumented function
 	 *
 	 * @return void
+	 * @author niancode
+	 **/
+	function saveMenus($data, $debug = 0)
+	{
+		return $this->wechatObj->saveMenus($data, $debug);
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
 	 * @author apple
 	 **/
 	function getuserinfo()

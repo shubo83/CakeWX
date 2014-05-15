@@ -822,6 +822,16 @@ class AdminController extends AppController {
 				}
 				break;
 			default:
+				if ($this->request->isPost()) {
+					
+					$this->loadModel('WxReply');
+					$appid = $this->wcdata['WxWebchat']['FWxAppId'];
+					$appsecret = $this->wcdata['WxWebchat']['FWxAppSecret'];
+					$case = $this->WxReply->saveMenus($wxId, $appid, $appsecret);
+					$msg = $case ? "菜单已经更新成功，由于微信客户端缓存，需要24小时微信客户端才会展现出来。" : $case;
+					$this->flashSuccess($msg);
+					$this->redirect($this->rdWcURL);
+				}
 				$this->render('/Admin/mFields');
 		}
 	}

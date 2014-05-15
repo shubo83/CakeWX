@@ -142,5 +142,53 @@ class WxDataMus extends AppModel {
 		}
 		return $data;
 	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function getMenuApi($webchat)
+	{
+		$newarr = array();
+		$data = $this->getDataList($webchat);
+		foreach ($data as $key => $value) {
+			$type = $this->checkType($value['url']);
+			$newarr['button'][$key]['type'] = $type['type'];
+			$newarr['button'][$key]['name'] = $value['name'];
+			$newarr['button'][$key][$type['key']] = $value['url'];
+			if (is_array($value['children'])) {
+				foreach ($value['children'] as $k => $v) {
+					$type = $this->checkType($value['url']);
+					$newarr['button'][$key]['sub_button']['type'] = $type['type'];
+					$newarr['button'][$key]['sub_button']['name'] = $v['name'];
+					$newarr['button'][$key]['sub_button'][$type['key']] = $v['url'];
+				}
+			}
+		}
+		$view = new View();
+		$main = $view->loadHelper('Main');
+		$json = $main->ch_json_encode($newarr);
+		// echo '<pre>';print_r($json);exit;
+		return $json;
+		
+		
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function checkType($url)
+	{
+		$type = array('key' => "key", 'type' => 'click');
+		if ($url) {
+			$type = preg_match('/(http|https|ftp):\/\/[\w.]+[\w\/]*[\w.]*\??[\w=&\+\%]*/is', $url) ? array('key' => "url", 'type' => "view") : array('key' => "key", 'type' => 'click');
+		} 
+		return $type;
+	}
 
 }
