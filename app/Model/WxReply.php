@@ -74,14 +74,14 @@ class WxReply extends AppModel {
 						$vars['keyword'] = $this->keyword;
 						$wxData = ClassRegistry::init('WxWebchat')->getMsg('subscribe', $vars, $this->toUsername);
 						$resultStr = $this->_getTPL($wxData['type'], $wxData);
-					} else {
-						$vars['keyword'] = $this->event;
+					} else if ($this->event == 'CLICK') {
+						$vars['keyword'] = $this->eventKey;
 						$wxData = ClassRegistry::init('WxWebchat')->getMsg("text", $vars, $this->toUsername);
 						$resultStr = $this->_getTPL($wxData['type'], $wxData);
 					}
 					break;
 				default:
-					$vars['keyword'] = $this->eventKey;
+					$vars['keyword'] = $this->event;
 					$wxData = ClassRegistry::init('WxWebchat')->getMsg("text", $vars, $this->toUsername);
 					$resultStr = $this->_getTPL($wxData['type'], $wxData);
 			}
