@@ -2,3 +2,4 @@ app/Config/database.php
 app/Config/settings.json
 app/tmp/
 app/webroot/attached/
+.idea/
