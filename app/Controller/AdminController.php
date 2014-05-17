@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 /**
  * Admin Controller
  *
- * @property Admin $Admin
+ * @property Admin $Admin2
  */
 class AdminController extends AppController {
 	
