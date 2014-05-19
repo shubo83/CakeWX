@@ -136,10 +136,20 @@ $("#previewbox").on("click",function() {
 });
 
 // 更换图文集
-$("#addTw").on("click", function(){
+$("#addTw").on("click", function() {
+    var hids = $(".media_preview_area").length;
+    var data = [];
+    if(hids){
+        $(".media_preview_area").each(function(index) {
+            data[index] = $(this).attr("id");
+        });
+        data = $.unique(data);
+    }
+    //console.log(data.length);
     $.ajax({
         url: ADMIN_WC_URL + "mPic?_a=twj",
         async: false,
+        data : data,
         success: function(data, status){
             $("#aj_box").html(JSON.parse(data));
             bootbox.dialog({
@@ -157,8 +167,8 @@ $("#addTw").on("click", function(){
                                 $('#'+val).append("<input type=\"hidden\" name=\"data[WxDataTw][FTwj][]\" value=\"" + t_id +"\" />");
                                 selehtm += $('#'+val).outerHTML() + "&nbsp;";
                             });
-                            $(".u-chooses").empty();
-                            $("#addTw").text("更换图文").prev().append(selehtm);
+                            //$(".u-chooses").empty();
+                            $("#addTw").prev().append(selehtm);
                             $(".icon_item_selected").text("删除");
                             $(".u-chooses .media_preview_area").click(function(){
                                 var delbox = $(this);

@@ -19,11 +19,9 @@
     display: none;
 }
 .Kreplaybox .media_preview_area{width:328px;}
-.modal-body{overflow-y:auto;overflow-x: hidden;}
 .media_preview_area:hover .com_mask {
     display: block
 }
-
 .media_preview_area.selected .com_mask {
     display: block
 }
@@ -124,7 +122,6 @@
 }
 .appmsg {
 	position: relative;
-	overflow: hidden;
 	margin-bottom: 20px;
 	border: 1px solid #d3d3d3;
 	background-color: #fff;
@@ -132,6 +129,7 @@
 	border-radius: 5px;
     cursor: pointer;
 }
+
 .appmsg_content {
 	padding: 0 14px;
 	border-bottom: 1px solid #d3d3d3;
@@ -158,10 +156,6 @@
 	line-height: 20px;
 	padding-bottom: 6px;
 }
-.appmsg_thumb_wrp {
-	height: 160px;
-	overflow: hidden;
-}
 .appmsg_thumb {
 	width:100%
 }
@@ -180,4 +174,14 @@
 	white-space: pre-wrap;
 	word-wrap: normal;
 	word-break: normal;
+}
+.modal-dialog{
+    width:960px;
+}
+#aj_box{
+    position: relative;
+    padding: 28px 140px;
+    height: 340px;
+    text-align: justify;
+    overflow-y: scroll;
 }

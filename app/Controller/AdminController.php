@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 /**
  * Admin Controller
  *
- * @property Admin $Admin23
+ * @property Admin $Admin
  */
 class AdminController extends AppController {
 	
@@ -499,7 +499,6 @@ class AdminController extends AppController {
 								        </div>
 						       		  	<div class="appmsg_thumb_wrp">
 								            <img class="js_appmsg_thumb appmsg_thumb" src="'.$data[WxDataTw][FUrl].'">
-								            <i class="appmsg_thumb default">封面图片</i>
 								        </div>
 						        		<p class="appmsg_desc">'.$data[WxDataTw][FMemo].'</p>
 									</div>
@@ -522,7 +521,6 @@ class AdminController extends AppController {
 									        </div>
 							       		  	<div class="appmsg_thumb_wrp">
 									            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-									            <i class="appmsg_thumb default">封面图片</i>
 									        </div>
 							        		<p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
 										</div>
@@ -622,7 +620,6 @@ class AdminController extends AppController {
 										        </div>
 								       		  	<div class="appmsg_thumb_wrp">
 										            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-										            <i class="appmsg_thumb default">封面图片</i>
 										        </div>
 								        		<p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
 											</div>
