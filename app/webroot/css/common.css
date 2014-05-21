@@ -18,6 +18,7 @@
 .fHidden {
     display: none;
 }
+.pipe{margin:0 10px;}
 .Kreplaybox .media_preview_area{width:328px;}
 .media_preview_area:hover .com_mask {
     display: block
@@ -25,6 +26,8 @@
 .media_preview_area.selected .com_mask {
     display: block
 }
+.u-chooses .media_preview_area .icon_item_selected{width:100px;font-size:12px;}
+.icon_item_selected .delitem, .icon_item_selected .editem{cursor: pointer}
 .page_tips {
     position: absolute;
     top: 0;
@@ -127,7 +130,6 @@
 	background-color: #fff;
 	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
 	border-radius: 5px;
-    cursor: pointer;
 }
 
 .appmsg_content {

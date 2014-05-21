@@ -95,13 +95,6 @@ $(document).ready(function() {
             bootbox.alert("系统出错。");
         }
     });
-
-    $(".u-chooses .media_preview_area").click(function(){
-        var delbox = $(this);
-        bootbox.confirm("确定要删除么？", function(result) {
-            result ? delbox.remove() : '';
-        });
-    });
 });
 
 // 图文预览
@@ -134,20 +127,21 @@ $("#previewbox").on("click",function() {
         }
     });
 });
-
-// 更换图文集
-$("#addTw").on("click", function() {
+function prebootbox(event) {
     var hids = $(".media_preview_area").length;
     var data = [];
+    var tmpurl = '',swnode = $(this).parent().parent().parent();
     if(hids){
         $(".media_preview_area").each(function(index) {
             data[index] = $(this).attr("id");
         });
         data = $.unique(data);
     }
+    tmpurl = event.data.atype == "switem" ? ADMIN_WC_URL + "mPic?_a=twj" : ADMIN_WC_URL + "mPic?_a=twj&_m=simple";
+    tmptype = event.data.atype;
     //console.log(data.length);
     $.ajax({
-        url: ADMIN_WC_URL + "mPic?_a=twj",
+        url: tmpurl,
         async: false,
         data : data,
         success: function(data, status){
@@ -168,14 +162,14 @@ $("#addTw").on("click", function() {
                                 selehtm += $('#'+val).outerHTML() + "&nbsp;";
                             });
                             //$(".u-chooses").empty();
-                            $("#addTw").prev().append(selehtm);
-                            $(".icon_item_selected").text("删除");
-                            $(".u-chooses .media_preview_area").click(function(){
-                                var delbox = $(this);
-                                bootbox.confirm("确定要删除么？", function(result) {
-                                    result ? delbox.remove() : '';
-                                });
-                            });
+                            if(tmptype == "switem"){
+                                $("#addTw").prev().append(selehtm);
+                                $(".icon_item_selected").html("<span class='delitem'>删除</span><span class='pipe'>|</span><span class='editem'>修改</span>");
+                            } else {
+                                $(".icon_item_selected").html("<span class='delitem'>删除</span><span class='pipe'>|</span><span class='editem'>修改</span>");
+                                //console.log(selehtm);
+                                swnode.replaceWith(selehtm);
+                            }
                         }
                     },
                 }
@@ -185,8 +179,16 @@ $("#addTw").on("click", function() {
             bootbox.alert("系统出错。");
         }
     });
+}
+// 更换图文集
+$(document).on("click","#addTw",{atype:"switem"}, prebootbox);
+$(".u-chooses").on("click",".editem",{atype:"editem"}, prebootbox);
+$(".u-chooses").on("click",".delitem", function() {
+    var delbox = $(this).parent().parent().parent();
+    bootbox.confirm("确定要删除么？", function(result) {
+        result ? delbox.remove() : '';
+    });
 });
-
 // 多图文判断JS
 $(".twSelect").on("change", function(){
     var type = $(this).val();

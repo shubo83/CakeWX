@@ -554,9 +554,9 @@ class AdminController extends AppController {
                         function even() {
                             $(this).addClass("selected");
                         }
-                        $(".media_preview_area").clicktoggle(even, odd);
-                        $(".media_preview_area").click(function(){
-                            $(".media_preview_area").removeClass("selected");
+                        $("#aj_box .media_preview_area").clicktoggle(even, odd);
+                        $("#aj_box .media_preview_area").click(function(){
+                            $("#aj_box .media_preview_area").removeClass("selected");
                             $(this).addClass("selected");
                             Atempids = [$(this).attr("id")];
                         });
@@ -599,7 +599,7 @@ class AdminController extends AppController {
 	                                }
 	                            }
 
-	                           $(".media_preview_area").clicktoggle(even, odd);
+	                           $("#aj_box .media_preview_area").clicktoggle(even, odd);
 	                           </script>';
 				}
 				exit(json_encode($html));
@@ -625,7 +625,7 @@ class AdminController extends AppController {
 											</div>
 										</div>
 									    <div class="com_mask"></div>
-							            <i class="icon_item_selected">删除</i>
+							            <i class="icon_item_selected"><span class="delitem">删除</span><span class="pipe">|</span><span class="editem">修改</span></i>
 							       </div>
 								</div>&nbsp;';
 					}
