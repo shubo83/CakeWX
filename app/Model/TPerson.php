@@ -569,7 +569,7 @@ class TPerson extends AppModel {
 		// $this->create();
 		// echo '<pre>';print_r($this->data);exit;
 		$query = $this->save($this->data, FALSE);
-		if ($query) return $user;
+		if ($query) return $this->id;
 	}
 	
 	/**
