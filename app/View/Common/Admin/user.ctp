@@ -4,7 +4,7 @@
 	
 	// nav
 	$this->start('nav');
-	echo $this->element('nav');;
+	echo $this->element('Admin/nav');;
 	$this->end();
 ?>
 
@@ -14,7 +14,7 @@
 		<div class="page-content">
 			<?php echo $this->fetch('content'); ?>
 		</div><!-- /.page-content -->
-		<?php echo $this->element('settings'); ?>
+		<?php echo $this->element('Admin/settings'); ?>
 	</div><!-- /.main-container-inner -->
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 		<i class="icon-double-angle-up icon-only bigger-110"></i>

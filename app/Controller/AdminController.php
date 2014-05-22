@@ -199,7 +199,7 @@ class AdminController extends AppController {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
 					$this->WxWcdata->set($this->request->data);
-					if ($this->WxWcdata->validates(array('fieldList' => array('FSignText')))) {
+					if ($this->WxWcdata->validates(array('fieldList' => array('')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
 							$this->Session->setFlash('修改成功。');

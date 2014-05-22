@@ -81,7 +81,8 @@ class UserController extends AppController {
 	 * @author apple
 	 **/
 	function loggout() {
-		$this->redirect($this->Auth->logout());
+		$this->Auth->logout();
+		$this->redirect("/");
 	}
 
 

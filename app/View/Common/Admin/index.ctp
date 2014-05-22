@@ -4,7 +4,7 @@
 	
 	// nav
 	$this->start('nav');
-	echo $this->element('nav');
+	echo $this->element('Admin/nav');
 	$this->end();
 ?>
 
@@ -50,7 +50,7 @@
 		try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 	</script>
 	<div class="main-container-inner">
-		<?= $this->element('sidebar'); ?>
+		<?= $this->element('Admin/sidebar'); ?>
 		<div class="main-content">
 			<div class="breadcrumbs" id="breadcrumbs">
 				<script type="text/javascript">
@@ -80,7 +80,7 @@
 				</div><!-- /.page-header -->
 				<?php echo $this->fetch('content'); ?>
 			</div><!-- /.page-content -->
-			<?php echo $this->element('settings'); ?>
+			<?php echo $this->element('Admin/settings'); ?>
 		</div>
 	</div><!-- /.main-container-inner -->
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
