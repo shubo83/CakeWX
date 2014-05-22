@@ -38,6 +38,7 @@ $(document).ready(function() {
     if(type == 1) {
         $(".u-chooses").parent().show();
         $("textarea").parent().hide();
+        $("#addTw").show();
         $.ajax({
             url: ADMIN_WC_URL + "mPic?_a=getTwj",
             async: false,
@@ -66,6 +67,7 @@ $(".twSelect").on("change", function(){
         $(".u-chooses").parent().hide();
     } else {
         $(".u-chooses").parent().show();
+        $("#addTw").show();
         $("textarea").parent().hide();
         var tempdata = $("#FPreTwj").val().split(',');
         var com = '', s = '';
