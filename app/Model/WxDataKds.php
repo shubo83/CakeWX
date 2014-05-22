@@ -65,7 +65,9 @@ class WxDataKds extends AppModel {
 		$this->set('Id', $this->id ? $this->id : String::uuid());
 		$this->set('FUpdatedate', date('Y-m-d H:i:s'));
 		$this->set('FWebchat', $id);
-		$this->data['WxDataKds']['FTwj'] = serialize($this->data['WxDataKds']['FTwj']);
+        if (isset($this->data['WxDataKds']['FTwj'])) {
+            $this->data['WxDataKds']['FTwj'] = serialize($this->data['WxDataKds']['FTwj']);
+        }
 		// print_r($this->data);exit;
 		$query = $this->save($this->data, FALSE);
 		if ($query) return $this->id;

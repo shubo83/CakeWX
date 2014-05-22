@@ -1,5 +1,5 @@
 @charset "utf-8";
-body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei", "黑体"}
+body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei"}
 .mtm{margin-top:10px!important;}.mbm{margin-bottom:10px!important;}
 .e_btn1 {
     position: relative;
@@ -50,6 +50,9 @@ body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei", "黑体"}
     -moz-transition: none;
     -o-transition: none;
     transition: none;
+}
+.table.table-bordered thead th, .table.table-bordered td{
+    text-align: center;
 }
 .wc_actions .e_btn1{display: block;width: 100px;margin:0 auto;}
 .e_btn1 i{margin-right: 5px;}
