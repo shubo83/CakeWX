@@ -28,7 +28,7 @@ echo $this->Main->formhr_input('FKey', array(
 		'placeholder' => "", 
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div></div>",
+		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>* (多个关键词请用中线格开：例如: 美丽|漂亮|好看)</span></span></div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
 echo $this->Main->formhr_input('FKeyMacth', array(

@@ -31,11 +31,6 @@ class WxDataKds extends AppModel {
 				'rule' => "notEmpty",
 				'message' => "必须填写",
 				'required' => true
-			),
-			'alphaNumeric' => array(
-				'rule' => "alphaNumeric",
-				'message' => "请填写字母或者数字",
-				'required' => true
 			)
 	    ),
 		'FKeyMacth' => array(
