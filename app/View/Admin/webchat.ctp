@@ -8,11 +8,11 @@
 	), array('block' => "script_extra", 'inline' => false));
 ?>
 <button class="btn btn-sm btn-primary"  onclick="location.href='<?= Router::url(array('controller' => "admin", 'action' => "webchatAdd")) ?>'">
-	<i class="icon-pencil align-top bigger-125"></i>
+	<i class="icon-plus align-top bigger-125"></i>
 	添加公众账号
 </button>
 
-<div class="alert alert-warning" style="margin-top:15px">
+<div class="alert" style="margin-top:15px">
 	<button type="button" class="close" data-dismiss="alert">
 		<i class="icon-remove"></i>
 	</button>
@@ -45,9 +45,9 @@
 					<? if (is_array($data['datalist'])): ?>
 						<? foreach ($data['datalist'] as $key => $vals): ?>
 							<tr>
-								<td>
-									<p><?= $this->Html->image($vals['WxWebchat']['FIcon'], array('fullBase' => true, 'width' => "88px", 'alt' => "")); ?></p>
-									<p><?= $vals['WxWebchat']['FName'] ?></p>
+								<td style="text-align:center;">
+									<?= $this->Html->image($vals['WxWebchat']['FIcon'], array('fullBase' => true, 'width' => "100px", 'alt' => "")); ?>
+									<p class="mtm"><?= $vals['WxWebchat']['FName'] ?></p>
 								</td>
 								<td>
 									免费版
@@ -66,21 +66,18 @@
 									</span>
 								</td>
 
-								<td>
-									<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+								<td class="wc_actions">
+                                    <button class="e_btn1" onclick="parent.location.href='<?= Router::url(array('controller' => "admin", 'action' => "webchatEdit", $vals['WxWebchat']['Id'])) ?>'">
+                                        <i class="icon-edit bigger-120"></i>编辑
+                                    </button>
 
-										<button class="btn btn-xs btn-info" onclick="parent.location.href='<?= Router::url(array('controller' => "admin", 'action' => "webchatEdit", $vals['WxWebchat']['Id'])) ?>'">
-											<i class="icon-edit bigger-120"></i>
-										</button>
+                                    <button class="e_btn1 mtm" alt="<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>">
+                                        <i class="icon-trash bigger-120"></i>删除
+                                    </button>
 
-										<button class="btn btn-xs btn-danger bootbox-confirm" alt="<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>">
-											<i class="icon-trash bigger-120"></i>
-										</button>
-
-										<button class="btn btn-xs btn-warning" onclick="parent.location.href='<?= Router::url('/admin/wc/'.md5($vals['WxWebchat']['Id']).'/center'); ?>'">
-											<i class="icon-wrench bigger-120"></i>
-										</button>
-									</div>
+                                    <button class="e_btn1 mtm" onclick="parent.location.href='<?= Router::url('/admin/wc/'.md5($vals['WxWebchat']['Id']).'/center'); ?>'">
+                                        <i class="icon-cogs bigger-120"></i>管理
+                                    </button>
 								</td>
 							</tr>
 						<? endforeach ?>
