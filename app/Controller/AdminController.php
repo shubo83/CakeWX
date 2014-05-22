@@ -228,7 +228,9 @@ class AdminController extends AppController {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
 					//print_r($this->request->data);exit;
-					$this->request->data['WxWcdata']['FFollowId'] = $this->request->data['WxWcdata']['FPreTwj'];
+                    if (isset($this->request->data['WxWcdata']['FTwj'][0])) {
+                        $this->request->data['WxWcdata']['FFollowId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    }
 					$this->WxWcdata->set($this->request->data);
 					if ($this->WxWcdata->validates(array('fieldList' => array('FFollowType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
@@ -260,7 +262,9 @@ class AdminController extends AppController {
 		switch ($query['action']) {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
-					$this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FPreTwj'];
+                    if (isset($$this->request->data['WxWcdata']['FTwj'][0])) {
+                        $this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    }
 					$this->WxWcdata->set($this->request->data);
 					if ($this->WxWcdata->validates(array('fieldList' => array('FDefaultType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
