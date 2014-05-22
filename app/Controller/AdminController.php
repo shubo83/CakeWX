@@ -772,6 +772,7 @@ class AdminController extends AppController {
 						if ($this->request->is('post')) {
 							$post = $this->request->data['post'];
 							$postJson['WxDataMus'] = json_decode($post, TRUE);
+							// print_r($postJson);exit;
 							$query = $this->WxDataMus->saveData($postJson, $wxId);
 							if ($query) {
 								$msg['state'] = 1;
