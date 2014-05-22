@@ -71,7 +71,7 @@
                                         <i class="icon-edit bigger-120"></i>编辑
                                     </button>
 
-                                    <button class="e_btn1 mtm" alt="<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>">
+                                    <button class="e_btn1 mtm" onclick="parent.location.href='<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>'">
                                         <i class="icon-trash bigger-120"></i>删除
                                     </button>
 
