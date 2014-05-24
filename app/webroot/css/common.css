@@ -53,7 +53,7 @@ ul li{list-style:none;}
     -o-transition: none;
     transition: none;
 }
-.table.table-bordered thead th, .table.table-bordered td{
+.table.account thead th, .table.table-bordered td{
     text-align: center;
 }
 .wc_actions .e_btn1{display: block;width: 100px;margin:0 auto;}
