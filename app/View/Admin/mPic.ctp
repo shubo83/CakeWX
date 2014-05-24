@@ -8,13 +8,20 @@
 		"Action/twPreview",
 	), array('block' => "script_extra", 'inline' => false));
 ?>
-<div class="row col-xs-12" style="margin-bottom:15px">
+<div style="margin-bottom:15px">
 	<button class="btn btn-sm btn-primary"  onclick="location.href='<?= "{$WC_URL}?_a=add" ?>'">
 		<i class="icon-pencil align-top bigger-125"></i>
 		添加图文
 	</button>
 </div>
-
+<div class="a_types">
+    <ul class="ttp cl">
+        <li id="ttp_all" class="a"><a href="#">全部</a></li>
+        <li class="a"><a href="#">单图文<span class="num">13</span></a></li>
+        <li><a href="#">多图文<span class="num">7</span></a></li>
+        <li><a href="#">活动图文<span class="num">1</span></a></li>
+    </ul>
+</div>
 <div class="row">
 	<div class="col-xs-12">
 		<div class="table-responsive">

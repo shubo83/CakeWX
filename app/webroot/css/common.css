@@ -1,5 +1,7 @@
 @charset "utf-8";
 body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei"}
+.cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .cl { zoom: 1; }
+ul li{list-style:none;}
 .mtm{margin-top:10px!important;}.mbm{margin-bottom:10px!important;}
 .e_btn1 {
     position: relative;
@@ -62,6 +64,50 @@ body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei"}
 .maroon {
     color: red;
     margin-right: 5px;
+}
+.ttp {
+    margin:0 0 5px 0;
+    padding-top: 10px;
+    border-top: 2px solid #DBDBDB;
+    background: transparent;
+}
+.ttp li {
+    float: left;
+    padding-bottom: 5px;
+}
+.ttp a {
+    border: 1px solid #D4D4D4;
+}
+.ttp a, .ttp strong {
+    float: left;
+    margin-right: 5px;
+    padding: 4px 8px 3px;
+    height: 30px;
+    border: 1px solid #DBDBDB;
+    background: #FFF;
+    white-space: nowrap;
+    text-decoration: none;
+    border-radius: 3px;
+    color:#444;
+}
+
+.ttp .a a, .ttp .a a:hover {
+    border: 1px solid #6699CC;
+    color: #FFF;
+    text-decoration: none;
+    background-color:#6699CC;
+}
+.ttp .num {
+    background: #999;
+    padding: 0 5px;
+    margin-left: 5px;
+    border-radius: 3px;
+    color: #FFF;
+    font-size: 12px;
+}
+.ttp .a .num {
+    background: #FFF;
+    color: #666;
 }
 .alert{
     padding: 8px 10px;
