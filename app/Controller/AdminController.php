@@ -262,7 +262,7 @@ class AdminController extends AppController {
 		switch ($query['action']) {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
-                    if (isset($$this->request->data['WxWcdata']['FTwj'][0])) {
+                    if (isset($this->request->data['WxWcdata']['FTwj'][0])) {
                         $this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FTwj'][0];
                     }
 					$this->WxWcdata->set($this->request->data);
@@ -640,6 +640,8 @@ class AdminController extends AppController {
 				$this->paginate['limit'] = 9;
 				$this->Paginator->settings = $this->paginate;
 				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id));
+				$data['category'] = $this->WxDataTw->getCategories($id, $this->rdWcURL);
+				// print_r($data['category']);exit;
 				$this->set('data', $data);
 				$this->render('/Admin/mPic');
 		}
@@ -651,8 +653,68 @@ class AdminController extends AppController {
 	 * @return void
 	 * @author apple
 	 */
-	function _mPicGary() {
-		$this->render('/Admin/mPicGary');
+	function _mPicGary($id, $query) {
+		$this->loadModel('WxDataTw');
+		switch ($query['action']) {
+			case 'add':
+				if ($this->request->is('post')) {
+					$this->WxDataTw->set($this->request->data);
+					if ($this->WxDataTw->validates()) {
+						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+						if ($query) {
+							$this->Session->setFlash('关键字添加成功。');
+							return $this->redirect($this->rdWcURL);
+						}
+					}
+				} else {
+					if (!$this->request->data) {
+						$this->request->data = array('WxWebchat' => array('FWxApi' => $this->wxAPI, 'FWxToken' => $this->wxToken));
+					}
+				}
+				$this->set('data', $data);
+				$this->render('/Admin/_mPicGaryAdd');
+				break;
+			case 'edit':
+				if (!$this->WxDataTw->checkId($id, $query['id'])) {
+					return $this->redirect($this->rdWcURL);
+				}
+				if ($this->request->is('post') || $this->request->is('put')) {
+					$this->WxDataTw->set($this->request->data);
+					if ($this->WxDataTw->validates()) {
+						$this->WxDataTw->id = $query['id'];
+						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+						if ($query) {
+							$this->Session->setFlash('图文编辑成功。');
+							return $this->redirect($this->rdWcURL);
+						}
+					}
+				} else {
+					if (!$this->request->data) {
+						$data = $this->WxDataTw->getDataList($id, $query['id']);
+						$this->request->data = $data;
+				    }
+
+				}
+				$this->set('data', $data);
+				$this->render('/Admin/_mPicGaryAdd');
+				break;
+			case 'del':
+				if (!$this->WxDataTw->checkId($id, $query['id'])) {
+					return $this->redirect($this->rdWcURL);
+				} 
+				if ($this->WxDataTw->delete($query['id'])) {
+					$this->Session->setFlash('图文删除成功。');
+				}
+				return $this->redirect($this->rdWcURL);
+				break;
+			default:
+				$this->paginate['limit'] = 9;
+				$this->Paginator->settings = $this->paginate;
+				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id));
+				$this->set('data', $data);
+				$this->render('/Admin/mPicGary');
+			
+		}
 	}
 	
 	/**

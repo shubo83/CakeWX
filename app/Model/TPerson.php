@@ -562,7 +562,7 @@ class TPerson extends AppModel {
 		$sp = new SimplePasswordHasher();
 		$this->set($user);
 		$this->set('Id', String::uuid());
-		$this->set('FPassWord', $sp->hash($user['TPerson']['FPassWord']));
+		$this->set('FPassWord', $sp->hash($this->data['TPerson']['FPassWord']));
 		$this->set('FCreatedate', date('Y-m-d H:i:s'));
 		$this->set('FIsActive', 1);
 		$this->set('FIsAuth', 1);

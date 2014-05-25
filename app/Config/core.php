@@ -183,7 +183,7 @@
 	Configure::write('Session', array(
 		'defaults' => 'php',
 		'cookie' => "liunian",
-		'timeout' => 1440
+		'timeout' => 3600
 	));
 
 /**

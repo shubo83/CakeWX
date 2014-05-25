@@ -104,6 +104,34 @@ class FirstMigrationWebchat extends CakeMigration {
 					),
 					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 				),
+				'wcdata_tw_events' => array(
+					'Id' => array('type' => 'string', 'null' => false, 'length' => 38, 'key' => 'primary'),
+					'FOwnerId' => array('type' => 'string', 'length' => 38, 'null' => false),
+					'FName' => array('type' => 'string', 'length' => 500, 'null' => false),
+					'FPic' => array('type' => 'string', 'length' => 1000),
+					'FMaxPersonCount' => array('type' => 'integer', 'length' => 11),
+					'FAddress' => array('type' => 'string', 'length' => 500),
+					'FMemo' => array('type' => 'text'),
+					'FStartdate' => array('type' => 'datetime'),
+					'FCreatedate' => array('type' => 'datetime'),
+					'FUpdatedate' => array('type' => 'datetime'),
+					'indexes' => array(
+						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
+					),
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+				),
+				'wcdata_tw_eventPersons' => array(
+					'Id' => array('type' => 'string', 'null' => false, 'length' => 38, 'key' => 'primary'),
+					'FEventId' => array('type' => 'string', 'length' => 38, 'null' => false),
+					'FMemo' => array('type' => 'text'),
+					'FState' => array('type' => 'integer', 'length' => 11),
+					'FCreatedate' => array('type' => 'datetime'),
+					'FUpdatedate' => array('type' => 'datetime'),
+					'indexes' => array(
+						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
+					),
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+				),
 				'wcdata_mus' => array(
 					'Id' => array('type' => 'string', 'null' => false, 'length' => 38, 'key' => 'primary'),
 					'FWebchat' => array('type' => 'string', 'length' => 38, 'null' => false),
