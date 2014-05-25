@@ -58,7 +58,7 @@ echo $this->Main->formhr_input('FUrl', array(
 		'placeholder' => "", 
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<button type='button' id='WX_icon' class='btn btn-xs btn-primary mar_5'><i class='icon-camera bigger-160'></i>上传</button></div></div>",
+		'after' => "<button type='button' id='WX_icon' class='btn btn-xs btn-primary mar_5'><i class='icon-camera bigger-160'></i>上传</button>&nbsp;&nbsp;&nbsp;<span style='color:red'>（大图片建议尺寸：720像素 * 400像素）</span></div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
 echo $this->Main->formhr_input('FMemo', array(
