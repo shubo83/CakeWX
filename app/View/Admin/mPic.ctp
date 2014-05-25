@@ -34,8 +34,8 @@
 			<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="al-center">图文类型</th>
                         <th>图文名称</th>
+						<th>图文类型</th>
 						<th>创建时间</th>
 						<th>更新时间</th>
 						<th>
@@ -49,28 +49,12 @@
 					<? if (is_array($data['datalist'])): ?>
 						<? foreach ($data['datalist'] as $key => $vals): ?>
 							<tr>
-                                <td class="al-center">
-                                    <?php switch ($vals['WxDataTw']['FType']) {
-                                          case 0:
-                                    ?>
-                                    <?= $this->Html->image("img.png", array('title' => '单图文')) ?>
-                                    <?php
-                                              break;
-                                          case 1:
-                                    ?>
-                                    <?= $this->Html->image("imgs.png", array('title' => '多图文')); ?>
-                                    <?php
-                                              break;
-                                          default:
-                                    ?>
-                                    <?= "无类型"; ?>
-                                    <?} ?>
-                                   <!-- <?= $vals['WxDataTw']['C_FType'] ?> -->
-                                </td>
 								<td>
 									<?= $vals['WxDataTw']['FTitle'] ?>
 								</td>
-
+								<td>
+                                   <?= $vals['WxDataTw']['C_FType'] ?>
+                                </td>
 								<td class="hidden-480">
 									<p><?= $vals['WxDataTw']['FCreatedate'] ?></p>
 								</td>
