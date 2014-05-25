@@ -20,10 +20,16 @@
 </div>
 <div class="a_types">
     <ul class="ttp cl">
-        <li id="ttp_all" class="a"><a href="#">全部</a></li>
-        <li class="a"><a href="#">单图文<span class="num">13</span></a></li>
-        <li><a href="#">多图文<span class="num">7</span></a></li>
-        <li><a href="#">活动图文<span class="num">1</span></a></li>
+        <li id="ttp_all" class="a"><a href="<?php echo $WC_URL; ?>">全部</a></li>
+		<?php foreach ($data['category'] as $key => $vals): ?>
+			 <li>
+				<a href="<?php echo $vals['link']; ?>"><?php echo $vals['name']; ?>
+					<?php if ($vals['count']): ?>
+						<span class="num"><?php echo $vals['count']; ?></span>
+					<? endif ?>
+				</a>
+			</li>
+		<? endforeach ?>
     </ul>
 </div>
 <div class="row">

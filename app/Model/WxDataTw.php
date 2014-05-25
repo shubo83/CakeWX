@@ -38,7 +38,8 @@ class WxDataTw extends AppModel {
 	    )
 	);
 	
-	public $type = array('0' => "单图文", '1' => "多图文");
+	public $type = array('0' => "文章图文", '1' => "图文集");
+	public $conType = array('wz' => "文章图文", 'hd' => '活动图文');
 	
 	/**
 	 * undocumented function
@@ -102,6 +103,23 @@ class WxDataTw extends AppModel {
 			// echo '<pre>';print_r($data);exit;
 		}
 		return $data;
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function getCategories($id, $baseurl) {
+		$newarr = array();
+		$conditions = array('FType' => 0, 'FWebchat' => $id);
+		$count = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
+		foreach ($this->conType as $key => $vals) {
+			$newarr[] = array('name' => $vals, 'count' => $count, 'link' => "{$baseurl}?_val={$key}");
+			$count = 0;
+		}
+		return $newarr;
 	}
 	
 	/**
