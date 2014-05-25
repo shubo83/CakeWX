@@ -9,10 +9,14 @@
 	), array('block' => "script_extra", 'inline' => false));
 ?>
 <div style="margin-bottom:15px">
-	<button class="btn btn-sm btn-primary"  onclick="location.href='<?= "{$WC_URL}?_a=add" ?>'">
-		<i class="icon-pencil align-top bigger-125"></i>
-		添加图文
+	<button class="btn btn-sm btn-primary radius5" onclick="location.href='<?= "{$WC_URL}?_a=add" ?>'">
+		<i class="icon-plus align-top bigger-125"></i>
+		添加单图文
 	</button>
+    <button class="btn btn-sm btn-primary radius5" onclick="location.href='<?= "{$WC_URL}?_a=add" ?>'">
+        <i class="icon-plus align-top bigger-125"></i>
+        添加多图文
+    </button>
 </div>
 <div class="a_types">
     <ul class="ttp cl">
@@ -76,15 +80,15 @@
 									<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
 
 										<button class="btn btn-xs btn-info" onclick="parent.location.href='<?php echo "{$WC_URL}?_a=edit&_id={$vals['WxDataTw']['Id']}" ?>'">
-											<i class="icon-edit bigger-120"></i>
+											<i class="icon-edit bigger-120" title="编辑"></i>
 										</button>
 
 										<button class="btn btn-xs btn-danger bootbox-confirm" alt="<?php echo "{$WC_URL}?_a=del&_id={$vals['WxDataTw']['Id']}" ?>">
-											<i class="icon-trash bigger-120"></i>
+											<i class="icon-trash bigger-120" title="删除"></i>
 										</button>
 										
 										<button class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>">
-											<i class="icon-wrench bigger-120"></i>
+											<i class="icon-search bigger-120" title="预览"></i>
 										</button>
 									</div>
 								</td>

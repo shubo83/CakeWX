@@ -10,7 +10,7 @@
 		<div class="navbar-header pull-left">
 			<a href="<?= $uid ? Router::url(array('controller' => "admin", 'action' => "index")) : Router::url("/") ?>" class="navbar-brand">
 				<small>
-					<i class="icon-leaf"></i>
+					<i class="icon-comments"></i>
 					<?= $navTitle ?>
 				</small>
 			</a><!-- /.brand -->

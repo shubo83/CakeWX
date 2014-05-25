@@ -104,14 +104,14 @@ echo $this->Main->formhr_input('FPreTwj', array(
 	));
 ?>
 <div class="clearfix form-actions">
-	<div class="col-md-offset-3 col-md-9">
+	<div class="col-md-offset-3">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交
 		</button>
 		&nbsp; &nbsp; &nbsp;
 		<button type="button" class="btn" id="previewbox">
-			<i class="icon-undo bigger-110"></i>
+			<i class="icon-search bigger-110"></i>
 			预览图文
 		</button>
 		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;

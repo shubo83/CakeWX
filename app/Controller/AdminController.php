@@ -493,13 +493,14 @@ class AdminController extends AppController {
 				$query['id'] = $this->request->query['id'];
 				$data = $this->WxDataTw->getDataList($id, $query['id']);
 				$data['WxDataTw']['FUrl'] = $data['WxDataTw']['FUrl'] ? Router::url($data['WxDataTw']['FUrl']) : '';
+                $data['WxDataTw']['FCreatedate'] = explode("-", substr($data['WxDataTw']['FCreatedate'],0,strpos($data['WxDataTw']['FCreatedate'],' ')));
 				$html = '<div class="media_preview_area">
 				        	<div class="appmsg  editing">
 					    	    <div id="js_appmsg_preview" class="appmsg_content">
 					                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
 					        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$data[WxDataTw][FTitle].'</a></h4>
 								        <div class="appmsg_info">
-								            <em class="appmsg_date"></em>
+								            <em class="appmsg_date">'.$data['WxDataTw']['FCreatedate'][1].'月'.$data['WxDataTw']['FCreatedate'][1].'日'.'</em>
 								        </div>
 						       		  	<div class="appmsg_thumb_wrp">
 								            <img class="js_appmsg_thumb appmsg_thumb" src="'.$data[WxDataTw][FUrl].'">
@@ -513,31 +514,32 @@ class AdminController extends AppController {
 				break;
 			case 'twj':
 				$data = $this->WxDataTw->getDataList($id);
-				foreach ($data['datalist'] as $vals) {
-					$vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
-					$html .= '<div class="media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
-					        	<div class="appmsg editing">
-						    	    <div id="js_appmsg_preview" class="appmsg_content">
-						                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-						        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
-									        <div class="appmsg_info">
-									            <em class="appmsg_date"></em>
-									        </div>
-							       		  	<div class="appmsg_thumb_wrp">
-									            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-									        </div>
-							        		<p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
-										</div>
-									</div>
-								    <div class="com_mask"></div>
-						            <i class="icon_item_selected">修改</i>
-						       </div>
-							</div>&nbsp;';
-				}
-				
-				// 单图文
-				if ($query['mod'] == 'simple') {
-                    $html .= '<script>
+                if(count($data)){
+                    foreach ($data['datalist'] as $vals) {
+                        $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
+                        $vals['WxDataTw']['FCreatedate'] = explode("-", substr($vals['WxDataTw']['FCreatedate'],0,strpos($vals['WxDataTw']['FCreatedate'],' ')));
+                        $html .= '<div class="media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
+                                    <div class="appmsg editing">
+                                        <div id="js_appmsg_preview" class="appmsg_content">
+                                            <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+                                                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
+                                                <div class="appmsg_info">
+                                                    <em class="appmsg_date">'.$vals['WxDataTw']['FCreatedate'][1].'月'.$vals['WxDataTw']['FCreatedate'][1].'日'.'</em>
+                                                </div>
+                                                <div class="appmsg_thumb_wrp">
+                                                    <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
+                                                </div>
+                                                <p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
+                                            </div>
+                                        </div>
+                                        <div class="com_mask"></div>
+                                        <i class="icon_item_selected">修改</i>
+                                   </div>
+                                </div>&nbsp;';
+                    }
+                    // 单图文
+                    if ($query['mod'] == 'simple') {
+                        $html .= '<script>
                         $.fn.clicktoggle = function(a, b) {
                             return this.each(function() {
                                 var clicked = false;
@@ -565,8 +567,8 @@ class AdminController extends AppController {
                             Atempids = [$(this).attr("id")];
                         });
                     </script>';
-				} else {
-					$html .= '<script>
+                    } else {
+                        $html .= '<script>
 	                            $.fn.clicktoggle = function(a, b) {
 	                                return this.each(function() {
 	                                    var clicked = false;
@@ -605,22 +607,26 @@ class AdminController extends AppController {
 
 	                           $("#aj_box .media_preview_area").clicktoggle(even, odd);
 	                           </script>';
-				}
+                    }
+                } else{
+                    $html = '<p>亲,您的图文太少了,<a href="">马上去添加</a>吧！</p>';
+                }
 				exit(json_encode($html));
 				break;
 			case 'getTwj':
 				if ($this->request->is('post')) {
 					$ids = json_decode($this->request->data['ids']);
 					$data = $this->WxDataTw->getDataList($id, NULL, $ids);
-					foreach ($data['datalist'] as $vals) {
+                    foreach ($data['datalist'] as $vals) {
 						$vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
-						$html .= '<div class="media_preview_area init_media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
+                        $vals['WxDataTw']['FCreatedate'] = explode("-", substr($vals['WxDataTw']['FCreatedate'],0,strpos($vals['WxDataTw']['FCreatedate'],' ')));
+                        $html .= '<div class="media_preview_area init_media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
 						        	<div class="appmsg editing">
 							    	    <div id="js_appmsg_preview" class="appmsg_content">
 							                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
 							        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
 										        <div class="appmsg_info">
-										            <em class="appmsg_date"></em>
+										            <em class="appmsg_date">'.$vals['WxDataTw']['FCreatedate'][1].'月'.$vals['WxDataTw']['FCreatedate'][1].'日'.'</em>
 										        </div>
 								       		  	<div class="appmsg_thumb_wrp">
 										            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">

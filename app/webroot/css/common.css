@@ -272,6 +272,10 @@ ul li{list-style:none;}
 	line-height: 20px;
 	padding-bottom: 6px;
 }
+.appmsg_date {
+    font-weight: 400;
+    font-style: normal;
+}
 .appmsg_thumb {
 	width:100%
 }
@@ -301,3 +305,4 @@ ul li{list-style:none;}
     text-align: justify;
     overflow-y: scroll;
 }
+.radius5{border-radius: 5px;}
