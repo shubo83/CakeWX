@@ -31,7 +31,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
                     <div class="appmsg_info"><em class="appmsg_date"><?php echo $data['WxDataTw']['FCreatedate ']; ?></em></div>
                         <h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank"><?php echo $data['WxDataTw']['FTitle']; ?></a></h4>
                         <div class="appmsg_thumb_wrp">
-                            <img class="js_appmsg_thumb appmsg_thumb" src="<?php echo Router::url("/", TRUE).$data['WxDataTw']['FUrl']; ?>">
+                            <img class="js_appmsg_thumb appmsg_thumb"  <?php if(!$data['WxDataTw']['FUrl']) { ?> style="display:none;"<?php }?>src="<?php echo Router::url("/", TRUE).$data['WxDataTw']['FUrl']; ?>">
                             <i class="appmsg_thumb default">封面图片</i>
                         </div>
                         <p class="appmsg_desc"><?php echo $data['WxDataTw']['FMemo']; ?></p>
