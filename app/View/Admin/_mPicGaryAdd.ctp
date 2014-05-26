@@ -17,6 +17,9 @@
 	$twData = $data['WxDataTw']['FTwj'];
 	// echo '<pre>';print_r($data);exit;
 ?>
+<h3 class="lighter block green">
+	添加图文集：
+</h3>
 <?php
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
 echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal"));

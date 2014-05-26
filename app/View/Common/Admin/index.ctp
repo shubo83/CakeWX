@@ -78,7 +78,9 @@
 						<?= $this->Main->MY_currmenu($vmenu['search']); ?>
 					</h1>
 				</div><!-- /.page-header -->
-				<?php echo $this->fetch('content'); ?>
+				<div class="col-sm-12">
+					<?php echo $this->fetch('content'); ?>
+				</div>
 			</div><!-- /.page-content -->
 			<?php echo $this->element('Admin/settings'); ?>
 		</div>

@@ -16,7 +16,7 @@
 	), array('block' => "script_extra", 'inline' => false));
 ?>
 <h3 class="lighter block green">
-	请完整填写以下信息：
+	添加活动图文：
 </h3>
 <?php 
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
