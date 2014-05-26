@@ -39,7 +39,7 @@ class WxDataTw extends AppModel {
 	);
 	
 	public $type = array('0' => "文章图文", '1' => "图文集");
-	public $conType = array('wz' => "文章图文", 'hd' => '活动图文');
+	public $conType = array('default' => "文章图文", 'events' => '活动图文');
 	
 	/**
 	 * undocumented function
@@ -54,9 +54,26 @@ class WxDataTw extends AppModel {
 		$this->set('FUpdatedate', date('Y-m-d H:i:s'));
 		$this->set('FWebchat', $id);
 		$this->data['WxDataTw']['FTwj'] = serialize($this->data['WxDataTw']['FTwj']);
- 		// print_r($this->data);exit;
+		$twData = $this->data;
 		$query = $this->save($this->data);
-		if ($query) return $this->id;
+		if ($query) {
+			switch ($twData['WxDataTw']['FTwType']) {
+				case 'events':
+					$dbExtra = ClassRegistry::init('WxDataTwEvent');
+					$eData = $dbExtra->find('first', array('conditions' => array('FOwnerId' => $this->id), 'recursive' => 0));
+					if (isset($eData['WxDataTwEvent']['Id'])) {
+						$dbExtra->id = $eData['WxDataTwEvent']['Id'];
+					} else {
+						$dbExtra->set('Id', String::uuid());
+						$dbExtra->set('FCreatedate', date('Y-m-d H:i:s'));
+					}
+					$dbExtra->set('FOwnerId', $this->id);
+					$dbExtra->save();
+					break;
+				default:
+			}
+			return $this->id;
+		} 
 	}
 	
 	/**
@@ -71,7 +88,7 @@ class WxDataTw extends AppModel {
 	    );
 		foreach ($data as $key => &$vals)
 		{	
-			$vals['WxDataTw']['C_FType'] = $this->type[$vals['WxDataTw']['FType']];
+			$vals['WxDataTw']['C_FType'] = $this->conType[$vals['WxDataTw']['FTwType']] ? $this->conType[$vals['WxDataTw']['FTwType']] : reset($this->conType);
 		}
 	    return $data;
 	}
@@ -84,8 +101,32 @@ class WxDataTw extends AppModel {
 	 **/
 	function getDataList($id = NULL, $cid = NULL, $ids = NULL) {	
 		if ($cid != NULL) {
-			$conditions = $id == NULL ? array('Id' => $cid) : array('Id' => $cid, 'FWebchat' => $id);
-			$data = $this->find('first', array('conditions' => $conditions, 'recursive' => 0));
+			$conditions = $id == NULL ? array('WxDataTw.Id' => $cid) : array('WxDataTw.Id' => $cid, 'WxDataTw.FWebchat' => $id);
+			$attr = array(
+				'conditions' => array(
+				),
+				'joins' => array(
+					array(
+						'table' => "{$this->tablePrefix}wcdata_tw_events",
+			            'alias' => 'WxDataTwEvent',
+			            'type' => 'LEFT',
+			            'conditions' => array(
+			                'WxDataTw.Id = WxDataTwEvent.FOwnerId'
+			            )
+					)
+				),
+				'fields' => array(
+					"WxDataTw.*",
+					"WxDataTwEvent.FMaxPersonCount", 
+					"WxDataTwEvent.FAddress", 
+					"WxDataTwEvent.FPersonCount",
+					"WxDataTwEvent.FStartdate"
+				),
+				'group' => array('WxDataTw.Id'),
+				'order' => array('FCreatedate DESC')
+			);
+			if ($conditions) $attr['conditions'] = array_merge($attr['conditions'], $conditions);
+			$data = $this->find('first', $attr);
 			if (is_array($data)) {
 				$data['WxDataTw']['FTwj'] = unserialize($data['WxDataTw']['FTwj']);
 				$data['WxDataTw']['FPreTwj'] = implode(',', $data['WxDataTw']['FTwj']);
@@ -96,7 +137,7 @@ class WxDataTw extends AppModel {
 			$data['datalist'] = $this->find('all', array('conditions' => $conditions, 'order' => "FCreatedate desc", 'recursive' => 0));
 			$data['count'] = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
 			foreach ($data['datalist'] as $key => &$vals) {	
-				$vals['WxDataTw']['C_FType'] = $this->type[$vals['WxDataTw']['FType']];
+				$vals['WxDataTw']['C_FType'] = $this->conType[$vals['WxDataTw']['FTwType']] ? $this->conType[$vals['WxDataTw']['FTwType']] : reset($this->conType);
 				$vals['WxDataTw']['FTwj'] = unserialize($vals['WxDataTw']['FTwj']);
 			}
 			// echo $this->getLastQuery();
@@ -113,10 +154,11 @@ class WxDataTw extends AppModel {
 	 **/
 	function getCategories($id, $baseurl) {
 		$newarr = array();
-		$conditions = array('FType' => 0, 'FWebchat' => $id);
-		$count = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
 		foreach ($this->conType as $key => $vals) {
-			$newarr[] = array('name' => $vals, 'count' => $count, 'link' => "{$baseurl}?_val={$key}");
+			$conditions = array('FType' => 0, 'FWebchat' => $id);
+			$conditions['FTwType'] = ($key == 'default') ? null : $key;
+			$count = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
+			$newarr[] = array('key' => $key, 'name' => $vals, 'count' => $count, 'link' => "{$baseurl}?_val={$key}");
 			$count = 0;
 		}
 		return $newarr;

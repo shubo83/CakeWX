@@ -16,9 +16,11 @@
 </div>
 <div class="a_types">
     <ul class="ttp cl">
-        <li id="ttp_all" class="a"><a href="<?php echo $WC_URL; ?>">全部</a></li>
+		<?php $css = (!$WC_query['value']) ? 'class="a"' : ''; ?>
+        <li id="ttp_all" <?php echo $css; ?>><a href="<?php echo $WC_URL; ?>">全部</a></li>
 		<?php foreach ($data['category'] as $key => $vals): ?>
-			 <li>
+			<?php $css = ($WC_query['value'] == $vals['key']) ? 'class="a"' : ''; ?>
+			 <?php echo "<li {$css}>"; ?>
 				<a href="<?php echo $vals['link']; ?>"><?php echo $vals['name']; ?>
 					<?php if ($vals['count']): ?>
 						<span class="num"><?php echo $vals['count']; ?></span>
