@@ -1,27 +1,3 @@
-(function($) {
-    if (!$.outerHTML) {
-        $.extend({
-            outerHTML: function(ele) {
-                var $return = undefined;
-                if (ele.length === 1) {
-                    $return = ele[0].outerHTML;
-                }
-                else if (ele.length > 1) {
-                    $return = {};
-                    ele.each(function(i) {
-                        $return[i] = $(this)[0].outerHTML;
-                    })
-                };
-                return $return;
-            }
-        });
-        $.fn.extend({
-            outerHTML: function() {
-                return $.outerHTML($(this));
-            }
-        });
-    }
-})(jQuery);
 KindEditor.ready(function(K) {
     var editor = K.editor({
         uploadJson: UPLOAD_URL,
@@ -62,7 +38,7 @@ KindEditor.ready(function(K) {
 		}
 	});
 });
-
+/*
 $(document).ready(function() {
     $("#WxDataTwFPreTwj").hide();
     var type = $(".twSelect").val();
@@ -96,7 +72,7 @@ $(document).ready(function() {
         }
     });
 });
-
+*/
 // 图文预览
 $("#previewbox").on("click",function() {
     var prehtml,tempurl,tempsum,temph;
@@ -129,16 +105,14 @@ $("#previewbox").on("click",function() {
 });
 function prebootbox(event) {
     var hids = $(".media_preview_area").length;
-    var data = [];
-    var tmpurl = '',swnode = $(this).parent().parent().parent();
+    var data = [], thisitem = $(this).parent().parent();
+    var tmpurl = ADMIN_WC_URL + "mPic?_a=twj&_m=simple";
     if(hids){
         $(".media_preview_area").each(function(index) {
             data[index] = $(this).attr("id");
         });
-        data = $.unique(data);
+        data = '123';
     }
-    tmpurl = event.data.atype == "switem" ? ADMIN_WC_URL + "mPic?_a=twj" : ADMIN_WC_URL + "mPic?_a=twj&_m=simple";
-    tmptype = event.data.atype;
     //console.log(data.length);
     $.ajax({
         url: tmpurl,
@@ -158,18 +132,15 @@ function prebootbox(event) {
                             var selehtm = '';
                             $.each(Atempids, function(key,val){
                                 var t_id = $('#'+val).attr('id');
-                                $('#'+val).append("<input type=\"hidden\" name=\"data[WxDataTw][FTwj][]\" value=\"" + t_id +"\" />");
-                                selehtm += $('#'+val).outerHTML() + "&nbsp;";
+                                //console.log($('#'+val).find('h4 a').text());
+                                thisitem.find('h4 a').text($('#'+val).find('h4 a').text());
+                                thisitem.find('.js_appmsg_thumb').attr('src',$('#'+val).find('.appmsg_thumb_wrp img').attr('src'));
+                                thisitem.find('.js_appmsg_thumb').show();
+                                thisitem.find('.default').hide();
+                                thisitem.append("<input type=\"hidden\" name=\"data[WxDataTw][FTwj][]\" value=\"" + t_id +"\" />");
+                                //selehtm += $('#'+val).outerHTML() + "&nbsp;";
                             });
-                            //$(".u-chooses").empty();
-                            if(tmptype == "switem"){
-                                $("#addTw").prev().append(selehtm);
-                                $(".icon_item_selected").html("<span class='delitem'>删除</span><span class='pipe'>|</span><span class='editem'>修改</span>");
-                            } else {
-                                $(".icon_item_selected").html("<span class='delitem'>删除</span><span class='pipe'>|</span><span class='editem'>修改</span>");
-                                //console.log(selehtm);
-                                swnode.replaceWith(selehtm);
-                            }
+
                         }
                     },
                 }
@@ -180,15 +151,6 @@ function prebootbox(event) {
         }
     });
 }
-// 更换图文集
-$(document).on("click","#addTw",{atype:"switem"}, prebootbox);
-$(".u-chooses").on("click",".editem",{atype:"editem"}, prebootbox);
-$(".u-chooses").on("click",".delitem", function() {
-    var delbox = $(this).parent().parent().parent();
-    bootbox.confirm("确定要删除么？", function(result) {
-        result ? delbox.remove() : '';
-    });
-});
 // 多图文判断JS
 $(".twSelect").on("change", function(){
     var type = $(this).val();
@@ -198,5 +160,22 @@ $(".twSelect").on("change", function(){
         $(".u-chooses").empty();
     } else{
         $("#twj").show();
+    }
+});
+var scntDiv = $('#js_appmsg_preview');
+var i = $('.js_appmsg_item').size() + 1;
+$("#js_add_appmsg").on("click", function() {
+    $('<div id="appmsgItem' + i +'" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item "><img class="js_appmsg_thumb appmsg_thumb" src=""><i class="appmsg_thumb default">缩略图</i><h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">标题</a></h4><div class="appmsg_edit_mask"><a class="icon18_common edit_gray js_edit" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">编辑</a><a class="icon18_common del_gray js_del" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">删除</a></div></div>').appendTo(scntDiv);
+    i = i+1;
+    return false;
+});
+$(".media_preview_area").on("click",".js_edit", prebootbox);
+$(".media_preview_area").on("click",".js_del", function() {
+    if($(this).parent().parent().attr('id') == 'appmsgItem2'){
+        alert("图文集至少需要两条图文。");
+        return false;
+    } else {
+        var jsitem = $(this).parent().parent();
+        jsitem.remove();
     }
 });

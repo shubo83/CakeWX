@@ -56,7 +56,7 @@
 										</button>
 										
 										<button class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>">
-											<i class="icon-wrench bigger-120"></i>
+											<i class="icon-search bigger-120"></i>
 										</button>
 									</div>
 								</td>

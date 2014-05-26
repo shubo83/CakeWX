@@ -14,34 +14,46 @@
 		"Action/mPicAdd"
 	), array('block' => "script_extra", 'inline' => false));
 ?>
-<h3 class="lighter block green">
-	请完整填写以下信息：
-</h3>
-<?php 
+<?php
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
-echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal")); 
-echo $this->Main->formhr_input('FType', array(
-		'div' => "form-group", 
-		'options' => array('文章图文', '活动图文'),
-		'label' => array('text' => "图文类型：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "select", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5 twSelect",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-));
-echo $this->Main->formhr_input('FPreTwj', array(
-		'div' => array('class' => "form-group fHidden", 'id' => "twj"), 
-		'label' => array('text' => "图文集：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text",
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><div class='u-chooses'></div><button type='button' id='addTw'>添加图文</button><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
+echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal"));
 ?>
+<div class="media_preview_area" style="width:320px;display:block;margin:0 auto;">
+    <div class="appmsg multi editing">
+        <div id="js_appmsg_preview" class="appmsg_content">
+            <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+                <div class="appmsg_info">
+                    <em class="appmsg_date"></em>
+                </div>
+                <div class="cover_appmsg_item">
+                    <h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank">标题</a></h4>
+                    <div class="appmsg_thumb_wrp">
+                        <img class="js_appmsg_thumb appmsg_thumb" src="">
+                        <i class="appmsg_thumb default">封面图片</i>
+                    </div>
+                    <div class="appmsg_edit_mask">
+                        <a onclick="return false;" class="icon18_common edit_gray js_edit" data-id="1" href="javascript:;">编辑</a>
+                    </div>
+                </div>
+            </div>
+            <div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
+                <img class="js_appmsg_thumb appmsg_thumb" src="">
+                <i class="appmsg_thumb default">缩略图</i>
+                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">标题</a></h4>
+                <div class="appmsg_edit_mask">
+                    <a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
+                    <a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
+                </div>
+            </div>
+        </div>
+        <div class="appmsg_add">
+            <a onclick="return false;" id="js_add_appmsg" href="javascript:void(0);">
+                &nbsp;
+                <i class="icon24_common add_gray">增加一条</i>
+            </a>
+        </div>
+    </div>
+</div>
 <div class="clearfix form-actions">
 	<div class="col-md-offset-3 col-md-9">
 		<button class="btn btn-info" type="submit">

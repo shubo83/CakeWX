@@ -91,7 +91,7 @@ echo $this->Main->formhr_input('FCity', array(
 	));
 ?>
 	<div class="clearfix form-actions">
-        <span class="col-sm-3 control-label no-padding-right" style="text-align:left;">
+        <span class="col-sm-3 no-padding-right" style="text-align:left;">
             <a href="<?php echo Router::url('/'); ?>" class="btn btn-grey">
                 <i class="icon-arrow-left"></i>
                 返回

@@ -291,12 +291,164 @@ ul li{list-style:none;}
 }
 .appmsg_desc {
 	padding: 5px 0 10px;
-	white-space: pre-wrap;
 	word-wrap: normal;
 	word-break: normal;
+    _height:110px;
+    max-height:110px;
+    overflow:hidden;
+}
+.appmsg_thumb_wrp{
+    max-height: 200px;
+    _height: 200px;
+    overflow: hidden;
 }
 .modal-dialog{
     width:960px;
+}
+/*多图文添加*/
+.page_appmsg_edit .appmsg {
+    min-height: 180px;
+}
+.multi .appmsg_content {
+    padding: 0;
+}
+.multi .appmsg_info {
+    padding-top: 4px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+.appmsg_item {
+    position: relative;
+    padding: 12px 14px;
+    border-top: 1px solid #d3d3d3;
+}
+.cover_appmsg_item {
+    position: relative;
+    margin: 0 14px 14px;
+}
+.cover_appmsg_item .appmsg_title a {
+    padding: 0 4px;
+    color: #fff;
+}
+.multi.editing .appmsg_thumb {
+    display: none;
+}
+.editing .appmsg_thumb.default {
+    display: block;
+}
+.appmsg_item .appmsg_thumb {
+    float: right;
+    width: 78px;
+    height: 78px;
+    margin-left: 14px;
+}
+.appmsg_item .appmsg_thumb.default {
+    line-height: 78px;
+    font-size: 16px
+}
+
+.multi .appmsg_edit_mask {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(229,229,229,0.85)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#d9e5e5e5',endcolorstr = '#d9e5e5e5');
+    text-align: center
+}
+
+.multi .appmsg_item .appmsg_edit_mask {
+    line-height: 102px
+}
+.appmsg_title {
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    padding-top: 6px;
+    line-height: 28px;
+    max-height: 56px;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all
+}
+.cover_appmsg_item .appmsg_edit_mask {
+    line-height: 160px
+}
+.multi .appmsg_edit_mask a {
+    margin-left: 8px;
+    margin-right: 8px
+}
+.appmsg_thumb.default {
+    display: block;
+    color: #c0c0c0;
+    text-align: center;
+    line-height: 160px;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #ececec;
+    font-size: 22px;
+}
+.appmsg_item .appmsg_thumb.default {
+    line-height: 78px;
+    font-size: 16px;
+}
+.editing .cover_appmsg_item:hover .appmsg_edit_mask,.editing .appmsg_item:hover .appmsg_edit_mask {
+    display: block
+}
+.editing .cover_appmsg_item:hover .appmsg_edit_mask, .editing .appmsg_item:hover .appmsg_edit_mask {
+    display: block;
+}
+.appmsg_edit_mask a {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.icon18_common {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 100px;
+    overflow: hidden;
+}
+.icon18_common.edit_gray {
+    background: transparent url(../img/admin/icon_multi.png) no-repeat 0 -35px;
+}
+.icon18_common.edit_gray:hover {
+    background: transparent url(../img/admin/icon_multi.png) no-repeat 0 -63px;
+}
+.icon24_common.add_gray {
+    background: transparent url(../img/admin/icon_multi.png) no-repeat 0 0;
+}
+.icon18_common.del_gray {
+    background: transparent url(../img/admin/icon_multi.png) no-repeat 0 -90px;
+}
+.icon18_common.del_gray:hover {
+    background: transparent url(../img/admin/icon_multi.png) no-repeat 0 -118px;
+}
+.icon24_common {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    display: inline-block;
+    line-height: 100px;
+    overflow: hidden;
+}
+.appmsg_add {
+    text-align: center;
+    padding: 12px 14px;
+    line-height: 72px;
+}
+.appmsg_add a {
+    display: block;
+    font-size: 0;
+    text-decoration: none;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 3px dotted #b8b8b8;
+    height: 72px;
 }
 #aj_box{
     position: relative;
@@ -305,4 +457,3 @@ ul li{list-style:none;}
     text-align: justify;
     overflow-y: scroll;
 }
-.radius5{border-radius: 5px;}
