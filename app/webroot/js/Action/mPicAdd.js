@@ -12,23 +12,24 @@ KindEditor.ready(function(K) {
                 clickFn : function(url, title, width, height, border, align) {
                     iconText.val(url);
                     editor.hideDialog();
+                    $('.js_appmsg_thumb').attr('src',BASE_URL+url).show();
                 }
             });
         });
     });
 
 	K.create('#WxDataTwFContent', {
-		width: '700px',
+		width: '600px',
+        minWidth: '600px',
 		height: '300px',
 		items: [
-		        'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+		        'source', '|', 'undo', 'redo', '|', 'preview', 'template', 'code', 'cut', 'copy', 'paste',
 		        'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
 		        'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
-		        'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+		        'superscript', 'clearhtml', 'selectall', '/',
 		        'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
 		        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
-		        'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
-		        'anchor', 'link', 'unlink', '|', 'about'
+		        'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'link', 'unlink'
 		],
 		allowImageUpload: true,
 		uploadJson: UPLOAD_URL + '?prefix',
@@ -178,4 +179,10 @@ $(".media_preview_area").on("click",".js_del", function() {
         var jsitem = $(this).parent().parent();
         jsitem.remove();
     }
+});
+$('#WxDataTwFTitle').keyup(function() {
+   $('.appmsg_title a').text($(this).val());
+});
+$('#WxDataTwFMemo').keyup(function() {
+    $('.appmsg_desc').text($(this).val());
 });

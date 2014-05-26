@@ -14,6 +14,7 @@ class MobController extends AppController {
 	    parent::beforeFilter();
 	    $this->Auth->allow('tw'); 
 		$this->loadModel("TPerson");
+        $this->loadModel("TPerson");
 	}
 	
 	/**
@@ -45,5 +46,17 @@ class MobController extends AppController {
 		$this->set('post', $data);
 		$this->render('/Mobile/index');
 	}
+    function tw_events($id)
+    {
+        $this->loadModel("WxDataTwtEvents");
+        $result = $this->WxDataTw->getDataList(NULL, $id);
+        $data['title'] = $result['WxDataTw']['FTitle'];
+        $data['author'] = $result['WxDataTw']['FAuthor'];
+        $data['content'] = $result['WxDataTw']['FContent'];
+        $data['memeo'] = $result['WxDataTw']['FMemo'];
+        $data['dateline'] = substr($result['WxDataTw']['FCreatedate'],0,strpos($result['WxDataTw']['FCreatedate'],' '));
+        $this->set('post', $data);
+        $this->render('/Mobile/index');
+    }
 	
 }

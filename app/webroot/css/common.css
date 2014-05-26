@@ -1,6 +1,7 @@
 @charset "utf-8";
 body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei"}
 .cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .cl { zoom: 1; }
+.fl{float: left;}.fr{float: right;}
 ul li{list-style:none;}
 .mtm{margin-top:10px!important;}.mbm{margin-bottom:10px!important;}
 .e_btn1 {
@@ -298,8 +299,8 @@ ul li{list-style:none;}
     overflow:hidden;
 }
 .appmsg_thumb_wrp{
-    max-height: 200px;
-    _height: 200px;
+    max-height: 160px;
+    _height: 160px;
     overflow: hidden;
 }
 .modal-dialog{
@@ -346,7 +347,7 @@ ul li{list-style:none;}
     line-height: 78px;
     font-size: 16px
 }
-
+.prebox .js_appmsg_thumb{}
 .multi .appmsg_edit_mask {
     display: none;
     position: absolute;
@@ -361,17 +362,6 @@ ul li{list-style:none;}
 
 .multi .appmsg_item .appmsg_edit_mask {
     line-height: 102px
-}
-.appmsg_title {
-    font-weight: 400;
-    font-style: normal;
-    font-size: 16px;
-    padding-top: 6px;
-    line-height: 28px;
-    max-height: 56px;
-    overflow: hidden;
-    word-wrap: break-word;
-    word-break: break-all
 }
 .cover_appmsg_item .appmsg_edit_mask {
     line-height: 160px
