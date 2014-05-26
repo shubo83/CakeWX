@@ -55,18 +55,13 @@ echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 
     </div>
 </div>
 <div class="clearfix form-actions">
-	<div class="col-md-offset-3 col-md-9">
+	<div style="width:320px;margin:0 auto;">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交
 		</button>
-		&nbsp; &nbsp; &nbsp;
-		<button type="button" class="btn" id="previewbox">
-			<i class="icon-undo bigger-110"></i>
-			预览图文
-		</button>
-		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-		<font color="red">(提示：针对多图文的操作，修改完后记得点击提交按钮。)</font>
+		&nbsp; &nbsp;
+		<font color="red">(提示：修改完后请点击提交保存。)</font>
 	</div>
 </div>
 <?php echo $this->Form->hidden('WxDataTw.FType', array('id' => "FType", 'value' => 1)); ?>
