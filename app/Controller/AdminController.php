@@ -717,18 +717,14 @@ class AdminController extends AppController {
 			case 'add':
 				if ($this->request->is('post')) {
 					$this->WxDataTw->set($this->request->data);
-					if ($this->WxDataTw->validates()) {
+					if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
 						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
-							$this->Session->setFlash('关键字添加成功。');
+							$this->Session->setFlash('图文添加成功。');
 							return $this->redirect($this->rdWcURL);
 						}
 					}
-				} else {
-					if (!$this->request->data) {
-						$this->request->data = array('WxWebchat' => array('FWxApi' => $this->wxAPI, 'FWxToken' => $this->wxToken));
-					}
-				}
+				} 
 				$this->set('data', $data);
 				$this->render('/Admin/_mPicGaryAdd');
 				break;
@@ -738,7 +734,7 @@ class AdminController extends AppController {
 				}
 				if ($this->request->is('post') || $this->request->is('put')) {
 					$this->WxDataTw->set($this->request->data);
-					if ($this->WxDataTw->validates()) {
+					if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
 						$this->WxDataTw->id = $query['id'];
 						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
 						if ($query) {
@@ -748,7 +744,7 @@ class AdminController extends AppController {
 					}
 				} else {
 					if (!$this->request->data) {
-						$data = $this->WxDataTw->getDataList($id, $query['id']);
+						$data = $this->WxDataTw->getGaryDataList($id, $query['id']);
 						$this->request->data = $data;
 				    }
 

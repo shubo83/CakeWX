@@ -1,5 +1,5 @@
 @charset "utf-8";
-body,h1,h2,h3,h4,h5,h6,p{font-family: "Microsoft Yahei"}
+body,h1,h2,h3,h4,h5,h6,p{font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3", "Microsoft Yahei"}
 .cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; } .cl { zoom: 1; }
 ul li{list-style:none;}
 .mtm{margin-top:10px!important;}.mbm{margin-bottom:10px!important;}
@@ -231,7 +231,7 @@ ul li{list-style:none;}
 .media_preview_area {
     display: inline-block;
     vertical-align: top;
-    width: 48%;
+    width: 320px;
     font-size: 14px;
     text-align: left;
     font-size: 14px;
@@ -255,13 +255,14 @@ ul li{list-style:none;}
 	font-weight: 400;
 	font-style: normal;
 	font-size: 16px;
-	padding-top: 6px;
+/*	padding-top: 6px;*/
 	line-height: 28px;
 	max-height: 56px;
 	overflow: hidden;
 	white-space: pre-wrap;
 	word-wrap: normal;
 	word-break: normal;
+	margin:0;
 }
 .appmsg_title a {
 	display: block;
@@ -456,4 +457,12 @@ ul li{list-style:none;}
     height: 340px;
     text-align: justify;
     overflow-y: scroll;
+}
+
+/*ace*/
+.form-actions {
+	padding-left:0;
+}
+.form-group input,.form-group select,.form-group textarea {
+	width:320px;
 }

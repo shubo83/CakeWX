@@ -55,7 +55,7 @@ class WxDataTw extends AppModel {
 		$this->set('FWebchat', $id);
 		$this->data['WxDataTw']['FTwj'] = serialize($this->data['WxDataTw']['FTwj']);
 		$twData = $this->data;
-		$query = $this->save($this->data);
+		$query = $this->save($this->data, FALSE);
 		if ($query) {
 			switch ($twData['WxDataTw']['FTwType']) {
 				case 'events':
@@ -142,6 +142,22 @@ class WxDataTw extends AppModel {
 			}
 			// echo $this->getLastQuery();
 			// echo '<pre>';print_r($data);exit;
+		}
+		return $data;
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function getGaryDataList($id, $cid) {
+		$data = $this->getDataList($id, $cid);
+		foreach ($data['WxDataTw']['FTwj'] as $key => &$vals) {
+			$findData = $this->findById($vals);
+			$findData['WxDataTw']['FUrl'] = Router::url($findData['WxDataTw']['FUrl'], TRUE);
+			$vals = $findData['WxDataTw'];
 		}
 		return $data;
 	}
