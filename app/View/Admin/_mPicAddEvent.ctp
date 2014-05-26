@@ -105,7 +105,7 @@ echo $this->Main->formhr_input('WxDataTw.FContent', array(
 	));
 ?>
 <div class="clearfix form-actions">
-	<div class="col-md-offset-3">
+	<div class="col-xs-12 col-sm-9 col-sm-offset-3">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交

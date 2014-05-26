@@ -107,17 +107,17 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
     </div>
 </div>
 <div class="clearfix form-actions">
-    <div class="col-md-offset-3">
-        <button class="btn btn-info" type="submit">
-            <i class="icon-ok bigger-110"></i>
-            提交
-        </button>
-        &nbsp; &nbsp; &nbsp;
+	<div class="col-xs-12 col-sm-9 col-sm-offset-3">
+		<button class="btn btn-info" type="submit">
+			<i class="icon-ok bigger-110"></i>
+			提交
+		</button>
+		&nbsp; &nbsp; &nbsp;
         <button type="reset" class="btn">
             <i class="icon-undo bigger-110"></i>
             重置
         </button>
-    </div>
+	</div>
 </div>
 <?php echo $this->Form->end(); ?>
 

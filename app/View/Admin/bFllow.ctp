@@ -35,13 +35,13 @@ echo $this->Main->formhr_input('FFollowContent', array(
 		'placeholder' => "",
 		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-        'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div><div class='col-xs-12 col-sm-9'><div class='u-chooses'></div><button type='button' id='addTw' style='display:none;'>更换图文</button></div></div>",
+        'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div><div class='u-chooses'></div><button type='button' id='addTw' style='display:none;'>更换图文</button></div>",
         'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
 	echo $this->Main->formhr_hidden('FPreTwj', array('id' => "FPreTwj"));
 ?>
 <div class="clearfix form-actions">
-	<div class="col-md-offset-3 col-md-9">
+	<div class="col-xs-12 col-sm-9 col-sm-offset-3">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交

@@ -55,9 +55,9 @@
 											<i class="icon-trash bigger-120"></i>
 										</button>
 										
-										<button class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>">
+										<!--<button class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>">
 											<i class="icon-search bigger-120"></i>
-										</button>
+										</button>!-->
 									</div>
 								</td>
 							</tr>
