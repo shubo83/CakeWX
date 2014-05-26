@@ -69,4 +69,5 @@ echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 
 		<font color="red">(提示：针对多图文的操作，修改完后记得点击提交按钮。)</font>
 	</div>
 </div>
+<?php echo $this->Form->hidden('WxDataTw.FType', array('id' => "FType", 'value' => 1)); ?>
 <?php echo $this->Form->end(); ?>

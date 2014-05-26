@@ -768,7 +768,7 @@ class AdminController extends AppController {
 			default:
 				$this->paginate['limit'] = 9;
 				$this->Paginator->settings = $this->paginate;
-				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id));
+				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id, 'FType' => 1));
 				$this->set('data', $data);
 				$this->render('/Admin/mPicGary');
 			
