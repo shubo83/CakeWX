@@ -99,6 +99,7 @@ class FirstMigrationWebchat extends CakeMigration {
 					'FContent' => array('type' => 'text'),
 					'FLink' => array('type' => 'string', 'length' => 1000),
 					'FTwj' => array('type' => 'text'),
+					'FTwType' => array('type' => 'string', 'length' => 100),
 					'indexes' => array(
 						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
 					),
@@ -107,14 +108,12 @@ class FirstMigrationWebchat extends CakeMigration {
 				'wcdata_tw_events' => array(
 					'Id' => array('type' => 'string', 'null' => false, 'length' => 38, 'key' => 'primary'),
 					'FOwnerId' => array('type' => 'string', 'length' => 38, 'null' => false),
-					'FName' => array('type' => 'string', 'length' => 500, 'null' => false),
-					'FPic' => array('type' => 'string', 'length' => 1000),
 					'FMaxPersonCount' => array('type' => 'integer', 'length' => 11),
+					'FPersonCount' => array('type' => 'integer', 'length' => 11),
 					'FAddress' => array('type' => 'string', 'length' => 500),
 					'FMemo' => array('type' => 'text'),
 					'FStartdate' => array('type' => 'datetime'),
 					'FCreatedate' => array('type' => 'datetime'),
-					'FUpdatedate' => array('type' => 'datetime'),
 					'indexes' => array(
 						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
 					),
