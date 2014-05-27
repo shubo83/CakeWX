@@ -453,7 +453,19 @@ class AdminController extends AppController {
 						}
 					}
 					$this->render('/Admin/_mPicAddTw');
-				} else if ($query['mod'] == 'event'){
+				} else if ($query['mod'] == 'twj') {
+					if ($this->request->is('post')) {
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+							$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+							if ($query) {
+								$this->Session->setFlash('图文添加成功。');
+								return $this->redirect($this->rdWcURL);
+							}
+						}
+					}
+					$this->render('/Admin/_mPicAddTwj');
+				} else if ($query['mod'] == 'event') {
 					if ($this->request->is('post')) {
 						$this->request->data['WxDataTw']['FType'] = 0;
 						$this->WxDataTw->set($this->request->data);
@@ -479,14 +491,29 @@ class AdminController extends AppController {
 					return $this->redirect($this->rdWcURL);
 				}
 				$data = $this->WxDataTw->getDataList($id, $query['id']);		//获取图文数据
+				$data = $data['WxDataTw']['FType'] == 1 ? $this->WxDataTw->getGaryDataList($id, $query['id']) : $data;
 				if ($this->request->is('post') || $this->request->is('put')) {
-					switch ($this->request->data['WxDataTw']['FTwType']) {
-						case 'events':			// 图文提交
-							$this->request->data['WxDataTw']['FType'] = 0;
-							$this->WxDataTw->set($this->request->data);
-							if ($this->WxDataTw->validates()) {
-								$this->WxDataTwEvent->set($this->request->data);
-								if ($this->WxDataTwEvent->validates()) {
+					if ($this->request->data['WxDataTw']['FType'] == 0) {
+						switch ($this->request->data['WxDataTw']['FTwType']) {
+							case 'events':			// 图文提交
+								$this->request->data['WxDataTw']['FType'] = 0;
+								$this->WxDataTw->set($this->request->data);
+								if ($this->WxDataTw->validates()) {
+									$this->WxDataTwEvent->set($this->request->data);
+									if ($this->WxDataTwEvent->validates()) {
+										$this->WxDataTw->id = $query['id'];
+										$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+										if ($query) {
+											$this->Session->setFlash('图文编辑成功。');
+											return $this->redirect($this->rdWcURL);
+										}
+									}
+								}
+								break;
+							default:
+								$this->request->data['WxDataTw']['FType'] = 0;
+								$this->WxDataTw->set($this->request->data);
+								if ($this->WxDataTw->validates()) {
 									$this->WxDataTw->id = $query['id'];
 									$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
 									if ($query) {
@@ -494,32 +521,35 @@ class AdminController extends AppController {
 										return $this->redirect($this->rdWcURL);
 									}
 								}
+						}
+					} else {
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+							$this->WxDataTw->id = $query['id'];
+							$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+							if ($query) {
+								$this->Session->setFlash('图文编辑成功。');
+								return $this->redirect($this->rdWcURL);
 							}
-							break;
-						default:
-							$this->request->data['WxDataTw']['FType'] = 0;
-							$this->WxDataTw->set($this->request->data);
-							if ($this->WxDataTw->validates()) {
-								$this->WxDataTw->id = $query['id'];
-								$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
-								if ($query) {
-									$this->Session->setFlash('图文编辑成功。');
-									return $this->redirect($this->rdWcURL);
-								}
-							}
+						}
 					}
 				} else {
 					if (!$this->request->data) {
 						$this->request->data = $data;
 				    }
 				}
-				switch ($data['WxDataTw']['FTwType']) {
-					case 'events':
-						$tpl = "_mPicAddEvent";
-						break;
-					default:
-						$tpl = "_mPicAddTw";
+				if ($data['WxDataTw']['FType'] == 0) {
+					switch ($data['WxDataTw']['FTwType']) {
+						case 'events':
+							$tpl = "_mPicAddEvent";
+							break;
+						default:
+							$tpl = "_mPicAddTw";
+					}
+				} else {
+					$tpl = "_mPicAddTwj";
 				}
+				
 				$this->set('data', $data);
 				$this->render("/Admin/{$tpl}");
 				break;
@@ -557,6 +587,7 @@ class AdminController extends AppController {
 				break;
 			case 'twj':
 				$data = $this->WxDataTw->getDataList($id);
+				// echo '<pre>';print_r($data);exit; niancode
                 if(count($data)){
                     foreach ($data['datalist'] as $vals) {
                         $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
@@ -692,9 +723,19 @@ class AdminController extends AppController {
 			default:
 				$this->paginate['limit'] = 9;
 				$this->Paginator->settings = $this->paginate;
-				$conditions = array('FWebchat' => $id, 'FType' => '0');
+				$conditions = array('FWebchat' => $id);
 				if ($query['value']) {
-					$conditions['FTwType'] = ($query['value'] == 'default') ? null : $query['value'];
+					switch ($query['value']) {
+						case 'tw':	
+							$conditions['FType'] = 0;
+							$conditions['FTwType'] = null;
+							break;
+						case 'twj':
+							$conditions['FType'] = 1;
+							break;
+						default:
+							$conditions['FTwType'] = $query['value'];
+					}
 				}
 				$data['datalist'] = $this->Paginator->paginate('WxDataTw', $conditions);
 				// print_r($this->WxDataTw->getLastQuery());exit;

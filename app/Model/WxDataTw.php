@@ -39,7 +39,7 @@ class WxDataTw extends AppModel {
 	);
 	
 	public $type = array('0' => "文章图文", '1' => "图文集");
-	public $conType = array('default' => "文章图文", 'events' => '活动图文');
+	public $conType = array('tw' => "单图文", 'twj' => "多图文", 'events' => '活动图文');
 	
 	/**
 	 * undocumented function
@@ -53,7 +53,8 @@ class WxDataTw extends AppModel {
 		$this->set('Id', $this->id ? $this->id : String::uuid());
 		$this->set('FUpdatedate', date('Y-m-d H:i:s'));
 		$this->set('FWebchat', $id);
-		$this->data['WxDataTw']['FTwj'] = serialize($this->data['WxDataTw']['FTwj']);
+		$twj = array_filter($this->data['WxDataTw']['FTwj']);
+		$this->data['WxDataTw']['FTwj'] = serialize(array_values($twj));
 		$twData = $this->data;
 		$query = $this->save($this->data, FALSE);
 		if ($query) {
@@ -77,6 +78,21 @@ class WxDataTw extends AppModel {
 	}
 	
 	/**
+	 * 获取图文类型
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function _getTwType($type, $FTwType = null)
+	{
+		if ($type == 0) {
+			return $this->conType[$FTwType] ? $this->conType[$FTwType] : $this->conType['tw'];
+		} else {
+			return $this->conType['twj'];
+		}
+	}
+	
+	/**
 	 * Overridden paginate method - group by week, away_team_id and home_team_id
 	 */
 	public function paginate($conditions, $fields, $order, $limit, $page = 1, $recursive = null, $extra = array()) 
@@ -88,7 +104,7 @@ class WxDataTw extends AppModel {
 	    );
 		foreach ($data as $key => &$vals)
 		{	
-			$vals['WxDataTw']['C_FType'] = $this->conType[$vals['WxDataTw']['FTwType']] ? $this->conType[$vals['WxDataTw']['FTwType']] : reset($this->conType);
+			$vals['WxDataTw']['C_FType'] = $this->_getTwType($vals['WxDataTw']['FType'], $vals['WxDataTw']['FTwType']);
 		}
 	    return $data;
 	}
@@ -171,8 +187,18 @@ class WxDataTw extends AppModel {
 	function getCategories($id, $baseurl) {
 		$newarr = array();
 		foreach ($this->conType as $key => $vals) {
-			$conditions = array('FType' => 0, 'FWebchat' => $id);
-			$conditions['FTwType'] = ($key == 'default') ? null : $key;
+			switch ($key)  {
+				case 'tw':
+					$conditions['FTwType']  = null;
+					$conditions['FType']  = 0;
+					break;
+				case 'twj':
+					$conditions['FType']  = 1;
+					break;
+				default:
+					$conditions['FType']  = 0;
+					$conditions['FTwType']  = $key;
+			}
 			$count = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
 			$newarr[] = array('key' => $key, 'name' => $vals, 'count' => $count, 'link' => "{$baseurl}?_val={$key}");
 			$count = 0;

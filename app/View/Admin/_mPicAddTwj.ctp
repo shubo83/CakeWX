@@ -15,10 +15,10 @@
 	), array('block' => "script_extra", 'inline' => false));
 	
 	$twData = $data['WxDataTw']['FTwj'];
-	// echo '<pre>';print_r($data);exit;
+	// echo '<pre>';print_r($twData);exit;
 ?>
 <h3 class="lighter block green">
-	添加图文集：
+	添加多图文：
 </h3>
 <?php
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
@@ -47,38 +47,52 @@ echo $this->Main->formhr_input('FTitle', array(
 		                    <em class="appmsg_date"></em>
 		                </div>
 		                <div class="cover_appmsg_item">
-		                    <h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank"><?php echo $twData[0]['FTitle']; ?></a></h4>
+		                    <h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank"><?php echo $twData[0]['FTitle'] ? $twData[0]['FTitle'] : '标题'; ?></a></h4>
 		                    <div class="appmsg_thumb_wrp">
-								<?php $appthumb = $twData[0]['Id'] ? '' : ''; ?>
-		                        <img class="js_appmsg_thumb <?php echo $appthumb; ?>" src="<?php echo $twData[0]['FUrl']; ?>">
+								<?php 
+									$appthumb = $twData[0]['FUrl'] ? 'appmsg_thumb' : '';
+									$stythumb = $twData[0]['FUrl'] ? 'style="display:inline"' : '';
+								?>
+		                        <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $twData[0]['FUrl']; ?>">
 		                        <i class="appmsg_thumb default">封面图片</i>
 		                    </div>
 		                    <div class="appmsg_edit_mask">
 		                        <a onclick="return false;" class="icon18_common edit_gray js_edit" data-id="1" href="javascript:;">编辑</a>
 		                    </div>
+							<input type="hidden" name="data[WxDataTw][FTwj][]" value="<?php echo $twData[0]['Id']; ?>">
 		                </div>
 		            </div>
 					<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
-						<?php $appthumb = $twData[1]['Id'] ? '' : ''; ?>
-		                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" src="<?php echo $twData[1]['FUrl']; ?>">
-		                <i class="appmsg_thumb default">缩略图</i>
-		                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $twData[1]['FTitle']; ?></a></h4>
+						<?php 
+							$appthumb = $twData[1]['FUrl'] ? 'appmsg_thumb' : ''; 
+							$stythumb = $twData[1]['FUrl'] ? 'style="display:inline"' : '';
+							$ithumb = $twData[1]['FUrl'] ? 'style="display:none"' : '';
+						?>
+		                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $twData[1]['FUrl']; ?>">
+		                <i class="appmsg_thumb default" <?php echo $ithumb; ?>>缩略图</i>
+		                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $twData[1]['FTitle'] ? $twData[1]['FTitle'] : '标题'; ?></a></h4>
 		                <div class="appmsg_edit_mask">
 		                    <a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
 		                    <a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
 		                </div>
+						<input type="hidden" name="data[WxDataTw][FTwj][]" value="<?php echo $twData[1]['Id']; ?>">
 		            </div>
 					<?php foreach ($twData as $key => $vals): ?>
 						<?php if ($key != 0 && $key != 1): ?>
-							<?php $appthumb = $vals['FUrl'] ? '' : 'appmsg_thumb'; ?>
+							<?php 
+								$appthumb = $vals['FUrl'] ? 'appmsg_thumb' : '';
+								$stythumb = $vals['FUrl'] ? 'style="display:inline"' : '';
+								$ithumb = $vals['FUrl'] ? 'style="display:none"' : '';
+							?>
 							<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
-				                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" src="<?php echo $vals['FUrl']; ?>">
-				                <i class="appmsg_thumb default">缩略图</i>
+				                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $vals['FUrl']; ?>">
+				                <i class="appmsg_thumb default" <?php echo $ithumb; ?>>缩略图</i>
 				                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $vals['FTitle']; ?></a></h4>
 				                <div class="appmsg_edit_mask">
 				                    <a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
 				                    <a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
 				                </div>
+								<input type="hidden" name="data[WxDataTw][FTwj][]" value="<?php echo $vals['Id']; ?>">
 				            </div>
 						<?php endif ?>
 					<?php endforeach ?>

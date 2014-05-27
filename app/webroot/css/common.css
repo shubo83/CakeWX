@@ -448,6 +448,9 @@ ul li{list-style:none;}
     text-align: justify;
     overflow-y: scroll;
 }
+.d_inline { 
+	display: inline;
+}
 
 /*ace*/
 .form-actions {
