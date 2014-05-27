@@ -1,3 +1,27 @@
+(function($) {
+    if (!$.outerHTML) {
+        $.extend({
+            outerHTML: function(ele) {
+                var $return = undefined;
+                if (ele.length === 1) {
+                    $return = ele[0].outerHTML;
+                }
+                else if (ele.length > 1) {
+                    $return = {};
+                    ele.each(function(i) {
+                        $return[i] = $(this)[0].outerHTML;
+                    })
+                };
+                return $return;
+            }
+        });
+        $.fn.extend({
+            outerHTML: function() {
+                return $.outerHTML($(this));
+            }
+        });
+    }
+})(jQuery);
 KindEditor.ready(function(K) {
     var editor = K.editor({
         uploadJson: UPLOAD_URL,
@@ -13,6 +37,7 @@ KindEditor.ready(function(K) {
                     iconText.val(url);
                     editor.hideDialog();
                     $('.js_appmsg_thumb').attr('src',BASE_URL+url).show();
+                    $('.appmsg_thumb.default').hide();
                 }
             });
         });
@@ -112,8 +137,8 @@ function prebootbox(event) {
         $(".media_preview_area").each(function(index) {
             data[index] = $(this).attr("id");
         });
-        data = '123';
     }
+    data = '';
     //console.log(data.length);
     $.ajax({
         url: tmpurl,
@@ -138,7 +163,7 @@ function prebootbox(event) {
                                 thisitem.find('.js_appmsg_thumb').attr('src',$('#'+val).find('.appmsg_thumb_wrp img').attr('src'));
                                 thisitem.find('.js_appmsg_thumb').show();
                                 thisitem.find('.default').hide();
-                                thisitem.append("<input type=\"hidden\" name=\"data[WxDataTw][FTwj][]\" value=\"" + t_id +"\" />");
+                                thisitem.find("input:hidden").attr('value',t_id);
                                 //selehtm += $('#'+val).outerHTML() + "&nbsp;";
                             });
 
@@ -166,7 +191,7 @@ $(".twSelect").on("change", function(){
 var scntDiv = $('#js_appmsg_preview');
 var i = $('.js_appmsg_item').size() + 1;
 $("#js_add_appmsg").on("click", function() {
-    $('<div id="appmsgItem' + i +'" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item "><img class="js_appmsg_thumb appmsg_thumb" src=""><i class="appmsg_thumb default">缩略图</i><h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">标题</a></h4><div class="appmsg_edit_mask"><a class="icon18_common edit_gray js_edit" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">编辑</a><a class="icon18_common del_gray js_del" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">删除</a></div></div>').appendTo(scntDiv);
+    $('<div class="appmsg_item js_appmsg_item "><img class="js_appmsg_thumb appmsg_thumb" src=""><i class="appmsg_thumb default">缩略图</i><h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">标题</a></h4><div class="appmsg_edit_mask"><a class="icon18_common edit_gray js_edit" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">编辑</a><a class="icon18_common del_gray js_del" data-id="' + i +'" onclick="return false;" href="javascript:void(0);">删除</a></div><input type="hidden" name="data[WxDataTw][FTwj][]" value=""></div>').appendTo(scntDiv);
     i = i+1;
     return false;
 });
@@ -180,9 +205,9 @@ $(".media_preview_area").on("click",".js_del", function() {
         jsitem.remove();
     }
 });
-$('#WxDataTwFTitle').keyup(function() {
+$('#WxDataTwFTitle', '.singleitem').keyup(function() {
    $('.appmsg_title a').text($(this).val());
 });
-$('#WxDataTwFMemo').keyup(function() {
+$('#WxDataTwFMemo', '.singleitem').keyup(function() {
     $('.appmsg_desc').text($(this).val());
 });

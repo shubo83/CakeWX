@@ -23,7 +23,7 @@
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
 echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'class' => "form-horizontal")); 
 ?>
-<div class="cl">
+<div class="singleitem cl">
     <div class="prebox fl" style="width:330px;">
         <div class="media_preview_area" style="width:320px;display:block;margin:0 auto;">
             <div class="appmsg">
@@ -34,7 +34,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
                         <div class="appmsg_info"><em class="appmsg_date"></em></div>
 						<div class="appmsg_thumb_wrp">
                             <img class="js_appmsg_thumb appmsg_thumb"  <?php if(!$data['WxDataTw']['FUrl']) { ?> style="display:none;"<?php }?>src="<?php echo Router::url($data['WxDataTw']['FUrl'], TRUE); ?>">
-                            <i class="appmsg_thumb default">封面图片</i>
+                            <i class="appmsg_thumb default" <?php if($data['WxDataTw']['FUrl']) { ?> style="display:none;"<?php }?>>封面图片</i>
                         </div>
                         <p class="appmsg_desc"><?php echo $data['WxDataTw']['FMemo']; ?></p>
                     </div>
@@ -46,7 +46,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 		<?php
         echo $this->Main->formhr_input('WxDataTw.FTitle', array(
 				'div' => "form-group", 
-				'label' => array('text' => "活动名称：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "活动名称：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "text", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",
@@ -56,7 +56,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FStartdate', array(
 				'div' => "form-group", 
-				'label' => array('text' => "时间：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "时间：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "text", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",
@@ -67,7 +67,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FAddress', array(
 				'div' => "form-group", 
-				'label' => array('text' => "地点：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "地点：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "text", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",
@@ -77,7 +77,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FMaxPersonCount', array(
 				'div' => "form-group", 
-				'label' => array('text' => "人数：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "人数：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "text", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",
@@ -87,7 +87,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FPersonCount', array(
 				'div' => "form-group", 
-				'label' => array('text' => "费用：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "费用：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "text", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",
@@ -97,7 +97,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('FUrl', array(
         		'div' => "form-group",
-		        'label' => array('text' => "封面图片：", 'class' => "col-sm-3 control-label no-padding-right"),
+		        'label' => array('text' => "封面图片：", 'class' => "col-sm-2 control-label no-padding-right"),
 		        'type' => "text",
 		        'placeholder' => "",
 		        'class' => "col-xs-10 col-sm-8",
@@ -107,7 +107,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 		    ));
 		echo $this->Main->formhr_input('WxDataTw.FMemo', array(
 				'div' => "form-group", 
-				'label' => array('text' => "摘要：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "摘要：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "textarea", 
 				'placeholder' => "",
 		        'style' => "width:600px",
@@ -118,7 +118,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 			));
 		echo $this->Main->formhr_input('WxDataTw.FContent', array(
 				'div' => "form-group", 
-				'label' => array('text' => "详细内容：", 'class' => "col-sm-3 control-label no-padding-right"), 
+				'label' => array('text' => "详细内容：", 'class' => "col-sm-2 control-label no-padding-right"),
 				'type' => "textarea", 
 				'placeholder' => "", 
 				'class' => "col-xs-10 col-sm-5",

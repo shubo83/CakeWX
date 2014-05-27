@@ -256,7 +256,7 @@ ul li{list-style:none;}
 	font-weight: 400;
 	font-style: normal;
 	font-size: 16px;
-/*	padding-top: 6px;*/
+	padding-top: 6px;
 	line-height: 28px;
 	max-height: 56px;
 	overflow: hidden;
@@ -264,6 +264,10 @@ ul li{list-style:none;}
 	word-wrap: normal;
 	word-break: normal;
 	margin:0;
+}
+.multi .appmsg_title {
+    font-size: 14px;
+    padding-top: 0;
 }
 .appmsg_title a {
 	display: block;
@@ -443,7 +447,7 @@ ul li{list-style:none;}
 }
 #aj_box{
     position: relative;
-    padding: 28px 140px;
+    padding: 28px 100px;
     height: 340px;
     text-align: justify;
     overflow-y: scroll;

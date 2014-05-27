@@ -49,11 +49,10 @@ echo $this->Main->formhr_input('FTitle', array(
 		                <div class="cover_appmsg_item">
 		                    <h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank"><?php echo $twData[0]['FTitle'] ? $twData[0]['FTitle'] : '标题'; ?></a></h4>
 		                    <div class="appmsg_thumb_wrp">
-								<?php 
-									$appthumb = $twData[0]['FUrl'] ? 'appmsg_thumb' : '';
+								<?php
 									$stythumb = $twData[0]['FUrl'] ? 'style="display:inline"' : '';
 								?>
-		                        <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $twData[0]['FUrl']; ?>">
+		                        <img class="js_appmsg_thumb appmsg_thumb" <?php echo $stythumb; ?> src="<?php echo $twData[0]['FUrl']; ?>">
 		                        <i class="appmsg_thumb default">封面图片</i>
 		                    </div>
 		                    <div class="appmsg_edit_mask">
@@ -63,12 +62,11 @@ echo $this->Main->formhr_input('FTitle', array(
 		                </div>
 		            </div>
 					<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
-						<?php 
-							$appthumb = $twData[1]['FUrl'] ? 'appmsg_thumb' : ''; 
+						<?php
 							$stythumb = $twData[1]['FUrl'] ? 'style="display:inline"' : '';
 							$ithumb = $twData[1]['FUrl'] ? 'style="display:none"' : '';
 						?>
-		                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $twData[1]['FUrl']; ?>">
+		                <img class="js_appmsg_thumb appmsg_thumb" <?php echo $stythumb; ?> src="<?php echo $twData[1]['FUrl']; ?>">
 		                <i class="appmsg_thumb default" <?php echo $ithumb; ?>>缩略图</i>
 		                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $twData[1]['FTitle'] ? $twData[1]['FTitle'] : '标题'; ?></a></h4>
 		                <div class="appmsg_edit_mask">
@@ -84,8 +82,8 @@ echo $this->Main->formhr_input('FTitle', array(
 								$stythumb = $vals['FUrl'] ? 'style="display:inline"' : '';
 								$ithumb = $vals['FUrl'] ? 'style="display:none"' : '';
 							?>
-							<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
-				                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" <?php echo $stythumb; ?> src="<?php echo $vals['FUrl']; ?>">
+							<div class="appmsg_item js_appmsg_item">
+				                <img class="js_appmsg_thumb appmsg_thumb" <?php echo $stythumb; ?> src="<?php echo $vals['FUrl']; ?>">
 				                <i class="appmsg_thumb default" <?php echo $ithumb; ?>>缩略图</i>
 				                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $vals['FTitle']; ?></a></h4>
 				                <div class="appmsg_edit_mask">

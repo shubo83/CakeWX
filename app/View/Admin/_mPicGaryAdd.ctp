@@ -71,7 +71,7 @@ echo $this->Main->formhr_input('FTitle', array(
 					<?php foreach ($twData as $key => $vals): ?>
 						<?php if ($key != 0 && $key != 1): ?>
 							<?php $appthumb = $vals['FUrl'] ? '' : 'appmsg_thumb'; ?>
-							<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
+							<div class="appmsg_item js_appmsg_item">
 				                <img class="js_appmsg_thumb <?php echo $appthumb; ?>" src="<?php echo $vals['FUrl']; ?>">
 				                <i class="appmsg_thumb default">缩略图</i>
 				                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank"><?php echo $vals['FTitle']; ?></a></h4>
