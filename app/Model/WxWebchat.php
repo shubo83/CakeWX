@@ -315,7 +315,7 @@ class WxWebchat extends AppModel {
 						'图文集' => array(
 							'url' => "{$baseURL}mPicGary", 
 							'icon' => "icon-double-angle-right",
-							'FIsActive' => 1
+							'FIsActive' => 0
 						),
 						'幻灯片' => array(
 							'url' => "{$baseURL}mSlide", 
