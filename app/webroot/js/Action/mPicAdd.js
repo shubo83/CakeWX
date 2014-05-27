@@ -39,7 +39,7 @@ KindEditor.ready(function(K) {
 		}
 	});
 });
-/*
+
 $(document).ready(function() {
     $("#WxDataTwFPreTwj").hide();
     var type = $(".twSelect").val();
@@ -73,7 +73,7 @@ $(document).ready(function() {
         }
     });
 });
-*/
+
 // 图文预览
 $("#previewbox").on("click",function() {
     var prehtml,tempurl,tempsum,temph;
