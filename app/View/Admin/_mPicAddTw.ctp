@@ -50,7 +50,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-8",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'>*</span></span></div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
         echo $this->Main->formhr_input('FAuthor', array(
         'div' => "form-group",
@@ -60,7 +60,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-8",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
         echo $this->Main->formhr_input('FUrl', array(
         'div' => "form-group",
@@ -70,7 +70,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-8",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<button type='button' id='WX_icon' class='btn btn-xs btn-primary mar_5'><i class='icon-camera bigger-160'></i>上传</button>&nbsp;&nbsp;&nbsp;</div><div style='color:red;margin-top:5px;'>（大图片建议尺寸：720像素 * 400像素）</div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
         echo $this->Main->formhr_input('FMemo', array(
         'div' => "form-group",
@@ -81,7 +81,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-8",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
         echo $this->Main->formhr_input('FContent', array(
         'div' => "form-group",
@@ -91,7 +91,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-5",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
         echo $this->Main->formhr_input('FLink', array(
         'div' => "form-group",
@@ -101,7 +101,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
         'class' => "col-xs-10 col-sm-12",
         'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
         'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
         ));
     ?>
     </div>

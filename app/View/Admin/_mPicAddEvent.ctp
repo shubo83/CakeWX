@@ -52,7 +52,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'>*</span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FStartdate', array(
 				'div' => "form-group", 
@@ -63,7 +63,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'onfocus' => "WdatePicker({maxDate:'2020-10-01', dateFmt:'yyyy-MM-dd HH:mm:ss'})",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'>*&nbsp;&nbsp;<img onclick=\"WdatePicker({el:'WxDataTwEventFStartdate', maxDate:'2020-10-01', dateFmt:'yyyy-MM-dd HH:mm:ss'})\" src='".Router::url('/js/DatePicker/skin/datePicker.gif')."' width='16' height='22' align='absmiddle'></span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FAddress', array(
 				'div' => "form-group", 
@@ -73,7 +73,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'>*</span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FMaxPersonCount', array(
 				'div' => "form-group", 
@@ -83,7 +83,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 		echo $this->Main->formhr_input('WxDataTwEvent.FPersonCount', array(
 				'div' => "form-group", 
@@ -93,9 +93,9 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
-		echo $this->Main->formhr_input('FUrl', array(
+		echo $this->Main->formhr_input('WxDataTw.FUrl', array(
         		'div' => "form-group",
 		        'label' => array('text' => "封面图片：", 'class' => "col-sm-2 control-label no-padding-right"),
 		        'type' => "text",
@@ -103,7 +103,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 		        'class' => "col-xs-10 col-sm-8",
 		        'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		        'after' => "<button type='button' id='WX_icon' class='btn btn-xs btn-primary mar_5'><i class='icon-camera bigger-160'></i>上传</button>&nbsp;&nbsp;&nbsp;</div><div style='color:red;margin-top:5px;'>（大图片建议尺寸：720像素 * 400像素）</div></div>",
-		        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+		        'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 		    ));
 		echo $this->Main->formhr_input('WxDataTw.FMemo', array(
 				'div' => "form-group", 
@@ -114,7 +114,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 		echo $this->Main->formhr_input('WxDataTw.FContent', array(
 				'div' => "form-group", 
@@ -124,7 +124,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 				'class' => "col-xs-10 col-sm-5",
 				'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 				'after' => "<span class='help-inline col-xs-12 col-sm-2'><span class='middle maroon'></span></span></div></div>",
-				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
+				'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-2'))
 			));
 	    ?>
     </div>
