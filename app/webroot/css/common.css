@@ -70,7 +70,7 @@ ul li{list-style:none;}
 .ttp {
     margin:0 0 5px 0;
     padding-top: 10px;
-    border-top: 2px solid #DBDBDB;
+    border-top: 1px dotted #e2e2e2;
     background: transparent;
 }
 .ttp li {

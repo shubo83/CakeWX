@@ -105,7 +105,7 @@ $("#addTw").on("click", function() {
             $("#aj_box").html(JSON.parse(data));
             bootbox.dialog({
                 message: $("#ajcont").html(),
-                title: "添加图文",
+                title: "选择图文",
                 buttons: {
                     success: {
                         label: "确定",

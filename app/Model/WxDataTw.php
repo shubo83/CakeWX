@@ -186,10 +186,11 @@ class WxDataTw extends AppModel {
 	 **/
 	function getCategories($id, $baseurl) {
 		$newarr = array();
+		$conditions['FWebchat'] = $id;
 		foreach ($this->conType as $key => $vals) {
 			switch ($key)  {
 				case 'tw':
-					$conditions['FTwType']  = null;
+					$conditions['FTwType'] = null;
 					$conditions['FType']  = 0;
 					break;
 				case 'twj':

@@ -438,6 +438,54 @@ class AdminController extends AppController {
 	function _mPic($id, $query) {
 		$this->loadModel('WxDataTw');
 		$this->loadModel('WxDataTwEvent');
+		$twTpl = array(
+			'tw' => '<div class="media_preview_area" id="%s">
+                        <div class="appmsg editing">
+                            <div id="js_appmsg_preview" class="appmsg_content">
+                                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+                                    <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">%s</a></h4>
+                                    <div class="appmsg_info">
+                                        <em class="appmsg_date">%s</em>
+                                    </div>
+                                    <div class="appmsg_thumb_wrp">
+                                        <img class="js_appmsg_thumb appmsg_thumb" src="%s">
+                                    </div>
+                                    <p class="appmsg_desc">%s</p>
+                                </div>
+                            </div>
+                            <div class="com_mask"></div>
+                            <i class="icon_item_selected">修改</i>
+                       </div>
+                    </div>&nbsp;',
+			'twj_header' => '<div class="media_preview_area" style="display:block;">
+						<div class="appmsg multi editing">
+				       		<div id="js_appmsg_preview" class="appmsg_content">
+								<div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+									<div class="appmsg_info">
+			                    		<em class="appmsg_date"></em>
+			                		</div>
+			                		<div class="cover_appmsg_item">
+			                    		<h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank">%s</a></h4>
+			                    		<div class="appmsg_thumb_wrp">
+			                        		<img class="js_appmsg_thumb" src="%s">
+			                        		<i class="appmsg_thumb default">封面图片</i>
+			                    		</div>
+			                    		<div class="appmsg_edit_mask">
+			                        		<a onclick="return false;" class="icon18_common edit_gray js_edit" data-id="1" href="javascript:;">编辑</a>
+			                    		</div>
+			                		</div>
+							    </div>',
+			'twj_wrap' => '<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
+								<img class="js_appmsg_thumb" src="%s">
+			               		<i class="appmsg_thumb default">缩略图</i>
+			                	<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">%s</a></h4>
+			                	<div class="appmsg_edit_mask">
+			                    	<a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
+			                    	<a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
+			                	</div>
+			            	</div>',
+			'twj_footer' => '</div></div></div>'							
+		);
 		switch ($query['action']) {
 			case 'add':
 				if ($query['mod'] == 'tw') {
@@ -566,50 +614,41 @@ class AdminController extends AppController {
 				$query['id'] = $this->request->query['id'];
 				$data = $this->WxDataTw->getDataList($id, $query['id']);
 				$data['WxDataTw']['FUrl'] = $data['WxDataTw']['FUrl'] ? Router::url($data['WxDataTw']['FUrl']) : '';
-                $data['WxDataTw']['FCreatedate'] = explode("-", substr($data['WxDataTw']['FCreatedate'],0,strpos($data['WxDataTw']['FCreatedate'],' ')));
-				$html = '<div class="media_preview_area">
-				        	<div class="appmsg  editing">
-					    	    <div id="js_appmsg_preview" class="appmsg_content">
-					                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-					        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$data[WxDataTw][FTitle].'</a></h4>
-								        <div class="appmsg_info">
-								            <em class="appmsg_date">'.$data['WxDataTw']['FCreatedate'][1].'月'.$data['WxDataTw']['FCreatedate'][1].'日'.'</em>
-								        </div>
-						       		  	<div class="appmsg_thumb_wrp">
-								            <img class="js_appmsg_thumb appmsg_thumb" src="'.$data[WxDataTw][FUrl].'">
-								        </div>
-						        		<p class="appmsg_desc">'.$data[WxDataTw][FMemo].'</p>
-									</div>
-								</div>
-					       </div>
-						</div>';
+                $data['WxDataTw']['FCreatedate'] = date('n月d日', strtotime($vals['WxDataTw']['FCreatedate']));
+				if ($data['WxDataTw']['FType'] == 0) {
+					$html = sprintf($twTpl['tw'], $data['WxDataTw']['Id'], $data['WxDataTw']['FTitle'], $data['WxDataTw']['FCreatedate'], $data['WxDataTw']['FUrl'], $data['WxDataTw']['FMemo']);
+				} else {
+					$grayList = $this->WxDataTw->getGaryDataList($id, $data['WxDataTw']['Id']);
+					foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
+						if ($k == 0) {
+							$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $v['FUrl']);
+						} else {
+							$html .= sprintf($twTpl['twj_wrap'], $v['FUrl'], $v['FTitle']);
+						}
+						$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
+					}
+				}
 				exit(json_encode($html));
 				break;
 			case 'twj':
 				$data = $this->WxDataTw->getDataList($id);
-				// echo '<pre>';print_r($data);exit; niancode
                 if(count($data)){
                     foreach ($data['datalist'] as $vals) {
                         $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
-                        $vals['WxDataTw']['FCreatedate'] = explode("-", substr($vals['WxDataTw']['FCreatedate'],0,strpos($vals['WxDataTw']['FCreatedate'],' ')));
-                        $html .= '<div class="media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
-                                    <div class="appmsg editing">
-                                        <div id="js_appmsg_preview" class="appmsg_content">
-                                            <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-                                                <h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
-                                                <div class="appmsg_info">
-                                                    <em class="appmsg_date">'.$vals['WxDataTw']['FCreatedate'][1].'月'.$vals['WxDataTw']['FCreatedate'][1].'日'.'</em>
-                                                </div>
-                                                <div class="appmsg_thumb_wrp">
-                                                    <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-                                                </div>
-                                                <p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
-                                            </div>
-                                        </div>
-                                        <div class="com_mask"></div>
-                                        <i class="icon_item_selected">修改</i>
-                                   </div>
-                                </div>&nbsp;';
+                        $vals['WxDataTw']['FCreatedate'] = date('n月d日', strtotime($vals['WxDataTw']['FCreatedate']));
+                        if ($vals['WxDataTw']['FType'] == 0) {
+							$html .= sprintf($twTpl['tw'], $vals['WxDataTw']['Id'], $vals['WxDataTw']['FTitle'], $vals['WxDataTw']['FCreatedate'], $vals['WxDataTw']['FUrl'], $vals['WxDataTw']['FMemo']);
+						} else {
+							$grayList = $this->WxDataTw->getGaryDataList($id, $vals['WxDataTw']['Id']);
+							foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
+								if ($k == 0) {
+									$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $v['FUrl']);
+								} else {
+									$html .= sprintf($twTpl['twj_wrap'], $v['FUrl'], $v['FTitle']);
+								}
+								$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
+							}
+						}
                     }
                     // 单图文
                     if ($query['mod'] == 'simple') {

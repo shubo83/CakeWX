@@ -131,7 +131,7 @@ echo $this->Form->create(false, array('name' => "form1", 'role' => "form", 'clas
 </div>
 	
 <div class="clearfix form-actions">
-	<div class="col-xs-12 col-sm-9 no-padding-left" style="margin-left:507px">
+	<div class="col-xs-12 col-sm-9 no-padding-left" style="margin-left:451px">
 		
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>

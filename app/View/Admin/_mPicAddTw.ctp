@@ -107,7 +107,7 @@ $this->Form->inputDefaults(array('label' => true, 'div' => true));
     </div>
 </div>
 <div class="clearfix form-actions">
-	<div class="col-xs-12 col-sm-9 col-sm-offset-3 no-padding-left" style="margin-left:507px">
+	<div class="col-xs-12 col-sm-9 col-sm-offset-3 no-padding-left" style="margin-left:451px">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交
