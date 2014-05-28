@@ -48,14 +48,15 @@ $(".twPreview").on("click",function(){
             data: pdata,
             success: function(data, status){
                 $("#aj_box").html(JSON.parse(data));
+                $("#aj_box").find(".com_mask, .icon_item_selected").remove();
                 bootbox.dialog({
                     message: $("#ajcont").html(),
                     title: "图文预览",
                     buttons: {
                         success: {
-                              label: "确定",
-                              className: "btn-primary",
-                            },
+                            label: "确定",
+                            className: "btn-primary"
+                        }
                     }
                 });
                 // bootbox.alert($("#ajcont").html());
