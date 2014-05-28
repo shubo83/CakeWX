@@ -83,6 +83,7 @@
 				</div>
 			</div><!-- /.page-content -->
 			<?php echo $this->element('Admin/settings'); ?>
+            <div class="mtm copyright text-center">©2014 <a href="http://zaiwx.com/" target="_blank">CakeWX</a></div>
 		</div>
 	</div><!-- /.main-container-inner -->
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">

@@ -43,6 +43,10 @@ var UPLOAD_URL = '<?= Router::url("/lib/picUpload") ?>';
 var ADMIN_URL = '<?= Router::url("/admin/", TRUE) ?>';
 var ADMIN_WC_URL = '<?= Router::url($WC_BASE) ?>';
 </script>
+<style>
+.copyright{text-align: center;margin:10px 0;font-size:10px;}
+.copyright a{text-decoration: none;color:#393939;}
+</style>
 </head>
 	<body id="activity-detail">
 		<?php
