@@ -468,10 +468,6 @@ class AdminController extends AppController {
 			                    		<h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank">%s</a></h4>
 			                    		<div class="appmsg_thumb_wrp">
 			                        		<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
-			                        		<i class="appmsg_thumb default">封面图片</i>
-			                    		</div>
-			                    		<div class="appmsg_edit_mask">
-			                        		<a onclick="return false;" class="icon18_common edit_gray js_edit" data-id="1" href="javascript:;">编辑</a>
 			                    		</div>
 			                		</div>
 							    </div>',
@@ -479,12 +475,8 @@ class AdminController extends AppController {
 								<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
 			               		<i class="appmsg_thumb default" %s>缩略图</i>
 			                	<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">%s</a></h4>
-			                	<div class="appmsg_edit_mask">
-			                    	<a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
-			                    	<a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
-			                	</div>
 			            	</div>',
-			'twj_footer' => '</div></div></div>'							
+			'twj_footer' => '</div><div class="com_mask"></div><i class="icon_item_selected">修改</i></div></div>'
 		);
 		switch ($query['action']) {
 			case 'add':
