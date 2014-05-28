@@ -458,7 +458,7 @@ class AdminController extends AppController {
                             <i class="icon_item_selected">修改</i>
                        </div>
                     </div>&nbsp;',
-			'twj_header' => '<div class="media_preview_area" style="display:block;">
+			'twj_header' => '<div class="media_preview_area" id="%s">
 						<div class="appmsg multi editing">
 				       		<div id="js_appmsg_preview" class="appmsg_content">
 								<div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
@@ -469,10 +469,6 @@ class AdminController extends AppController {
 			                    		<h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank">%s</a></h4>
 			                    		<div class="appmsg_thumb_wrp">
 			                        		<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
-			                        		<i class="appmsg_thumb default">封面图片</i>
-			                    		</div>
-			                    		<div class="appmsg_edit_mask">
-			                        		<a onclick="return false;" class="icon18_common edit_gray js_edit" data-id="1" href="javascript:;">编辑</a>
 			                    		</div>
 			                		</div>
 							    </div>',
@@ -480,12 +476,8 @@ class AdminController extends AppController {
 								<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
 			               		<i class="appmsg_thumb default" %s>缩略图</i>
 			                	<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">%s</a></h4>
-			                	<div class="appmsg_edit_mask">
-			                    	<a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
-			                    	<a class="icon18_common del_gray js_del" data-id="2" onclick="return false;" href="javascript:void(0);">删除</a>
-			                	</div>
 			            	</div>',
-			'twj_footer' => '</div></div></div>'							
+			'twj_footer' => '</div><div class="com_mask"></div><i class="icon_item_selected">修改</i></div></div>&nbsp;'
 		);
 		switch ($query['action']) {
 			case 'add':
@@ -623,7 +615,7 @@ class AdminController extends AppController {
 					foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
 						if ($k == 0) {
 							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
-							$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $stythumb, $v['FUrl']);
+							$html .= sprintf($twTpl['twj_header'], $v['Id'], $v['FTitle'], $stythumb, $v['FUrl']);
 						} else {
 							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
 							$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
@@ -651,7 +643,7 @@ class AdminController extends AppController {
 							foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
 								if ($k == 0) {
 									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
-									$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $stythumb, $v['FUrl']);
+									$html .= sprintf($twTpl['twj_header'], $v['Id'], $v['FTitle'], $stythumb, $v['FUrl']);
 								} else {
 									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
 									$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
@@ -691,46 +683,6 @@ class AdminController extends AppController {
                             Atempids = [$(this).attr("id")];
                         });
                     </script>';
-                    } else {
-                        $html .= '<script>
-	                            $.fn.clicktoggle = function(a, b) {
-	                                return this.each(function() {
-	                                    var clicked = false;
-	                                    $(this).bind("click", function() {
-	                                        if (clicked) {
-	                                            clicked = false;
-	                                            return b.apply(this, arguments);
-	                                        }
-	                                        clicked = true;
-	                                        return a.apply(this, arguments);
-	                                    });
-	                                });
-	                            };
-	                            Atempids = [];
-	                            function odd() {
-	                                $(this).removeClass("selected");
-	                                var hva = $(this).attr("id");
-	                                var index = Atempids.indexOf(hva);
-	                                if (index === -1) {
-	                                    Atempids.push(hva);
-	                                } else {
-	                                    Atempids.splice(index, 1);
-	                                }
-	                            }
-
-	                            function even() {
-	                                $(this).addClass("selected");
-	                                var hva = $(this).attr("id");
-	                                var index = Atempids.indexOf(hva);
-	                                if (index === -1) {
-	                                    Atempids.push(hva);
-	                                } else {
-	                                    Atempids.splice(index, 1);
-	                                }
-	                            }
-
-	                           $("#aj_box .media_preview_area").clicktoggle(even, odd);
-	                           </script>';
                     }
                 } else {
                     $html = '<p style="text-align: center;margin-top: 80px;">亲,您的图文太少了，<a href="'.Router::url($data['WxDataTw']['FUrl']).'">马上去添加</a> 吧！</p>';
