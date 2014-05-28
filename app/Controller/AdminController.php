@@ -654,8 +654,7 @@ class AdminController extends AppController {
 						}
                     }
                     // 单图文
-                    if ($query['mod'] == 'simple') {			// 图文单选 or 多选
-                        $html .= '<script>
+                    $html .= '<script>
                         $.fn.clicktoggle = function(a, b) {
                             return this.each(function() {
                                 var clicked = false;
@@ -683,7 +682,6 @@ class AdminController extends AppController {
                             Atempids = [$(this).attr("id")];
                         });
                     </script>';
-                    }
                 } else {
                     $html = '<p style="text-align: center;margin-top: 80px;">亲,您的图文太少了，<a href="'.Router::url($data['WxDataTw']['FUrl']).'">马上去添加</a> 吧！</p>';
                 }
