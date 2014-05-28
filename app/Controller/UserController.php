@@ -87,6 +87,16 @@ class UserController extends AppController {
 		$this->redirect("/");
 	}
 
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author niancode
+	 **/
+	function version()
+	{
+		echo $this->version.'<br />'.$this->verdate;exit;
+	}
 
 	
 }

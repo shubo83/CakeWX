@@ -90,6 +90,6 @@
 		<i class="icon-double-angle-up icon-only bigger-110"></i>
 	</a>
 </div>
-<div class="mtm copyright text-center">©2014 <a href="http://cakewx.com/" target="_blank">CakeWX</a></div>
+<div class="mtm copyright text-center">©2014 <a href="http://cakewx.com/" target="_blank">CakeWX</a>&nbsp;<?php echo $version; ?></div>
 <!-- /.main-container
 </div><!-- /.main-container -->
