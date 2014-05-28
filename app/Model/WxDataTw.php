@@ -255,7 +255,7 @@ class WxDataTw extends AppModel {
 									'Url' => $value['FPreview']
 								);
 			}
-			$returnArr['count'] += intval(count($twjData));
+			$returnArr['count'] += intval(count($twjData['WxDataTw']['FTwj']));
 		}
 		
 		// Msg Output
