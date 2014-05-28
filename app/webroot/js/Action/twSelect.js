@@ -124,7 +124,7 @@ $("#addTw").on("click", function() {
                             $(".u-chooses").empty();
                             $(".u-chooses").prepend(selehtm);
                             $(".u-chooses").find(".com_mask, .icon_item_selected").remove();
-                            $("#addTw").text("重置图文");
+                            $("#addTw").text("更换图文");
                             $("#FPreTwj").attr("value", tmpid);
                         }
                     },
