@@ -146,7 +146,7 @@ class WxDataTw extends AppModel {
 			if (is_array($data)) {
 				$data['WxDataTw']['FTwj'] = unserialize($data['WxDataTw']['FTwj']);
 				$data['WxDataTw']['FPreTwj'] = implode(',', $data['WxDataTw']['FTwj']);
-				$data['WxDataTw']['FPreview'] = ($data['WxDataTw']['FType'] == 0 && $data['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$data['WxDataTw']['Id']}") : Router::url("/mob/tw/{$data['WxDataTw']['Id']}");
+				$data['WxDataTw']['FPreview'] = ($data['WxDataTw']['FType'] == 0 && $data['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$data['WxDataTw']['Id']}", TRUE) : Router::url("/mob/tw/{$data['WxDataTw']['Id']}", TRUE);
 			}
 		} else {
 			$conditions['FWebchat'] = $id;
@@ -175,7 +175,7 @@ class WxDataTw extends AppModel {
 		foreach ($data['WxDataTw']['FTwj'] as $key => &$vals) {
 			$findData = $this->findById($vals);
 			$findData['WxDataTw']['FUrl'] = Router::url($findData['WxDataTw']['FUrl'], TRUE);
-			$findData['WxDataTw']['FPreview'] = ($findData['WxDataTw']['FType'] == 0 && $findData['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$findData['WxDataTw']['Id']}") : Router::url("/mob/tw/{$findData['WxDataTw']['Id']}");
+			$findData['WxDataTw']['FPreview'] = ($findData['WxDataTw']['FType'] == 0 && $findData['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$findData['WxDataTw']['Id']}", TRUE) : Router::url("/mob/tw/{$findData['WxDataTw']['Id']}", TRUE);
 			$vals = $findData['WxDataTw'];
 		}
 		return $data;
@@ -232,7 +232,7 @@ class WxDataTw extends AppModel {
 	function getMsg($twId, $type = 'arr')
 	{
 		$twId = is_array($twId) ? reset($twId) : $twId;
-		$data = $this->find('first', array('conditions' => array('Id' => $twId), 'recursive' => 0));
+		$data = $this->getDataList(null, $twId);
 		$WX_twj = isset($data['WxDataTw']['FTwj']) ? unserialize($data['WxDataTw']['FTwj']) : FALSE;
 		$WX_type = isset($data['WxDataTw']['FType']) ? $data['WxDataTw']['FType'] : 0;
 		$returnArr['count'] = 0;
@@ -242,17 +242,17 @@ class WxDataTw extends AppModel {
 										'Title' => $data['WxDataTw']['FTitle'],
 										'Description' => $data['WxDataTw']['FMemo'],
 										'PicUrl' => Router::url($data['WxDataTw']['FUrl'], TRUE),
-										'Url' => $data['WxDataTw']['FLink'] ? $data['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
+										'Url' => $data['WxDataTw']['FPreview']
 									);
 		} else {
-			$twjData = $this->find('all', array('conditions' => array('Id' => $WX_twj), 'recursive' => 0));
+			$twjData = $this->getGaryDataList(null, $twId);
 			$itemsArr = array();
-			foreach ($twjData as $key => $value) {
+			foreach ($twjData['WxDataTw']['FTwj'] as $key => $value) {
 				$returnArr['items'][] = array(
-									'Title' => $value['WxDataTw']['FTitle'],
-									'Description' => $value['WxDataTw']['FMemo'],
-									'PicUrl' => Router::url($value['WxDataTw']['FUrl'], TRUE),
-									'Url' => $value['WxDataTw']['FLink'] ? $value['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
+									'Title' => $value['FTitle'],
+									'Description' => $value['FMemo'],
+									'PicUrl' => Router::url($value['FUrl'], TRUE),
+									'Url' => $value['FPreview']
 								);
 			}
 			$returnArr['count'] += intval(count($twjData));
