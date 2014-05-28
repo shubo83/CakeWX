@@ -74,10 +74,10 @@
 										<button class="btn btn-xs btn-danger bootbox-confirm" alt="<?php echo "{$WC_URL}?_a=del&_id={$vals['WxDataTw']['Id']}" ?>">
 											<i class="icon-trash bigger-120" title="删除"></i>
 										</button>
-										<?php $previewJS = ($vals['WxDataTw']['FType'] == 0 && $vals['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$vals['WxDataTw']['Id']}") : 'javascript::'; ?>
-										<a class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>" href="<?php echo $previewJS; ?>" target="_blank">
+										<?php $previewJS = ($vals['WxDataTw']['FType'] == 0 && $vals['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$vals['WxDataTw']['Id']}") : Router::url("/mob/tw/{$vals['WxDataTw']['Id']}"); ?>
+										<button class="btn btn-xs btn-warning twPreview" id="<?php echo $vals['WxDataTw']['Id'] ?>" data-url="<?php echo $previewJS; ?>">
 											<i class="icon-search bigger-120" title="预览"></i>
-										</a>
+										</button>
 									</div>
 								</td>
 							</tr>

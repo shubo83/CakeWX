@@ -188,7 +188,8 @@ ul li{list-style:none;}
     -moz-opacity: .6;
     -khtml-opacity: .6;
     opacity: .6;
-    z-index: 1
+    z-index: 1;
+    cursor: pointer;
 }
 
 .media_preview_area.selected .icon_item_selected {
@@ -399,7 +400,7 @@ ul li{list-style:none;}
     margin-left: 8px;
     margin-right: 8px;
 }
-.copyright{font-size: 10px;}
+.copyright{}
 .copyright a{text-decoration: none;color:#393939;}
 .icon18_common {
     width: 18px;
