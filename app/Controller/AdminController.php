@@ -56,6 +56,7 @@ class AdminController extends AppController {
 	 * @return void
 	 * @author apple
 	 **/
+
 	function wc($id) {
 		$this->wxId = $id;
 		$this->vmenu = $this->WxWebchat->getmenus('vmenu', $this->wxId);
@@ -626,7 +627,11 @@ class AdminController extends AppController {
 				exit(json_encode($html));
 				break;
 			case 'twj':
-				$data = $this->WxDataTw->getDataList($id);
+				if ($query['value'] == 'tw') {
+					$data = $this->WxDataTw->getDataList($id, null, null, array('FType' => 0));
+				} else {
+					$data = $this->WxDataTw->getDataList($id);
+				}
                 if(count($data)){
                     foreach ($data['datalist'] as $vals) {
                         $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
@@ -649,7 +654,7 @@ class AdminController extends AppController {
 						}
                     }
                     // 单图文
-                    if ($query['mod'] == 'simple') {
+                    if ($query['mod'] == 'simple') {			// 图文单选 or 多选
                         $html .= '<script>
                         $.fn.clicktoggle = function(a, b) {
                             return this.each(function() {

@@ -115,7 +115,7 @@ class WxDataTw extends AppModel {
 	 * @return void
 	 * @author apple
 	 **/
-	function getDataList($id = NULL, $cid = NULL, $ids = NULL) {	
+	function getDataList($id = NULL, $cid = NULL, $ids = NULL, $conditions = NULL) {	
 		if ($cid != NULL) {
 			$conditions = $id == NULL ? array('WxDataTw.Id' => $cid) : array('WxDataTw.Id' => $cid, 'WxDataTw.FWebchat' => $id);
 			$attr = array(
@@ -148,7 +148,7 @@ class WxDataTw extends AppModel {
 				$data['WxDataTw']['FPreTwj'] = implode(',', $data['WxDataTw']['FTwj']);
 			}
 		} else {
-			$conditions = array('FWebchat' => $id);
+			$conditions['FWebchat'] = $id;
 			if ($ids) $conditions['Id'] = $ids;
 			$data['datalist'] = $this->find('all', array('conditions' => $conditions, 'order' => "FCreatedate desc", 'recursive' => 0));
 			$data['count'] = $this->find('count', array('conditions' => $conditions, 'recursive' => 0));
@@ -232,18 +232,12 @@ class WxDataTw extends AppModel {
 		$data = $this->find('first', array('conditions' => array('Id' => $twId), 'recursive' => 0));
 		$WX_twj = isset($data['WxDataTw']['FTwj']) ? unserialize($data['WxDataTw']['FTwj']) : FALSE;
 		$WX_type = isset($data['WxDataTw']['FType']) ? $data['WxDataTw']['FType'] : 0;
-		$returnArr['count'] = 1;
-		$returnArr['items'][0] = array(
-									'Title' => $data['WxDataTw']['FTitle'],
-									'Description' => $data['WxDataTw']['FMemo'],
-									'PicUrl' => Router::url($data['WxDataTw']['FUrl'], TRUE),
-									'Url' => $data['WxDataTw']['FLink'] ? $data['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
-								);
+		$returnArr['count'] = 0;
 		if ($WX_type == 1) {
 			$twjData = $this->find('all', array('conditions' => array('Id' => $WX_twj), 'recursive' => 0));
 			$itemsArr = array();
 			foreach ($twjData as $key => $value) {
-				$returnArr['items'][$key+1] = array(
+				$returnArr['items'][] = array(
 									'Title' => $value['WxDataTw']['FTitle'],
 									'Description' => $value['WxDataTw']['FMemo'],
 									'PicUrl' => Router::url($value['WxDataTw']['FUrl'], TRUE),

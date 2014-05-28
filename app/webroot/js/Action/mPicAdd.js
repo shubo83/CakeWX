@@ -132,7 +132,7 @@ $("#previewbox").on("click",function() {
 function prebootbox(event) {
     var hids = $(".media_preview_area").length;
     var data = [], thisitem = $(this).parent().parent();
-    var tmpurl = ADMIN_WC_URL + "mPic?_a=twj&_m=simple";
+    var tmpurl = ADMIN_WC_URL + "mPic?_a=twj&_val=tw";
     if(hids){
         $(".media_preview_area").each(function(index) {
             data[index] = $(this).attr("id");
