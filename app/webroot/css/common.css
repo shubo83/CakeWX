@@ -400,8 +400,8 @@ ul li{list-style:none;}
     margin-left: 8px;
     margin-right: 8px;
 }
-.copyright{ font-size: 12px;position: absolute;bottom:3px;padding-left:10px;width:100%;}
-.copyright a{color:#393939;text-decoration: none;}
+.copyright{ font-size: 12px;position: absolute;bottom:3px;width:100%;}
+.copyright_normal{ font-size: 12px;bottom:3px;width:100%;}
 .icon18_common {
     width: 18px;
     height: 18px;
