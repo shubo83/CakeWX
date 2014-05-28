@@ -233,7 +233,15 @@ class WxDataTw extends AppModel {
 		$WX_twj = isset($data['WxDataTw']['FTwj']) ? unserialize($data['WxDataTw']['FTwj']) : FALSE;
 		$WX_type = isset($data['WxDataTw']['FType']) ? $data['WxDataTw']['FType'] : 0;
 		$returnArr['count'] = 0;
-		if ($WX_type == 1) {
+		if ($WX_type == 0) {
+			$returnArr['count'] = 1;
+			$returnArr['items'][0] = array(
+										'Title' => $data['WxDataTw']['FTitle'],
+										'Description' => $data['WxDataTw']['FMemo'],
+										'PicUrl' => Router::url($data['WxDataTw']['FUrl'], TRUE),
+										'Url' => $data['WxDataTw']['FLink'] ? $data['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
+									);
+		} else {
 			$twjData = $this->find('all', array('conditions' => array('Id' => $WX_twj), 'recursive' => 0));
 			$itemsArr = array();
 			foreach ($twjData as $key => $value) {
