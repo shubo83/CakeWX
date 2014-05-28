@@ -232,7 +232,7 @@ class WxDataTw extends AppModel {
 	function getMsg($twId, $type = 'arr')
 	{
 		$twId = is_array($twId) ? reset($twId) : $twId;
-		$data = $this->find('first', array('conditions' => array('Id' => $twId), 'recursive' => 0));
+		$data = $this->getDataList(null, $twId);
 		$WX_twj = isset($data['WxDataTw']['FTwj']) ? unserialize($data['WxDataTw']['FTwj']) : FALSE;
 		$WX_type = isset($data['WxDataTw']['FType']) ? $data['WxDataTw']['FType'] : 0;
 		$returnArr['count'] = 0;
@@ -245,14 +245,14 @@ class WxDataTw extends AppModel {
 										'Url' => $data['WxDataTw']['FPreview']
 									);
 		} else {
-			$twjData = $this->find('all', array('conditions' => array('Id' => $WX_twj), 'recursive' => 0));
+			$twjData = $this->getGaryDataList(null, $WX_twj);
 			$itemsArr = array();
 			foreach ($twjData as $key => $value) {
 				$returnArr['items'][] = array(
-									'Title' => $value['WxDataTw']['FTitle'],
-									'Description' => $value['WxDataTw']['FMemo'],
-									'PicUrl' => Router::url($value['WxDataTw']['FUrl'], TRUE),
-									'Url' => $value['WxDataTw']['FPreview']
+									'Title' => $value['FTitle'],
+									'Description' => $value['FMemo'],
+									'PicUrl' => Router::url($value['FUrl'], TRUE),
+									'Url' => $value['FPreview']
 								);
 			}
 			$returnArr['count'] += intval(count($twjData));
