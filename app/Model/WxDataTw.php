@@ -242,7 +242,7 @@ class WxDataTw extends AppModel {
 										'Title' => $data['WxDataTw']['FTitle'],
 										'Description' => $data['WxDataTw']['FMemo'],
 										'PicUrl' => Router::url($data['WxDataTw']['FUrl'], TRUE),
-										'Url' => $data['WxDataTw']['FLink'] ? $data['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
+										'Url' => $data['WxDataTw']['FPreview']
 									);
 		} else {
 			$twjData = $this->find('all', array('conditions' => array('Id' => $WX_twj), 'recursive' => 0));
@@ -252,7 +252,7 @@ class WxDataTw extends AppModel {
 									'Title' => $value['WxDataTw']['FTitle'],
 									'Description' => $value['WxDataTw']['FMemo'],
 									'PicUrl' => Router::url($value['WxDataTw']['FUrl'], TRUE),
-									'Url' => $value['WxDataTw']['FLink'] ? $value['WxDataTw']['FLink'] : $this->_getFTwjLink($data['WxDataTw']['Id'])
+									'Url' => $value['WxDataTw']['FPreview']
 								);
 			}
 			$returnArr['count'] += intval(count($twjData));
