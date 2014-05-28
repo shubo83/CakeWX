@@ -146,6 +146,7 @@ class WxDataTw extends AppModel {
 			if (is_array($data)) {
 				$data['WxDataTw']['FTwj'] = unserialize($data['WxDataTw']['FTwj']);
 				$data['WxDataTw']['FPreTwj'] = implode(',', $data['WxDataTw']['FTwj']);
+				$data['WxDataTw']['FPreview'] = ($data['WxDataTw']['FType'] == 0 && $data['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$data['WxDataTw']['Id']}") : Router::url("/mob/tw/{$data['WxDataTw']['Id']}");
 			}
 		} else {
 			$conditions['FWebchat'] = $id;
@@ -155,6 +156,7 @@ class WxDataTw extends AppModel {
 			foreach ($data['datalist'] as $key => &$vals) {	
 				$vals['WxDataTw']['C_FType'] = $this->conType[$vals['WxDataTw']['FTwType']] ? $this->conType[$vals['WxDataTw']['FTwType']] : reset($this->conType);
 				$vals['WxDataTw']['FTwj'] = unserialize($vals['WxDataTw']['FTwj']);
+				$vals['WxDataTw']['FPreview'] = ($vals['WxDataTw']['FType'] == 0 && $vals['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$vals['WxDataTw']['Id']}", TRUE) : Router::url("/mob/tw/{$vals['WxDataTw']['Id']}", TRUE);
 			}
 			// echo $this->getLastQuery();
 			// echo '<pre>';print_r($data);exit;
@@ -173,6 +175,7 @@ class WxDataTw extends AppModel {
 		foreach ($data['WxDataTw']['FTwj'] as $key => &$vals) {
 			$findData = $this->findById($vals);
 			$findData['WxDataTw']['FUrl'] = Router::url($findData['WxDataTw']['FUrl'], TRUE);
+			$findData['WxDataTw']['FPreview'] = ($findData['WxDataTw']['FType'] == 0 && $findData['WxDataTw']['FTwType'] != null) ? Router::url("/mob/tw/events/{$findData['WxDataTw']['Id']}") : Router::url("/mob/tw/{$findData['WxDataTw']['Id']}");
 			$vals = $findData['WxDataTw'];
 		}
 		return $data;

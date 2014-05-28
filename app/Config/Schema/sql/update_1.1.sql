@@ -1,3 +1,5 @@
+alter table cx_webchat modify FStatus tinyint(1) null;
+alter table cx_webchat modify FIcon varchar(500) null;
 alter table cx_wcdata_tw add column FTwType varchar(100) null;
 CREATE TABLE `cx_wcdata_tw_events` (
   `Id` varchar(38) NOT NULL,
