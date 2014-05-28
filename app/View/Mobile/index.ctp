@@ -13,4 +13,5 @@
     <div id="img-content">
         <div class="text"><?php echo $post['content'] ?></div>
     </div>
+    <div class="mtm copyright text-center">©2014 <a href="http://zaiwx.com/" target="_blank">CakeWX</a></div>
 </div>
