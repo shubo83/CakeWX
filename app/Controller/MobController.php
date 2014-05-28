@@ -48,15 +48,20 @@ class MobController extends AppController {
 	}
     function tw_events($id)
     {
-        $this->loadModel("WxDataTwtEvents");
+        $this->loadModel("WxDataTw");
         $result = $this->WxDataTw->getDataList(NULL, $id);
         $data['title'] = $result['WxDataTw']['FTitle'];
+        $data['cover'] = $result['WxDataTw']['FUrl'];
         $data['author'] = $result['WxDataTw']['FAuthor'];
         $data['content'] = $result['WxDataTw']['FContent'];
         $data['memeo'] = $result['WxDataTw']['FMemo'];
-        $data['dateline'] = substr($result['WxDataTw']['FCreatedate'],0,strpos($result['WxDataTw']['FCreatedate'],' '));
+        $data['dateline'] = $result['WxDataTw']['FCreatedate'];
+        $data['start'] = $result['WxDataTwEvent']['FStartdate'];
+        $data['maxpercount'] = $result['WxDataTwEvent']['FMaxPersonCount'];
+        $data['address'] = $result['WxDataTwEvent']['FAddress'];
+        $data['percount'] = $result['WxDataTwEvent']['FPersonCount'];
         $this->set('post', $data);
-        $this->render('/Mobile/index');
+        $this->render('/Mobile/events');
     }
 	
 }
