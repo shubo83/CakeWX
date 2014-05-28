@@ -467,7 +467,7 @@ class AdminController extends AppController {
 			                		<div class="cover_appmsg_item">
 			                    		<h4 class="appmsg_title"><a href="javascript:void(0);" onclick="return false;" target="_blank">%s</a></h4>
 			                    		<div class="appmsg_thumb_wrp">
-			                        		<img class="js_appmsg_thumb" src="%s">
+			                        		<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
 			                        		<i class="appmsg_thumb default">封面图片</i>
 			                    		</div>
 			                    		<div class="appmsg_edit_mask">
@@ -476,8 +476,8 @@ class AdminController extends AppController {
 			                		</div>
 							    </div>',
 			'twj_wrap' => '<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
-								<img class="js_appmsg_thumb" src="%s">
-			               		<i class="appmsg_thumb default">缩略图</i>
+								<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
+			               		<i class="appmsg_thumb default" %s>缩略图</i>
 			                	<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">%s</a></h4>
 			                	<div class="appmsg_edit_mask">
 			                    	<a class="icon18_common edit_gray js_edit" data-id="2" onclick="return false;" href="javascript:void(0);">编辑</a>
@@ -621,9 +621,12 @@ class AdminController extends AppController {
 					$grayList = $this->WxDataTw->getGaryDataList($id, $data['WxDataTw']['Id']);
 					foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
 						if ($k == 0) {
-							$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $v['FUrl']);
+							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+							$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $stythumb, $v['FUrl']);
 						} else {
-							$html .= sprintf($twTpl['twj_wrap'], $v['FUrl'], $v['FTitle']);
+							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+							$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
+							$html .= sprintf($twTpl['twj_wrap'], $stythumb, $v['FUrl'], $ithumb, $v['FTitle']);
 						}
 						$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
 					}
@@ -642,9 +645,12 @@ class AdminController extends AppController {
 							$grayList = $this->WxDataTw->getGaryDataList($id, $vals['WxDataTw']['Id']);
 							foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
 								if ($k == 0) {
-									$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $v['FUrl']);
+									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+									$html .= sprintf($twTpl['twj_header'], $v['FTitle'], $stythumb, $v['FUrl']);
 								} else {
-									$html .= sprintf($twTpl['twj_wrap'], $v['FUrl'], $v['FTitle']);
+									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+									$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
+									$html .= sprintf($twTpl['twj_wrap'], $stythumb, $v['FUrl'], $ithumb, $v['FTitle']);
 								}
 								$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
 							}
