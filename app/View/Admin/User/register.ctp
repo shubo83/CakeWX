@@ -91,17 +91,19 @@ echo $this->Main->formhr_input('FCity', array(
 	));
 ?>
 	<div class="clearfix form-actions">
-		<div class="col-md-offset-3 col-md-9">
-			<a href="<?php echo Router::url('/'); ?>" class="btn btn-grey">
-				<i class="icon-arrow-left"></i>
-				返回
-			</a>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="btn btn-info" type="submit">
-				<i class="icon-ok bigger-110"></i>
-				注册账号
-			</button>
+		<div class="col-sm-3 no-padding-right">
+			<button class="btn btn-grey" type="button" onclick="location.href='<?php echo Router::url('/'); ?>'">
+                <i class="icon-arrow-left bigger-110"></i>
+                返回
+            </button>
 		</div>
+		<div class="col-xs-12 col-sm-9">
+            <button class="btn btn-info" type="submit">
+                <i class="icon-ok bigger-110"></i>
+                注册账号
+            </button>
+		</div>
+	
 	</div>
 	<?php echo $this->Form->end(); ?>
 </div>

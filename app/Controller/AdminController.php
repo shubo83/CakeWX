@@ -56,6 +56,7 @@ class AdminController extends AppController {
 	 * @return void
 	 * @author apple
 	 **/
+
 	function wc($id) {
 		$this->wxId = $id;
 		$this->vmenu = $this->WxWebchat->getmenus('vmenu', $this->wxId);
@@ -228,7 +229,9 @@ class AdminController extends AppController {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
 					//print_r($this->request->data);exit;
-					$this->request->data['WxWcdata']['FFollowId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    if (isset($this->request->data['WxWcdata']['FTwj'][0])) {
+                        $this->request->data['WxWcdata']['FFollowId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    }
 					$this->WxWcdata->set($this->request->data);
 					if ($this->WxWcdata->validates(array('fieldList' => array('FFollowType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
@@ -260,7 +263,9 @@ class AdminController extends AppController {
 		switch ($query['action']) {
 			default:
 				if ($this->request->is('post') || $this->request->is('put')) {
-					$this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    if (isset($this->request->data['WxWcdata']['FTwj'][0])) {
+                        $this->request->data['WxWcdata']['FDefaultId'] = $this->request->data['WxWcdata']['FTwj'][0];
+                    }
 					$this->WxWcdata->set($this->request->data);
 					if ($this->WxWcdata->validates(array('fieldList' => array('FDefaultType')))) {
 						$query = $this->WxWcdata->saveData($this->request->data, $this->uid, $id);
@@ -433,48 +438,161 @@ class AdminController extends AppController {
 	 */
 	function _mPic($id, $query) {
 		$this->loadModel('WxDataTw');
+		$this->loadModel('WxDataTwEvent');
+		$twTpl = array(
+			'tw' => '<div class="media_preview_area" id="%s">
+                        <div class="appmsg editing">
+                            <div id="js_appmsg_preview" class="appmsg_content">
+                                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+                                    <h4 class="appmsg_title"><a href="%s" target="_blank">%s</a></h4>
+                                    <div class="appmsg_info">
+                                        <em class="appmsg_date">%s</em>
+                                    </div>
+                                    <div class="appmsg_thumb_wrp">
+                                        <img class="js_appmsg_thumb appmsg_thumb" src="%s">
+                                    </div>
+                                    <p class="appmsg_desc">%s</p>
+                                </div>
+                            </div>
+                            <div class="com_mask"></div>
+                            <i class="icon_item_selected">修改</i>
+                       </div>
+                    </div>&nbsp;',
+			'twj_header' => '<div class="media_preview_area" id="%s">
+						<div class="appmsg multi editing">
+				       		<div id="js_appmsg_preview" class="appmsg_content">
+								<div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+									<div class="appmsg_info">
+			                    		<em class="appmsg_date"></em>
+			                		</div>
+			                		<div class="cover_appmsg_item">
+			                    		<h4 class="appmsg_title"><a href="%s" target="_blank">%s</a></h4>
+			                    		<div class="appmsg_thumb_wrp">
+			                        		<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
+			                    		</div>
+			                		</div>
+							    </div>',
+			'twj_wrap' => '<div id="appmsgItem2" data-fileid="" data-id="2" class="appmsg_item js_appmsg_item">
+								<img class="js_appmsg_thumb appmsg_thumb" %s src="%s">
+			               		<i class="appmsg_thumb default" %s>缩略图</i>
+			                	<h4 class="appmsg_title"><a href="%s" target="_blank">%s</a></h4>
+			            	</div>',
+			'twj_footer' => '</div><div class="com_mask"></div><i class="icon_item_selected">修改</i></div></div>&nbsp;'
+		);
 		switch ($query['action']) {
 			case 'add':
-				if ($this->request->is('post')) {
-					$this->WxDataTw->set($this->request->data);
-					if ($this->WxDataTw->validates()) {
-						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
-						if ($query) {
-							$this->Session->setFlash('关键字添加成功。');
-							return $this->redirect($this->rdWcURL);
+				if ($query['mod'] == 'tw') {
+					if ($this->request->is('post')) {
+						$this->request->data['WxDataTw']['FType'] = 0;
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates()) {
+							$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+							if ($query) {
+								$this->Session->setFlash('图文添加成功。');
+								return $this->redirect($this->rdWcURL);
+							}
 						}
 					}
-				} else {
-					if (!$this->request->data) {
-						$this->request->data = array('WxWebchat' => array('FWxApi' => $this->wxAPI, 'FWxToken' => $this->wxToken));
+					$this->render('/Admin/_mPicAddTw');
+				} else if ($query['mod'] == 'twj') {
+					if ($this->request->is('post')) {
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+							$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+							if ($query) {
+								$this->Session->setFlash('图文添加成功。');
+								return $this->redirect($this->rdWcURL);
+							}
+						}
 					}
+					$this->render('/Admin/_mPicAddTwj');
+				} else if ($query['mod'] == 'event') {
+					if ($this->request->is('post')) {
+						$this->request->data['WxDataTw']['FType'] = 0;
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates()) {
+							$this->WxDataTwEvent->set($this->request->data);
+							if ($this->WxDataTwEvent->validates()) {
+								$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+								if ($query) {
+									$this->Session->setFlash('图文添加成功。');
+									return $this->redirect($this->rdWcURL);
+								}
+							}
+						}
+					}
+					$this->render('/Admin/_mPicAddEvent');
+				} else {
+					$this->set('data', $data);
+					$this->render('/Admin/_mPicAdd');
 				}
-				$this->set('data', $data);
-				$this->render('/Admin/_mPicAdd');
 				break;
 			case 'edit':
 				if (!$this->WxDataTw->checkId($id, $query['id'])) {
 					return $this->redirect($this->rdWcURL);
 				}
+				$data = $this->WxDataTw->getDataList($id, $query['id']);		//获取图文数据
+				$data = $data['WxDataTw']['FType'] == 1 ? $this->WxDataTw->getGaryDataList($id, $query['id']) : $data;
 				if ($this->request->is('post') || $this->request->is('put')) {
-					$this->WxDataTw->set($this->request->data);
-					if ($this->WxDataTw->validates()) {
-						$this->WxDataTw->id = $query['id'];
-						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
-						if ($query) {
-							$this->Session->setFlash('图文编辑成功。');
-							return $this->redirect($this->rdWcURL);
+					if ($this->request->data['WxDataTw']['FType'] == 0) {
+						switch ($this->request->data['WxDataTw']['FTwType']) {
+							case 'events':			// 图文提交
+								$this->request->data['WxDataTw']['FType'] = 0;
+								$this->WxDataTw->set($this->request->data);
+								if ($this->WxDataTw->validates()) {
+									$this->WxDataTwEvent->set($this->request->data);
+									if ($this->WxDataTwEvent->validates()) {
+										$this->WxDataTw->id = $query['id'];
+										$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+										if ($query) {
+											$this->Session->setFlash('图文编辑成功。');
+											return $this->redirect($this->rdWcURL);
+										}
+									}
+								}
+								break;
+							default:
+								$this->request->data['WxDataTw']['FType'] = 0;
+								$this->WxDataTw->set($this->request->data);
+								if ($this->WxDataTw->validates()) {
+									$this->WxDataTw->id = $query['id'];
+									$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+									if ($query) {
+										$this->Session->setFlash('图文编辑成功。');
+										return $this->redirect($this->rdWcURL);
+									}
+								}
+						}
+					} else {
+						$this->WxDataTw->set($this->request->data);
+						if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+							$this->WxDataTw->id = $query['id'];
+							$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+							if ($query) {
+								$this->Session->setFlash('图文编辑成功。');
+								return $this->redirect($this->rdWcURL);
+							}
 						}
 					}
 				} else {
 					if (!$this->request->data) {
-						$data = $this->WxDataTw->getDataList($id, $query['id']);
 						$this->request->data = $data;
 				    }
-
 				}
+				if ($data['WxDataTw']['FType'] == 0) {
+					switch ($data['WxDataTw']['FTwType']) {
+						case 'events':
+							$tpl = "_mPicAddEvent";
+							break;
+						default:
+							$tpl = "_mPicAddTw";
+					}
+				} else {
+					$tpl = "_mPicAddTwj";
+				}
+				
 				$this->set('data', $data);
-				$this->render('/Admin/_mPicAdd');
+				$this->render("/Admin/{$tpl}");
 				break;
 			case 'del':
 				if (!$this->WxDataTw->checkId($id, $query['id'])) {
@@ -489,50 +607,53 @@ class AdminController extends AppController {
 				$query['id'] = $this->request->query['id'];
 				$data = $this->WxDataTw->getDataList($id, $query['id']);
 				$data['WxDataTw']['FUrl'] = $data['WxDataTw']['FUrl'] ? Router::url($data['WxDataTw']['FUrl']) : '';
-				$html = '<div class="media_preview_area">
-				        	<div class="appmsg  editing">
-					    	    <div id="js_appmsg_preview" class="appmsg_content">
-					                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-					        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$data[WxDataTw][FTitle].'</a></h4>
-								        <div class="appmsg_info">
-								            <em class="appmsg_date"></em>
-								        </div>
-						       		  	<div class="appmsg_thumb_wrp">
-								            <img class="js_appmsg_thumb appmsg_thumb" src="'.$data[WxDataTw][FUrl].'">
-								        </div>
-						        		<p class="appmsg_desc">'.$data[WxDataTw][FMemo].'</p>
-									</div>
-								</div>
-					       </div>
-						</div>';
+                $data['WxDataTw']['FCreatedate'] = date('n月d日', strtotime($data['WxDataTw']['FCreatedate']));
+				if ($data['WxDataTw']['FType'] == 0) {
+					$html .= sprintf($twTpl['tw'], $vals['WxDataTw']['Id'], $data['WxDataTw']['FPreview'], $data['WxDataTw']['FTitle'], $data['WxDataTw']['FCreatedate'], $data['WxDataTw']['FUrl'], $data['WxDataTw']['FMemo']);
+				} else {
+					$grayList = $this->WxDataTw->getGaryDataList($id, $data['WxDataTw']['Id']);
+					foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
+						if ($k == 0) {
+							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+							$html .= sprintf($twTpl['twj_header'], $vals['WxDataTw']['Id'], $v['FPreview'], $v['FTitle'], $stythumb, $v['FUrl']);
+						} else {
+							$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+							$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
+							$html .= sprintf($twTpl['twj_wrap'], $stythumb, $v['FUrl'], $ithumb, $v['FPreview'], $v['FTitle']);
+						}
+						$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
+					}
+				}
 				exit(json_encode($html));
 				break;
 			case 'twj':
-				$data = $this->WxDataTw->getDataList($id);
-				foreach ($data['datalist'] as $vals) {
-					$vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
-					$html .= '<div class="media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
-					        	<div class="appmsg editing">
-						    	    <div id="js_appmsg_preview" class="appmsg_content">
-						                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-						        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
-									        <div class="appmsg_info">
-									            <em class="appmsg_date"></em>
-									        </div>
-							       		  	<div class="appmsg_thumb_wrp">
-									            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-									        </div>
-							        		<p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
-										</div>
-									</div>
-								    <div class="com_mask"></div>
-						            <i class="icon_item_selected">修改</i>
-						       </div>
-							</div>&nbsp;';
+				if ($query['value'] == 'tw') {
+					$data = $this->WxDataTw->getDataList($id, null, null, array('FType' => 0));
+				} else {
+					$data = $this->WxDataTw->getDataList($id);
 				}
-				
-				// 单图文
-				if ($query['mod'] == 'simple') {
+                if(count($data)){
+                    foreach ($data['datalist'] as $vals) {
+                        $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
+                        $vals['WxDataTw']['FCreatedate'] = date('n月d日', strtotime($vals['WxDataTw']['FCreatedate']));
+                        if ($vals['WxDataTw']['FType'] == 0) {
+							$html .= sprintf($twTpl['tw'], $vals['WxDataTw']['Id'], $vals['WxDataTw']['FPreview'], $vals['WxDataTw']['FTitle'], $vals['WxDataTw']['FCreatedate'], $vals['WxDataTw']['FUrl'], $vals['WxDataTw']['FMemo']);
+						} else {
+							$grayList = $this->WxDataTw->getGaryDataList($id, $vals['WxDataTw']['Id']);
+							foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
+								if ($k == 0) {
+									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+									$html .= sprintf($twTpl['twj_header'], $vals['WxDataTw']['Id'], $v['FPreview'], $v['FTitle'], $stythumb, $v['FUrl']);
+								} else {
+									$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+									$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
+									$html .= sprintf($twTpl['twj_wrap'], $stythumb, $v['FUrl'], $ithumb, $v['FPreview'], $v['FTitle']);
+								}
+								$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
+							}
+						}
+                    }
+                    // 单图文
                     $html .= '<script>
                         $.fn.clicktoggle = function(a, b) {
                             return this.each(function() {
@@ -561,81 +682,63 @@ class AdminController extends AppController {
                             Atempids = [$(this).attr("id")];
                         });
                     </script>';
-				} else {
-					$html .= '<script>
-	                            $.fn.clicktoggle = function(a, b) {
-	                                return this.each(function() {
-	                                    var clicked = false;
-	                                    $(this).bind("click", function() {
-	                                        if (clicked) {
-	                                            clicked = false;
-	                                            return b.apply(this, arguments);
-	                                        }
-	                                        clicked = true;
-	                                        return a.apply(this, arguments);
-	                                    });
-	                                });
-	                            };
-	                            Atempids = [];
-	                            function odd() {
-	                                $(this).removeClass("selected");
-	                                var hva = $(this).attr("id");
-	                                var index = Atempids.indexOf(hva);
-	                                if (index === -1) {
-	                                    Atempids.push(hva);
-	                                } else {
-	                                    Atempids.splice(index, 1);
-	                                }
-	                            }
-
-	                            function even() {
-	                                $(this).addClass("selected");
-	                                var hva = $(this).attr("id");
-	                                var index = Atempids.indexOf(hva);
-	                                if (index === -1) {
-	                                    Atempids.push(hva);
-	                                } else {
-	                                    Atempids.splice(index, 1);
-	                                }
-	                            }
-
-	                           $("#aj_box .media_preview_area").clicktoggle(even, odd);
-	                           </script>';
-				}
+                } else {
+                    $html = '<p style="text-align: center;margin-top: 80px;">亲,您的图文太少了，<a href="'.Router::url($data['WxDataTw']['FUrl']).'">马上去添加</a> 吧！</p>';
+                }
 				exit(json_encode($html));
 				break;
 			case 'getTwj':
 				if ($this->request->is('post')) {
 					$ids = json_decode($this->request->data['ids']);
 					$data = $this->WxDataTw->getDataList($id, NULL, $ids);
-					foreach ($data['datalist'] as $vals) {
-						$vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
-						$html .= '<div class="media_preview_area init_media_preview_area" id="'.$vals['WxDataTw']['Id'].'">
-						        	<div class="appmsg editing">
-							    	    <div id="js_appmsg_preview" class="appmsg_content">
-							                <div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
-							        			<h4 class="appmsg_title"><a onclick="return false;" href="javascript:void(0);" target="_blank">'.$vals[WxDataTw][FTitle].'</a></h4>
-										        <div class="appmsg_info">
-										            <em class="appmsg_date"></em>
-										        </div>
-								       		  	<div class="appmsg_thumb_wrp">
-										            <img class="js_appmsg_thumb appmsg_thumb" src="'.$vals[WxDataTw][FUrl].'">
-										        </div>
-								        		<p class="appmsg_desc">'.$vals[WxDataTw][FMemo].'</p>
-											</div>
-										</div>
-									    <div class="com_mask"></div>
-							            <i class="icon_item_selected"><span class="delitem">删除</span><span class="pipe">|</span><span class="editem">修改</span></i>
-							       </div>
-								</div>&nbsp;';
-					}
+                    if(count($data)) {
+                        foreach ($data['datalist'] as $vals) {
+	                        $vals['WxDataTw']['FUrl'] = $vals['WxDataTw']['FUrl'] ? Router::url($vals['WxDataTw']['FUrl']) : '';
+	                        $vals['WxDataTw']['FCreatedate'] = date('n月d日', strtotime($vals['WxDataTw']['FCreatedate']));
+	                        if ($vals['WxDataTw']['FType'] == 0) {
+								$html .= sprintf($twTpl['tw'], $vals['WxDataTw']['Id'], $vals['WxDataTw']['FPreview'], $vals['WxDataTw']['FTitle'], $vals['WxDataTw']['FCreatedate'], $vals['WxDataTw']['FUrl'], $vals['WxDataTw']['FMemo']);
+							} else {
+								$grayList = $this->WxDataTw->getGaryDataList($id, $vals['WxDataTw']['Id']);
+								foreach ($grayList['WxDataTw']['FTwj'] as $k => $v) {
+									if ($k == 0) {
+										$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+										$html .= sprintf($twTpl['twj_header'], $vals['WxDataTw']['Id'], $v['FPreview'], $v['FTitle'], $stythumb, $v['FUrl']);
+									} else {
+										$stythumb = $v['FUrl'] ? 'style="display:inline"' : '';
+										$ithumb = $v['FUrl'] ? 'style="display:none"' : '';
+										$html .= sprintf($twTpl['twj_wrap'], $stythumb, $v['FUrl'], $ithumb, $v['FPreview'], $v['FTitle']);
+									}
+									$html .= $k == end(array_keys($grayList['WxDataTw']['FTwj'])) ? sprintf($twTpl['twj_footer']) : '';
+								}
+							}
+                        }
+                    } else {
+                        $html = '<p style="text-align: center;margin-top: 80px;">亲,您的图文太少了，<a href="'.Router::url($data['WxDataTw']['FUrl']).'">马上去添加</a> 吧！</p>';
+                    }
 					exit(json_encode($html));
 				}
 				break;
 			default:
 				$this->paginate['limit'] = 9;
 				$this->Paginator->settings = $this->paginate;
-				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id));
+				$conditions = array('FWebchat' => $id);
+				if ($query['value']) {
+					switch ($query['value']) {
+						case 'tw':	
+							$conditions['FType'] = 0;
+							$conditions['FTwType'] = null;
+							break;
+						case 'twj':
+							$conditions['FType'] = 1;
+							break;
+						default:
+							$conditions['FTwType'] = $query['value'];
+					}
+				}
+				$data['datalist'] = $this->Paginator->paginate('WxDataTw', $conditions);
+				// print_r($this->WxDataTw->getLastQuery());exit;
+				$data['category'] = $this->WxDataTw->getCategories($id, $this->rdWcURL);
+				// print_r($data['category']);exit;
 				$this->set('data', $data);
 				$this->render('/Admin/mPic');
 		}
@@ -647,8 +750,64 @@ class AdminController extends AppController {
 	 * @return void
 	 * @author apple
 	 */
-	function _mPicGary() {
-		$this->render('/Admin/mPicGary');
+	function _mPicGary($id, $query) {
+		$this->loadModel('WxDataTw');
+		switch ($query['action']) {
+			case 'add':
+				if ($this->request->is('post')) {
+					$this->WxDataTw->set($this->request->data);
+					if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+						if ($query) {
+							$this->Session->setFlash('图文添加成功。');
+							return $this->redirect($this->rdWcURL);
+						}
+					}
+				} 
+				$this->set('data', $data);
+				$this->render('/Admin/_mPicGaryAdd');
+				break;
+			case 'edit':
+				if (!$this->WxDataTw->checkId($id, $query['id'])) {
+					return $this->redirect($this->rdWcURL);
+				}
+				if ($this->request->is('post') || $this->request->is('put')) {
+					$this->WxDataTw->set($this->request->data);
+					if ($this->WxDataTw->validates(array('fieldList' => array('FTitle')))) {
+						$this->WxDataTw->id = $query['id'];
+						$query = $this->WxDataTw->saveData($this->request->data, $this->uid, $id);
+						if ($query) {
+							$this->Session->setFlash('图文编辑成功。');
+							return $this->redirect($this->rdWcURL);
+						}
+					}
+				} else {
+					if (!$this->request->data) {
+						$data = $this->WxDataTw->getGaryDataList($id, $query['id']);
+						$this->request->data = $data;
+				    }
+
+				}
+				$this->set('data', $data);
+				$this->render('/Admin/_mPicGaryAdd');
+				break;
+			case 'del':
+				if (!$this->WxDataTw->checkId($id, $query['id'])) {
+					return $this->redirect($this->rdWcURL);
+				} 
+				if ($this->WxDataTw->delete($query['id'])) {
+					$this->Session->setFlash('图文删除成功。');
+				}
+				return $this->redirect($this->rdWcURL);
+				break;
+			default:
+				$this->paginate['limit'] = 9;
+				$this->Paginator->settings = $this->paginate;
+				$data['datalist'] = $this->Paginator->paginate('WxDataTw', array('FWebchat' => $id, 'FType' => 1));
+				$this->set('data', $data);
+				$this->render('/Admin/mPicGary');
+			
+		}
 	}
 	
 	/**

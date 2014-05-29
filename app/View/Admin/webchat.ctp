@@ -24,10 +24,10 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="table-responsive">
-			<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+			<table id="sample-table-1" class="table table-striped table-bordered table-hover account">
 				<thead>
 					<tr>
-						<th>公众号名称</th>
+						<th style="text-align:center;">公众号名称</th>
 						<th>会员套餐</th>
 						<th class="hidden-480">创建时间/到期时间</th>
 						<th class="hidden-480">
@@ -71,7 +71,7 @@
                                         <i class="icon-edit bigger-120"></i>编辑
                                     </button>
 
-                                    <button class="e_btn1 mtm" alt="<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>">
+                                    <button class="e_btn1 mtm bootbox-confirm" alt="<?= Router::url(array('controller' => "admin", 'action' => "webchatDel", $vals['WxWebchat']['Id'])) ?>">
                                         <i class="icon-trash bigger-120"></i>删除
                                     </button>
 

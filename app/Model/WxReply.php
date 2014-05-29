@@ -86,7 +86,7 @@ class WxReply extends AppModel {
 					$resultStr = $this->_getTPL($wxData['type'], $wxData);
 			}
 		} else {
-			$returnStr = "亲，您的账号还没有配置成功。［CakeWX］";
+			$resultStr = $this->_getTPL('text', array('data' => "亲，您的账号还没有配置成功。［CakeWX］"));
 		}
 		return $resultStr;
 	}

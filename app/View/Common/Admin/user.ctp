@@ -19,5 +19,7 @@
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 		<i class="icon-double-angle-up icon-only bigger-110"></i>
 	</a>
-</div><!-- /.main-container 
+</div>
+<div class="mtm copyright_normal text-center">©2014 <a href="http://cakewx.com/" target="_blank">CakeWX</a>&nbsp;<?php echo $version; ?></div>
+<!-- /.main-container
 </div><!-- /.main-container -->

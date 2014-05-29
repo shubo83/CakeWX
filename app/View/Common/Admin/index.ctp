@@ -78,13 +78,18 @@
 						<?= $this->Main->MY_currmenu($vmenu['search']); ?>
 					</h1>
 				</div><!-- /.page-header -->
-				<?php echo $this->fetch('content'); ?>
+				<div class="col-sm-12">
+					<?php echo $this->fetch('content'); ?>
+				</div>
 			</div><!-- /.page-content -->
 			<?php echo $this->element('Admin/settings'); ?>
+
 		</div>
 	</div><!-- /.main-container-inner -->
 	<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 		<i class="icon-double-angle-up icon-only bigger-110"></i>
 	</a>
-</div><!-- /.main-container 
+</div>
+<div class="mtm copyright text-center">©2014 <a href="http://cakewx.com/" target="_blank">CakeWX</a>&nbsp;<?php echo $version; ?></div>
+<!-- /.main-container
 </div><!-- /.main-container -->

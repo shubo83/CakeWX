@@ -99,6 +99,16 @@ echo $this->Main->formhr_input('FWxToken', array(
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
 ?>
+<div class="alert alert-info" style="margin-top:20px">
+	<button type="button" class="close" data-dismiss="alert">
+		<i class="icon-remove"></i>
+	</button>
+	<strong>
+		提示：
+	</strong>
+	接口地址和TOKEN无须填写，请把这两个配置到微信公众平台，方才能正常工作。&nbsp;&nbsp;<font color="red">PS：<a target="_blank" style="color:red" href="http://www.cakewx.com/settings.html">微信公众平台具体怎么配置，传送门>></a></font>
+	<br>
+</div>
 <div class="clearfix form-actions">
 	<div class="col-md-offset-3 col-md-9">
 		<button class="btn btn-info" type="submit">

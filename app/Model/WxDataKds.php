@@ -65,7 +65,9 @@ class WxDataKds extends AppModel {
 		$this->set('Id', $this->id ? $this->id : String::uuid());
 		$this->set('FUpdatedate', date('Y-m-d H:i:s'));
 		$this->set('FWebchat', $id);
-		$this->data['WxDataKds']['FTwj'] = serialize($this->data['WxDataKds']['FTwj']);
+        if (isset($this->data['WxDataKds']['FTwj'])) {
+            $this->data['WxDataKds']['FTwj'] = serialize($this->data['WxDataKds']['FTwj']);
+        }
 		// print_r($this->data);exit;
 		$query = $this->save($this->data, FALSE);
 		if ($query) return $this->id;
@@ -156,7 +158,7 @@ class WxDataKds extends AppModel {
 	function getMsg($webchat, $keywords) {
 		$content = array();
 		$suffix = ClassRegistry::init('WxWcdata')->getMsg('signtext', $webchat);
-		$data = $this->find('first', array('conditions' => array('FKey' => $keywords, 'FWebchat' => $webchat, 'AND' => array('OR' => array(array('FKeyMacth' => null), array('FKeyMacth' => 0)))), 'recursive' => 0));
+		$data = $this->find('first', array('conditions' => array("FIND_IN_SET('{$keywords}', REPLACE(FKey,'|',','))", 'FWebchat' => $webchat, 'AND' => array('OR' => array(array('FKeyMacth' => null), array('FKeyMacth' => 0)))), 'recursive' => 0));
 		if (!$data) {		// 模糊匹配			
 			$data = $this->find('first', array('conditions' => array("LOCATE(`Fkey`, '{$keywords}') >" => "0", 'FWebchat' => $webchat, 'FKeyMacth' => "1"), 'recursive' => 0));
 		}

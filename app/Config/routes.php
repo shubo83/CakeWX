@@ -26,6 +26,7 @@ Router::connect('/loggout', array('controller' => 'user', 'action' => 'loggout')
 Router::connect('/admin', array('controller' => 'admin', 'action' => 'index'));
 Router::connect('/wxapi/*', array('controller' => 'wxapi', 'action' => 'index'));
 Router::connect('/admin/wc/*', array('controller' => 'admin', 'action' => 'wc'));
+Router::connect('/version', array('controller' => 'user', 'action' => 'version'));
 Router::mapResources('users');
 Router::mapResources('education');
 Router::mapResources('wx');

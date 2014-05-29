@@ -16,7 +16,7 @@ echo $this->Main->formhr_input('FWxType', array(
 		'label' => array('text' => "公众号类型：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "select", 
 		'placeholder' => "", 
-		'class' => "",
+		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		'after' => "</div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
@@ -26,7 +26,7 @@ echo $this->Main->formhr_input('FWxAppId', array(
 		'label' => array('text' => "AppId：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "text", 
 		'placeholder' => "请填写应用id", 
-		'class' => "",
+		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		'after' => "</div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
@@ -36,14 +36,14 @@ echo $this->Main->formhr_input('FWxAppSecret', array(
 		'label' => array('text' => "AppSecret：", 'class' => "col-sm-3 control-label no-padding-right"), 
 		'type' => "text", 
 		'placeholder' => "请填写应用密匙", 
-		'class' => "",
+		'class' => "col-xs-10 col-sm-5",
 		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
 		'after' => "</div></div>",
 		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
 	));
 ?>
 <div class="clearfix form-actions">
-	<div class="col-md-offset-3 col-md-9">
+	<div class="col-xs-12 col-sm-9 col-sm-offset-3">
 		<button class="btn btn-info" type="submit">
 			<i class="icon-ok bigger-110"></i>
 			提交

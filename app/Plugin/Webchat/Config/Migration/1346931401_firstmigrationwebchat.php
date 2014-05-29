@@ -27,8 +27,8 @@ class FirstMigrationWebchat extends CakeMigration {
 					'FName' => array('type' => 'string', 'length' => 200),
 					'FCreatedate' => array('type' => 'datetime'),
 					'FOffdate' => array('type' => 'datetime'),
-					'FIcon' => array('type' => 'string', 'length' => 500, 'null' => false),
-					'FStatus' => array('type' => 'boolean', 'length' => 1, 'null' => false),
+					'FIcon' => array('type' => 'string', 'length' => 500),
+					'FStatus' => array('type' => 'boolean', 'length' => 1),
 					'FIsActive' => array('type' => 'boolean', 'length' => 1),
 					'FWxType' => array('type' => 'string', 'length' => 200),
 					'FWxApi' => array('type' => 'string', 'length' => 200),
@@ -42,7 +42,7 @@ class FirstMigrationWebchat extends CakeMigration {
 					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 				),
 				'wcsess' => array(
-					'Id' => array('type' => 'integer', 'null' => false, 'length' => 38, 'key' => 'primary'),
+					'Id' => array('type' => 'integer', 'null' => false, 'length' => 11, 'key' => 'primary'),
 					'FData' => array('type' => 'text', 'null' => false),
 					'FExpires' => array('type' => 'integer', 'length' => 11),
 					'FWebchat' => array('type' => 'string', 'length' => 38),
@@ -99,6 +99,21 @@ class FirstMigrationWebchat extends CakeMigration {
 					'FContent' => array('type' => 'text'),
 					'FLink' => array('type' => 'string', 'length' => 1000),
 					'FTwj' => array('type' => 'text'),
+					'FTwType' => array('type' => 'string', 'length' => 100),
+					'indexes' => array(
+						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
+					),
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
+				),
+				'wcdata_tw_events' => array(
+					'Id' => array('type' => 'string', 'null' => false, 'length' => 38, 'key' => 'primary'),
+					'FOwnerId' => array('type' => 'string', 'length' => 38, 'null' => false),
+					'FMaxPersonCount' => array('type' => 'integer', 'length' => 11),
+					'FPersonCount' => array('type' => 'integer', 'length' => 11),
+					'FAddress' => array('type' => 'string', 'length' => 500),
+					'FMemo' => array('type' => 'text'),
+					'FStartdate' => array('type' => 'datetime'),
+					'FCreatedate' => array('type' => 'datetime'),
 					'indexes' => array(
 						'PRIMARY' => array('column' => 'Id', 'unique' => 1)
 					),

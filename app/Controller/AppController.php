@@ -43,6 +43,8 @@ class AppController extends Controller {
 	public $wxAPI = '';
 	public $wxToken = 'liunian';
 	public $site_cx = "Powered by CakeWX";
+	public $version = "1.1";
+	public $verdate = "Wed May 28 23:35:59 CST 2014";
 	
 	/**
 	 * undocumented function
@@ -205,6 +207,7 @@ class AppController extends Controller {
 		$this->set('user', $this->user);
 		$this->set('name', $this->user['FullName']);
 		$this->set('WC_BASE', "");
+		$this->set('version', "V{$this->version}");
 	}
 	
 	/**

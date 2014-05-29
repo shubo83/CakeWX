@@ -14,108 +14,42 @@
 		"Action/mPicAdd"
 	), array('block' => "script_extra", 'inline' => false));
 ?>
-<h3 class="lighter block green">
-	请完整填写以下信息：
+<h3 class="lighter block green" style="margin-bottom: 25px">
+	请选择要添加的图文类型：
 </h3>
 <?php 
 $this->Form->inputDefaults(array('label' => true, 'div' => true));
-echo $this->Form->create('WxDataTw', array('name' => "form1", 'role' => "form", 'class' => "form-horizontal")); 
-echo $this->Main->formhr_input('FTitle', array(
-		'div' => "form-group", 
-		'label' => array('text' => "图文名称：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'>*</span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FAuthor', array(
-		'div' => "form-group", 
-		'label' => array('text' => "作者：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FUrl', array(
-		'div' => "form-group", 
-		'label' => array('text' => "封面图片：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<button type='button' id='WX_icon' class='btn btn-xs btn-primary mar_5'><i class='icon-camera bigger-160'></i>上传</button></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FMemo', array(
-		'div' => "form-group", 
-		'label' => array('text' => "摘要：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "textarea", 
-		'placeholder' => "",
-        'style' => "width:700px",
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FContent', array(
-		'div' => "form-group", 
-		'label' => array('text' => "图文内容：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "textarea", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FLink', array(
-		'div' => "form-group", 
-		'label' => array('text' => "图文链接：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FType', array(
-		'div' => "form-group", 
-		'options' => array('单图文', '多图文'),
-		'label' => array('text' => "图文类型：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "select", 
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5 twSelect",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
-echo $this->Main->formhr_input('FPreTwj', array(
-		'div' => array('class' => "form-group fHidden", 'id' => "twj"), 
-		'label' => array('text' => "图文集：", 'class' => "col-sm-3 control-label no-padding-right"), 
-		'type' => "text",
-		'placeholder' => "", 
-		'class' => "col-xs-10 col-sm-5",
-		'between' => "<div class='col-xs-12 col-sm-9'><div class='clearfix'>",
-		'after' => "<span class='help-inline col-xs-12 col-sm-7'><div class='u-chooses'></div><button type='button' id='addTw'>添加图文</button><span class='middle maroon'></span></span></div></div>",
-		'error' => array('attributes' => array('wrap' => 'div', 'class' => 'help-block col-xs-12 col-md-offset-3'))
-	));
 ?>
-<div class="clearfix form-actions">
-	<div class="col-md-offset-3 col-md-9">
-		<button class="btn btn-info" type="submit">
-			<i class="icon-ok bigger-110"></i>
-			提交
-		</button>
-		&nbsp; &nbsp; &nbsp;
-		<button type="button" class="btn" id="previewbox">
-			<i class="icon-undo bigger-110"></i>
-			预览图文
-		</button>
-		&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;
-		<font color="red">(提示：针对多图文的操作，修改完后记得点击提交按钮。)</font>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="well">
+			<h4 class="blue smaller lighter"><?php echo $this->Html->link('单图文', "{$WC_URL}?_m=tw&_a=add"); ?></h4>
+			发布文章类型的单图文展示页面，普通文章，适用公司简介，联系方式等信息的展示。
+		</div>
+		<div class="well">
+			<h4 class="blue smaller lighter"><?php echo $this->Html->link('多图文', "{$WC_URL}?_m=twj&_a=add"); ?></h4>
+			发布文章类型的图文集，普通文章，适用等产品信息介绍，广告等内容的展示。
+		</div>
+		<div class="well">
+			<h4 class="blue smaller lighter"><?php echo $this->Html->link('活动图文', "{$WC_URL}?_m=event&_a=add"); ?></h4>
+			发布活动类型的单图文，活动详细页展示您定义的活动，有刮刮卡，大转盘，优惠券，及活动报名，成员审核，活动管理等。
+		</div>
+		<div class="well">
+			<h4 class="grey smaller lighter">投票图文（即将上线）</h4>
+			发布投票，用户可以投票该自定义内容，可以查看投票结果。
+		</div>
+		<div class="well">
+			<h4 class="grey smaller lighter">问卷调查图文（即将上线）</h4>
+			发布问卷调查，用户可以填写问卷调查，您可以得到调查反馈。
+		</div>
+		<div class="well">
+			<h4 class="grey smaller lighter">在线预定图文（即将上线）</h4>
+			发布预定，用户可以预定您的项目，并且您可以查看用户填写的内容，并第一时间取得联系。
+		</div>
+		<div class="well">
+			<h4 class="grey smaller lighter">留言图文（即将上线）</h4>
+			发布留言板功能，用户可以给你的产品或者店面进行留言反馈。
+		</div>
 	</div>
 </div>
 <?php echo $this->Form->end(); ?>
